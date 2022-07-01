@@ -1,0 +1,16 @@
+framework: net6.0, net472
+
+source https://api.nuget.org/v3/index.json
+
+// .NET CLASSIC STUFF
+
+// TEST STUFF
+nuget Microsoft.NET.Test.Sdk 17.1.0
+nuget xunit 2.4.1
+nuget xunit.runner.visualstudio 2.4.3
+nuget xunit.categories 2.0.6
+nuget FluentAssertions 6.5.1
+
+// BUILD STUFF
+nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true
+nuget SourceLink.Copy.PdbFiles 2.8.3 copy_local: true
