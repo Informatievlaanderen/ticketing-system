@@ -1,19 +1,22 @@
-framework: net6.0, net472
+type file
+version 1.0.0
 
-source https://api.nuget.org/v3/index.json
+id Be.Vlaanderen.Basisregisters.TicketingService.Storage.InMemory
+title Be.Vlaanderen.Basisregisters.TicketingService.Storage.InMemory
 
-nuget Dapper 2.0.123
-nuget MediatR 10.0.1
+authors Basisregisters.Vlaanderen
+owners Vlaamse overheid
+copyright Copyright (c) Vlaamse overheid
+requireLicenseAcceptance false
+projectUrl https://vlaanderen.be/digitaal-vlaanderen
+iconUrl https://raw.githubusercontent.com/Informatievlaanderen/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
 
-// .NET CLASSIC STUFF
+description TicketingService in-memory storage.
 
-// TEST STUFF
-nuget Microsoft.NET.Test.Sdk 17.1.0
-nuget xunit 2.4.1
-nuget xunit.runner.visualstudio 2.4.3
-nuget xunit.categories 2.0.6
-nuget FluentAssertions 6.5.1
+dependencies
+  framework: net6.0
 
-// BUILD STUFF
-nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true
-nuget SourceLink.Copy.PdbFiles 2.8.3 copy_local: true
+files
+  TicketingService.Storage.InMemory.dll => lib\net6.0
+  TicketingService.Storage.InMemory.pdb => lib\net6.0
