@@ -2,10 +2,13 @@ framework: net6.0, net472
 
 source https://api.nuget.org/v3/index.json
 
-// .NET CLASSIC STUFF
+// VBR STUFF
+nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.5
 
 // TEST STUFF
+nuget Microsoft.AspNetCore.Mvc.Testing 6.0.6
 nuget Microsoft.NET.Test.Sdk 17.1.0
+nuget Newtonsoft.Json 13.0.1
 nuget xunit 2.4.1
 nuget xunit.runner.visualstudio 2.4.3
 nuget xunit.categories 2.0.6
