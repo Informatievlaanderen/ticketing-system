@@ -7,6 +7,6 @@ public interface ITicketing
 {
     Task<Guid> CreateTicket(string originator);
     Task Pending(Guid ticketId);
-    Task Complete(Guid ticketId);
+    Task Complete(Guid ticketId, Ticket ticket);
     Task<Ticket?> Get(Guid ticketId);
 }
