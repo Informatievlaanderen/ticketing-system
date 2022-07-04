@@ -2,6 +2,8 @@ namespace TicketingService.IntegrationTests;
 
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Storage.InMemory;
 using Xunit;
+using System.Text.Json.Serialization;
 
 public class TicketingServiceTests
 {
@@ -24,26 +27,30 @@ public class TicketingServiceTests
 
         var client = application.CreateClient();
 
+        // create
         const string originator = "originator";
-        var response = await client.PostAsync($"/tickets/create/{originator}", new StringContent(""), CancellationToken.None);
-        var ticketId = JsonConvert.DeserializeObject<Guid>(await response.Content.ReadAsStringAsync(CancellationToken.None));
-        
-        response = await client.GetAsync($"/tickets/{ticketId:D}", CancellationToken.None);
-        var ticket = JsonConvert.DeserializeObject<Ticket>(await response.Content.ReadAsStringAsync(CancellationToken.None));
+        var response = await client.PostAsync($"/tickets/create/{originator}", new StringContent(""));
+        var ticketId = JsonConvert.DeserializeObject<Guid>(await response.Content.ReadAsStringAsync());
+
+        // get
+        var ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
         Assert.NotNull(ticket);
         Assert.Equal(TicketStatus.Created, ticket!.Status);
         Assert.Equal(originator, ticket.Originator);
 
-        await client.PutAsync($"/tickets/{ticketId}/pending", new StringContent(""), CancellationToken.None);
-        response = await client.GetAsync($"/tickets/{ticketId:D}", CancellationToken.None);
-        ticket = JsonConvert.DeserializeObject<Ticket>(await response.Content.ReadAsStringAsync(CancellationToken.None));
+        // pending
+        await client.PutAsync($"/tickets/{ticketId}/pending", new StringContent(""));
+        ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
         Assert.NotNull(ticket);
         Assert.Equal(TicketStatus.Pending, ticket!.Status);
 
-        await client.PutAsync($"/tickets/{ticketId}/complete", new StringContent(""), CancellationToken.None);
-        response = await client.GetAsync($"/tickets/{ticketId:D}", CancellationToken.None);
-        ticket = JsonConvert.DeserializeObject<Ticket>(await response.Content.ReadAsStringAsync(CancellationToken.None));
+        // complete
+        const string complete = "Complete";
+        ticket.Body = complete;
+        await client.PutAsJsonAsync($"/tickets/{ticketId}/complete", ticket);
+        ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
         Assert.NotNull(ticket);
         Assert.Equal(TicketStatus.Complete, ticket!.Status);
+        Assert.Equal(complete, ticket.Body);
     }
 }

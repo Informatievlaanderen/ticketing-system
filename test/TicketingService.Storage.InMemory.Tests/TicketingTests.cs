@@ -23,9 +23,12 @@ public class TicketingTests
         Assert.NotNull(ticket);
         Assert.Equal(TicketStatus.Pending, ticket!.Status);
 
-        await ticketing.Complete(ticketId);
+        const string complete = "Complete";
+        ticket.Body = complete;
+        await ticketing.Complete(ticketId, ticket);
         ticket = await ticketing.Get(ticketId);
         Assert.NotNull(ticket);
         Assert.Equal(TicketStatus.Complete, ticket!.Status);
+        Assert.Equal(complete, ticket.Body);
     }
 }

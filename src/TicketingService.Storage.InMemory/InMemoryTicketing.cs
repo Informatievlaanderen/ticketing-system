@@ -17,11 +17,15 @@ public class InMemoryTicketing : ITicketing
         return Task.FromResult(ticketId);
     }
 
-    private Task ChangeStatus(Guid ticketId, TicketStatus newStatus)
+    private Task ChangeStatus(Guid ticketId, TicketStatus newStatus, string? body = null)
     {
         if (_tickets.TryGetValue(ticketId, out var ticket))
         {
             ticket.Status = newStatus;
+            if (ticket.Status == TicketStatus.Complete && body is not null)
+            {
+                ticket.Body = body;
+            }
         }
 
         return Task.CompletedTask;
@@ -29,7 +33,7 @@ public class InMemoryTicketing : ITicketing
     
     public Task Pending(Guid ticketId) => ChangeStatus(ticketId, TicketStatus.Pending);
 
-    public Task Complete(Guid ticketId) => ChangeStatus(ticketId, TicketStatus.Complete);
+    public Task Complete(Guid ticketId, Ticket ticket) => ChangeStatus(ticketId, TicketStatus.Complete, ticket.Body);
 
     public Task<Ticket?> Get(Guid ticketId) => Task.FromResult(_tickets.TryGetValue(ticketId, out var ticket)
         ? ticket
