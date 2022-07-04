@@ -1,5 +1,7 @@
 namespace TicketingService.Abstractions;
 
+using System;
+
 public class Ticket
 {
     public Guid TicketId { get; }
