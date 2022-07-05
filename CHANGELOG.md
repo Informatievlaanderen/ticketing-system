@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.2...v1.0.3) (2022-07-05)
+
+
+### Bug Fixes
+
+* document test ([5052da4](https://github.com/informatievlaanderen/ticketing-system/commit/5052da4d479c3f651c748b6d8fe9c8c2d1468376))
+
 ## [1.0.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.1...v1.0.2) (2022-07-05)
 
 
