@@ -12,26 +12,6 @@ updates:
     interval: daily
 
 - package-ecosystem: docker
-  directory: "/src/BuildingRegistry.Api.CrabImport"
-  schedule:
-    interval: daily
-
-- package-ecosystem: docker
-  directory: "/src/BuildingRegistry.Api.Extract"
-  schedule:
-    interval: daily
-
-- package-ecosystem: docker
-  directory: "/src/BuildingRegistry.Api.Legacy"
-  schedule:
-    interval: daily
-
-- package-ecosystem: docker
-  directory: "/src/BuildingRegistry.Projections.Syndication"
-  schedule:
-    interval: daily
-
-- package-ecosystem: docker
-  directory: "/src/BuildingRegistry.Projector"
+  directory: "/src/TicketingService"
   schedule:
     interval: daily
