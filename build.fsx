@@ -35,7 +35,7 @@ supportedRuntimeIdentifiers <- [ "msil"; "linux-x64" ]
 
 // Solution -----------------------------------------------------------------------
 
-Target.create "Restore_Solution" (fun _ -> restore "BuildingRegistry")
+Target.create "Restore_Solution" (fun _ -> restore "TicketingSystem")
 
 Target.create "Build_Solution" (fun _ ->
   setVersions "SolutionInfo.cs"
