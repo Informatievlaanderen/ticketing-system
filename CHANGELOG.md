@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.0...v1.0.1) (2022-07-05)
+
+
+### Bug Fixes
+
+* sonar build ([434b2c3](https://github.com/informatievlaanderen/ticketing-system/commit/434b2c325e24cb75fd8655da399ceef11dabca02))
+
 # 1.0.0 (2022-07-05)
 
 
