@@ -10,6 +10,12 @@
   <ItemGroup>
     <ProjectReference Include="..\TicketingService.Abstractions\TicketingService.Abstractions.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="paket.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
