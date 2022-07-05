@@ -11,7 +11,7 @@ public class TicketingTests
     {
         var ticketing = new InMemoryTicketing() as ITicketing;
 
-        // create
+        // create ticket
         const string originator = "originator";
         var ticketId = await ticketing.CreateTicket(originator);
 
