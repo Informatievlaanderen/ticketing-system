@@ -1,12 +1,12 @@
 {
-  "name": "building-registry",
-  "version": "3.19.1",
-  "description": "Authentic base registry containing all buildings of Flanders.",
+  "name": "ticketing-system",
+  "version": "1.0.0",
+  "description": "A system with service to get tickets for async operations.",
   "author": "Basisregisters Vlaanderen",
   "license": "EUPL-1.2",
   "repository": {
     "type": "git",
-    "url": "git@github.com:informatievlaanderen/building-registry.git"
+    "url": "git@github.com:informatievlaanderen/ticketing-system.git"
   },
   "dependencies": {},
   "devDependencies": {
