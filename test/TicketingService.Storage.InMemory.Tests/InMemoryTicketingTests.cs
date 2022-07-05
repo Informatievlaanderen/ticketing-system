@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using Abstractions;
 using Xunit;
 
-public class TicketingTests
+public class InMemoryTicketingTests
 {
     [Fact]
     public async Task CreateGetUpdatePendingComplete()
     {
         var ticketing = new InMemoryTicketing() as ITicketing;
 
-        // create ticket
+        // create
         const string originator = "originator";
         var ticketId = await ticketing.CreateTicket(originator);
 
@@ -29,11 +29,10 @@ public class TicketingTests
 
         // complete
         const string complete = "Complete";
-        ticket.Body = complete;
-        await ticketing.Complete(ticketId, ticket);
+        await ticketing.Complete(ticketId, complete);
         ticket = await ticketing.Get(ticketId);
         Assert.NotNull(ticket);
         Assert.Equal(TicketStatus.Complete, ticket!.Status);
-        Assert.Equal(complete, ticket.Body);
+        Assert.Equal(complete, ticket.Result);
     }
 }

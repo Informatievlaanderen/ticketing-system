@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using TicketingService.Abstractions;
@@ -15,6 +13,6 @@ var app = builder.Build();
 app.MapPost("/tickets/create/{originator}", Handlers.Create);
 app.MapGet("/tickets/{ticketId:guid}", Handlers.Get);
 app.MapPut("/tickets/{ticketId:guid}/pending", Handlers.Pending);
-app.MapPut("/tickets/{ticketId:guid}/complete", Handlers.Complete);
+app.MapPut("/tickets/{ticketId:guid}/complete/{result=result}", Handlers.Complete);
 
 app.Run();

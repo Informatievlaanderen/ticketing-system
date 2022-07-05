@@ -12,19 +12,19 @@ public class InMemoryTicketing : ITicketing
     public Task<Guid> CreateTicket(string originator)
     {
         var ticketId = Guid.NewGuid();
-        _tickets[ticketId] = new Ticket(ticketId, originator, TicketStatus.Created, "");
+        _tickets[ticketId] = new Ticket(ticketId, originator, TicketStatus.Created);
 
         return Task.FromResult(ticketId);
     }
 
-    private Task ChangeStatus(Guid ticketId, TicketStatus newStatus, string? body = null)
+    private Task ChangeStatus(Guid ticketId, TicketStatus newStatus, object? result = null)
     {
         if (_tickets.TryGetValue(ticketId, out var ticket))
         {
             ticket.Status = newStatus;
-            if (ticket.Status == TicketStatus.Complete && body is not null)
+            if (ticket.Status == TicketStatus.Complete && result is not null)
             {
-                ticket.Body = body;
+                ticket.Result = result;
             }
         }
 
@@ -33,7 +33,7 @@ public class InMemoryTicketing : ITicketing
     
     public Task Pending(Guid ticketId) => ChangeStatus(ticketId, TicketStatus.Pending);
 
-    public Task Complete(Guid ticketId, Ticket ticket) => ChangeStatus(ticketId, TicketStatus.Complete, ticket.Body);
+    public Task Complete(Guid ticketId, object? result) => ChangeStatus(ticketId, TicketStatus.Complete, result);
 
     public Task<Ticket?> Get(Guid ticketId) => Task.FromResult(_tickets.TryGetValue(ticketId, out var ticket)
         ? ticket
