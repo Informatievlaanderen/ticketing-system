@@ -27,7 +27,7 @@ public class TicketingServiceTests
 
         var client = application.CreateClient();
 
-        // create
+        // create ticket
         const string originator = "originator";
         var response = await client.PostAsync($"/tickets/create/{originator}", new StringContent(""));
         var ticketId = JsonConvert.DeserializeObject<Guid>(await response.Content.ReadAsStringAsync());
