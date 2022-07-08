@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.5...v1.0.6) (2022-07-08)
+
+
+### Bug Fixes
+
+* replace ticket result with object ([02dd603](https://github.com/informatievlaanderen/ticketing-system/commit/02dd603af1b1b68d49c50642f7d4eee381da82b6))
+
 ## [1.0.5](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.4...v1.0.5) (2022-07-05)
 
 
