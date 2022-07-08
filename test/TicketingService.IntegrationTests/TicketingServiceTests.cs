@@ -2,9 +2,7 @@ namespace TicketingService.IntegrationTests;
 
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Abstractions;
@@ -12,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Storage.InMemory;
 using Xunit;
-using System.Text.Json.Serialization;
 
 public class TicketingServiceTests
 {
@@ -46,11 +43,10 @@ public class TicketingServiceTests
 
         // complete
         const string complete = "Complete";
-        ticket.Body = complete;
-        await client.PutAsJsonAsync($"/tickets/{ticketId}/complete", ticket);
+        await client.PutAsJsonAsync($"/tickets/{ticketId}/complete", complete);
         ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
         Assert.NotNull(ticket);
         Assert.Equal(TicketStatus.Complete, ticket!.Status);
-        Assert.Equal(complete, ticket.Body);
+        Assert.Equal(complete, ticket.Result!.ToString());
     }
 }
