@@ -1,0 +1,6 @@
+Microsoft.NET.Test.Sdk
+Moq
+xunit
+xunit.runner.visualstudio
+xunit.categories
+FluentAssertions
