@@ -5,7 +5,11 @@ source https://api.nuget.org/v3/index.json
 // VBR STUFF
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.5
 
+// PRODUCTION STUFF
+nuget Marten.AspNetCore 5.5.2
+
 // TEST STUFF
+nuget Docker.DotNet 3.125.5
 nuget Microsoft.AspNetCore.Mvc.Testing 6.0.6
 nuget Microsoft.NET.Test.Sdk 17.1.0
 nuget Newtonsoft.Json 13.0.1
@@ -13,6 +17,9 @@ nuget xunit 2.4.1
 nuget xunit.runner.visualstudio 2.4.3
 nuget xunit.categories 2.0.6
 nuget FluentAssertions 6.5.1
+nuget SwashBuckle.AspNetCore.Swagger 6.3.1
+nuget SwashBuckle.AspNetCore.SwaggerGen 6.3.1
+nuget SwashBuckle.AspNetCore.SwaggerUI 6.3.1
 
 // BUILD STUFF
 nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true

@@ -28,6 +28,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingService.Storage.In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingService.Storage.InMemory", "src\TicketingService.Storage.InMemory\TicketingService.Storage.InMemory.csproj", "{BF442FDB-03CD-47F5-BBCA-CC572E468972}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingService.Storage.PgSqlMarten", "src\TicketingService.Storage.PgSqlMarten\TicketingService.Storage.PgSqlMarten.csproj", "{12E4F2B4-3F26-4E6D-BCDF-E1B565DB8E65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingService.Storage.PgSqlMarten.Tests", "test\TicketingService.Storage.PgSqlMarten.Tests\TicketingService.Storage.PgSqlMarten.Tests.csproj", "{0AC77D1F-2DD3-4E78-A9F8-0A45D740D778}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,14 @@ Global
 		{BF442FDB-03CD-47F5-BBCA-CC572E468972}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF442FDB-03CD-47F5-BBCA-CC572E468972}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF442FDB-03CD-47F5-BBCA-CC572E468972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E4F2B4-3F26-4E6D-BCDF-E1B565DB8E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E4F2B4-3F26-4E6D-BCDF-E1B565DB8E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E4F2B4-3F26-4E6D-BCDF-E1B565DB8E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E4F2B4-3F26-4E6D-BCDF-E1B565DB8E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC77D1F-2DD3-4E78-A9F8-0A45D740D778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC77D1F-2DD3-4E78-A9F8-0A45D740D778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC77D1F-2DD3-4E78-A9F8-0A45D740D778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC77D1F-2DD3-4E78-A9F8-0A45D740D778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +76,8 @@ Global
 		{C0C6F051-F29D-45D2-8AC2-3369B6E2047E} = {1A034126-30E6-416B-BB2E-F5786E07B178}
 		{D8BA34D8-4D08-4B6D-B00F-D1774EF92F08} = {1A034126-30E6-416B-BB2E-F5786E07B178}
 		{BF442FDB-03CD-47F5-BBCA-CC572E468972} = {24B47154-C5F0-4356-B059-49A1E72C38A6}
+		{12E4F2B4-3F26-4E6D-BCDF-E1B565DB8E65} = {24B47154-C5F0-4356-B059-49A1E72C38A6}
+		{0AC77D1F-2DD3-4E78-A9F8-0A45D740D778} = {1A034126-30E6-416B-BB2E-F5786E07B178}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65FA30D5-DDFC-40EC-9BC9-3BF93D1B430F}

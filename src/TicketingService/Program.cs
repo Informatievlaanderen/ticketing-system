@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TicketingService.Abstractions;
 using TicketingService.Endpoints;
-using TicketingService.Storage.InMemory;
+using TicketingService.Storage.PgSqlMarten;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<ITicketing, InMemoryTicketing>();
+builder.Services.AddMartenTicketing(builder.Configuration.GetConnectionString("Marten"));
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -14,5 +16,10 @@ app.MapPost("/tickets/create/{originator}", Handlers.Create);
 app.MapGet("/tickets/{ticketId:guid}", Handlers.Get);
 app.MapPut("/tickets/{ticketId:guid}/pending", Handlers.Pending);
 app.MapPut("/tickets/{ticketId:guid}/complete", Handlers.Complete);
+app.MapDelete("/tickets/{ticketId:guid}", Handlers.Delete);
+app.MapGet("/tickets", Handlers.GetAll);
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();
