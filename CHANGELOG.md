@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.6...v1.1.0) (2022-07-13)
+
+
+### Features
+
+* add Postgres backend ([81d199c](https://github.com/informatievlaanderen/ticketing-system/commit/81d199c3bf4e973cad35131bf104cc89a4e698bd))
+
 ## [1.0.6](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.5...v1.0.6) (2022-07-08)
 
 
