@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.1.1...v1.2.0) (2022-07-13)
+
+
+### Features
+
+* add http proxy ([2c0542b](https://github.com/informatievlaanderen/ticketing-system/commit/2c0542b3560ddd767125ed86acb73360b7c5b9f2))
+
 ## [1.1.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.1.0...v1.1.1) (2022-07-13)
 
 
