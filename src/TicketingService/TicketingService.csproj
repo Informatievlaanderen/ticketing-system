@@ -29,7 +29,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\TicketingService.Abstractions\TicketingService.Abstractions.csproj" />
-    <ProjectReference Include="..\TicketingService.Storage.InMemory\TicketingService.Storage.InMemory.csproj" />
+    <ProjectReference Include="..\TicketingService.Storage.PgSqlMarten\TicketingService.Storage.PgSqlMarten.csproj" />
   </ItemGroup>
   
   <Import Project="..\..\.paket\Paket.Restore.targets" />

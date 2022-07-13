@@ -1,19 +1,20 @@
 namespace TicketingService.Abstractions;
 
 using System;
+using System.Text.Json.Serialization;
 
-public class Ticket
+public record Ticket(Guid TicketId, string Originator, TicketStatus Status, TicketResult? Result = null)
 {
-    public Guid TicketId { get; }
-    public string Originator { get; }
-    public TicketStatus Status { get; set; }
-    public object? Result { get; set; }
-
-    public Ticket(Guid ticketId, string originator, TicketStatus status, object? result)
-    {
-        TicketId = ticketId;
-        Originator = originator;
-        Status = status;
-        Result = result;
-    }
+    public TicketStatus Status { get; set; } = Status;
+    public TicketResult? Result { get; set; } = Result;
 }
+
+public enum TicketStatus
+{
+    Created,
+    Pending,
+    Complete
+}
+
+[JsonConverter(typeof(TicketResultJsonConverter))]
+public record TicketResult(object? Result);
