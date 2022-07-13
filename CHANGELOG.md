@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.1.0...v1.1.1) (2022-07-13)
+
+
+### Bug Fixes
+
+* push to nuget ([297d65f](https://github.com/informatievlaanderen/ticketing-system/commit/297d65fa35fbe1795ac67921edd5f8ea029013ae))
+
 # [1.1.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.0.6...v1.1.0) (2022-07-13)
 
 
