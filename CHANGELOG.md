@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.2.0...v1.3.0) (2022-07-14)
+
+
+### Features
+
+* add ITicketingUrl ([937dbf6](https://github.com/informatievlaanderen/ticketing-system/commit/937dbf671f6e628fd1bb8c0aa2f2449665d97d96))
+
 # [1.2.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.1.1...v1.2.0) (2022-07-13)
 
 
