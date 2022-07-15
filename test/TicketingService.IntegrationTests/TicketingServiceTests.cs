@@ -25,7 +25,7 @@ public class TicketingServiceTests
 
         var client = application.CreateClient();
 
-        // create
+        // create ticket
         const string originator = "originator";
         var ticketId = Guid.Empty;
         var response = await client.PostAsync($"/tickets/create/{originator}", new ReadOnlyMemoryContent(null));
