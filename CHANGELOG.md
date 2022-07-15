@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.3.1...v1.3.2) (2022-07-15)
+
+
+### Bug Fixes
+
+* use postgres container for testing ([367e02c](https://github.com/informatievlaanderen/ticketing-system/commit/367e02cecfa58fc7531fd2bba0c4e17e943ffdba))
+
 ## [1.3.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.3.0...v1.3.1) (2022-07-15)
 
 
