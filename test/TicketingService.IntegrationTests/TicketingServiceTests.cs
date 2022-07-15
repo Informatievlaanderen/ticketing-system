@@ -1,27 +1,32 @@
 namespace TicketingService.IntegrationTests;
 
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Abstractions;
+using ContainerHelper;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Storage.PgSqlMarten;
 using Xunit;
 
 public class TicketingServiceTests
 {
+    
     [Fact]
     public async Task CreateGetUpdatePendingCompleteDelete()
     {
-        const string connectionString = "Server=127.0.0.1;Port=5432;Database=tickets;User Id=postgres;Password=mysecretpassword;";
-
+        var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
+        using var _ = Container.Compose(composeFileName, "postgres_test", "5432", "tcp");
+        
         var application = new WebApplicationFactory<Program>()
-            .WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureServices(services => services.AddMartenTicketing(connectionString));
-            });
+          .WithWebHostBuilder(builder =>
+          {
+              const string connectionString = "Host=localhost;Port=5432;Database=tickets;Username=postgres;Password=postgres";
+              builder.ConfigureServices(services => services.AddMartenTicketing(connectionString));
+          });
 
         var client = application.CreateClient();
 

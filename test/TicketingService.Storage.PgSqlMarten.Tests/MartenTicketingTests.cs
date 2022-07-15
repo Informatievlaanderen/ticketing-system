@@ -1,7 +1,9 @@
 namespace TicketingService.Storage.PgSqlMarten.Tests;
 
+using System.IO;
 using System.Threading.Tasks;
 using Abstractions;
+using ContainerHelper;
 using Marten;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -11,9 +13,11 @@ public class MartenTicketingTests
     [Fact]
     public async Task CreateGetUpdatePendingCompleteDelete()
     {
-        const string connectionString = "Server=127.0.0.1;Port=5432;Database=tickets;User Id=postgres;Password=mysecretpassword;";
-
+        var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
+        using var _ = Container.Compose(composeFileName, "postgres_test", "5432", "tcp");
+        
         // add Marten
+        const string connectionString = "Host=localhost;Port=5432;Database=tickets;Username=postgres;Password=postgres";
         var services = new ServiceCollection();
         services.AddMartenTicketing(connectionString);
         var serviceProvider = services.BuildServiceProvider();
