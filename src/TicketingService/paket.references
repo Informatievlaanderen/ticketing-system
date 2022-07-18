@@ -1,3 +1,4 @@
+Microsoft.AspNetCore.Authentication.JwtBearer
 SwashBuckle.AspNetCore.Swagger
 SwashBuckle.AspNetCore.SwaggerGen
 SwashBuckle.AspNetCore.SwaggerUI

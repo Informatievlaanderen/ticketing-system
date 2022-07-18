@@ -10,6 +10,7 @@ nuget Marten.AspNetCore 5.5.2
 
 // TEST STUFF
 nuget Ductus.FluentDocker 2.10.55
+nuget Microsoft.AspNetCore.Authentication.JwtBearer 6.0.7
 nuget Microsoft.AspNetCore.Mvc.Testing 6.0.6
 nuget Microsoft.NET.Test.Sdk 17.1.0
 nuget Moq 4.17.2
