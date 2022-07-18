@@ -19,12 +19,12 @@ public class TicketingServiceTests
     public async Task CreateGetUpdatePendingCompleteDelete()
     {
         var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
-        using var _ = Container.Compose(composeFileName, "postgres_test", "5432", "tcp");
+        using var _ = Container.Compose(composeFileName, "postgres_test", "5433", "tcp");
         
         var application = new WebApplicationFactory<Program>()
           .WithWebHostBuilder(builder =>
           {
-              const string connectionString = "Host=localhost;Port=5432;Database=tickets;Username=postgres;Password=postgres";
+              const string connectionString = "Host=localhost;Port=5433;Database=tickets;Username=postgres;Password=postgres";
               builder.ConfigureServices(services => services.AddMartenTicketing(connectionString));
           });
 
