@@ -1,5 +1,6 @@
 using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -24,13 +25,7 @@ builder.Services.AddCors();
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
-builder.Services.AddAuthorization(/*configure =>
-{
-  configure.FallbackPolicy = new AuthorizationPolicyBuilder()
-      .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-      .RequireAuthenticatedUser()
-      .Build();
-}*/);
+builder.Services.AddAuthorization();
 
 // add swagger
 builder.Services.AddEndpointsApiExplorer();
