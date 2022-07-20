@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/informatievlaanderen/ticketing-system/compare/v1.3.3...v1.3.4) (2022-07-20)
+
+
+### Bug Fixes
+
+* add security ([08eea4b](https://github.com/informatievlaanderen/ticketing-system/commit/08eea4bef0b78b8cc48cfd61b11158f21c90ee19))
+
 ## [1.3.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.3.2...v1.3.3) (2022-07-18)
 
 
