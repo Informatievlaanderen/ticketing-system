@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.3.4...v1.4.0) (2022-07-29)
+
+
+### Features
+
+* add healthchecks ([f7d092a](https://github.com/informatievlaanderen/ticketing-system/commit/f7d092a4a4181029ff767a150d605ffe470cf394))
+
 ## [1.3.4](https://github.com/informatievlaanderen/ticketing-system/compare/v1.3.3...v1.3.4) (2022-07-20)
 
 
