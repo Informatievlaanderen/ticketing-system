@@ -8,7 +8,7 @@ using Weasel.Core;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddMartenTicketing(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddMartenTicketing(this IServiceCollection services, string connectionString)
     {
         services.AddMarten(options =>
         {
@@ -26,5 +26,6 @@ public static class ServiceCollectionExtensions
         });
         
         services.AddSingleton<ITicketing, MartenTicketing>();
+        return services;
     }
 }
