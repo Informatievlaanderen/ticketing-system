@@ -6,6 +6,7 @@ source https://api.nuget.org/v3/index.json
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.5
 
 // PRODUCTION STUFF
+nuget AspNetCore.HealthChecks.NpgSql 6.0.2
 nuget Marten.AspNetCore 5.5.2
 
 // TEST STUFF
