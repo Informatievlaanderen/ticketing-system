@@ -1,5 +1,6 @@
 namespace TicketingService.Storage.InMemory.Tests;
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abstractions;
 using Xunit;
@@ -10,17 +11,18 @@ public class InMemoryTicketingTests
     public async Task CreateGetUpdatePendingCompleteDelete()
     {
         var ticketing = new InMemoryTicketing() as ITicketing;
-            
+
         // create
         const string originator = "originator";
-        var ticketId = await ticketing.CreateTicket(originator);
+        var ticketId = await ticketing.CreateTicket(new Dictionary<string, string> { { originator, originator } });
+
         try
         {
             // get
             var ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Created, ticket!.Status);
-            Assert.Equal(originator, ticket.Originator);
+            Assert.Equal(originator, ticket.Metadata[originator]);
 
             // pending
             await ticketing.Pending(ticketId);

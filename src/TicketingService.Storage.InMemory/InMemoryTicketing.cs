@@ -11,10 +11,10 @@ public class InMemoryTicketing : ITicketing
 {
     private readonly IDictionary<Guid, Ticket> _tickets = new Dictionary<Guid, Ticket>();
 
-    public Task<Guid> CreateTicket(string originator, CancellationToken cancellationToken = default)
+    public Task<Guid> CreateTicket(IDictionary<string, string>? metadata = null, CancellationToken cancellationToken = default)
     {
         var ticketId = Guid.NewGuid();
-        _tickets[ticketId] = new Ticket(ticketId, originator, TicketStatus.Created);
+        _tickets[ticketId] = new Ticket(ticketId, TicketStatus.Created, metadata ?? new Dictionary<string, string>());
 
         return Task.FromResult(ticketId);
     }
@@ -39,7 +39,7 @@ public class InMemoryTicketing : ITicketing
 
         return Task.CompletedTask;
     }
-    
+
     public Task Pending(Guid ticketId, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Pending, cancellationToken: cancellationToken);
 
     public Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Complete, result, cancellationToken);

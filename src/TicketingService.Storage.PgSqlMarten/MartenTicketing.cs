@@ -17,12 +17,12 @@ public class MartenTicketing : ITicketing
         _store = store;
     }
 
-    public async Task<Guid> CreateTicket(string originator, CancellationToken cancellationToken = default)
+    public async Task<Guid> CreateTicket(IDictionary<string, string>? metadata = null, CancellationToken cancellationToken = default)
     {
         var ticketId = CombGuidIdGeneration.NewGuid();
 
         await using var session = _store.DirtyTrackedSession();
-        session.Insert(new Ticket(ticketId, originator, TicketStatus.Created));
+        session.Insert(new Ticket(ticketId, TicketStatus.Created, metadata ?? new Dictionary<string, string>()));
         await session.SaveChangesAsync(cancellationToken);
 
         return ticketId;
