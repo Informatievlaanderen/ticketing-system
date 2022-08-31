@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Abstractions;
+using Microsoft.AspNetCore.Mvc;
 
 public static class Handlers
 {
-    public static async Task<Guid> Create(string originator, ITicketing ticketing, CancellationToken cancellationToken = default) => await ticketing.CreateTicket(originator, cancellationToken);
+    public static async Task<Guid> Create([FromBody] IDictionary<string, string>? metadata, ITicketing ticketing, CancellationToken cancellationToken = default) => await ticketing.CreateTicket(metadata, cancellationToken);
 
     public static async Task<IEnumerable<Ticket>> GetAll(ITicketing ticketing, CancellationToken cancellationToken = default) => await ticketing.GetAll(cancellationToken);
 

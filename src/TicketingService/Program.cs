@@ -57,7 +57,7 @@ app
     .UseAuthorization();
 
 // map endpoints
-app.MapPost("/tickets/create/{originator}", Handlers.Create)
+app.MapPost("/tickets/create", Handlers.Create)
     .Produces((int)HttpStatusCode.OK)
     .ExcludeFromDescription();
 app.MapGet("/tickets", Handlers.GetAll)
