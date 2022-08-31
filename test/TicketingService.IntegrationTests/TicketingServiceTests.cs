@@ -28,7 +28,7 @@ public class TicketingServiceTests
 
         // construct claims identity
         var claimsIdentity = new ClaimsIdentity(new[] { new Claim("internal", "true") });
-        string jwtToken = CreateJwtToken(claimsIdentity);
+        var jwtToken = CreateJwtToken(claimsIdentity);
 
         var application = new WebApplicationFactory<Program>()
           .WithWebHostBuilder(builder =>
@@ -58,6 +58,10 @@ public class TicketingServiceTests
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Created, ticket!.Status);
             Assert.Equal(originator, ticket.Originator);
+            Assert.NotEqual(default, ticket.Created);
+            Assert.NotEqual(default, ticket.LastModified);
+
+            var ticketCreatedOn = ticket.Created;
 
             // pending
             request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/pending");
@@ -66,6 +70,10 @@ public class TicketingServiceTests
             ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Pending, ticket!.Status);
+            Assert.Equal(ticketCreatedOn, ticket.Created);
+            Assert.True(ticket.Created < ticket.LastModified);
+
+            var ticketLastModified = ticket.LastModified;
 
             // complete
             const string complete = "Complete";
@@ -79,6 +87,7 @@ public class TicketingServiceTests
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Complete, ticket!.Status);
             Assert.Equal(new TicketResult(complete), ticket.Result);
+            Assert.True(ticketLastModified < ticket.LastModified);
         }
         finally
         {
