@@ -72,6 +72,9 @@ app.MapPut("/tickets/{ticketId:guid}/pending", Handlers.Pending)
 app.MapPut("/tickets/{ticketId:guid}/complete", Handlers.Complete)
     .Produces((int)HttpStatusCode.OK)
     .ExcludeFromDescription();
+app.MapPut("/tickets/{ticketId:guid}/error", Handlers.Error)
+    .Produces((int)HttpStatusCode.OK)
+    .ExcludeFromDescription();
 app.MapDelete("/tickets/{ticketId:guid}", Handlers.Delete)
     .Produces((int)HttpStatusCode.OK)
     .ExcludeFromDescription();

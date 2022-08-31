@@ -12,7 +12,7 @@ using Xunit;
 public class MartenTicketingTests
 {
     [Fact]
-    public async Task CreateGetUpdatePendingCompleteDelete()
+    public async Task CreateGetUpdatePendingErrorCompleteDelete()
     {
         var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
         using var _ = Container.Compose(composeFileName, "postgres_test", "5433", "tcp");
@@ -42,6 +42,16 @@ public class MartenTicketingTests
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Pending, ticket!.Status);
+
+            // error
+            var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
+            await ticketing.Error(ticketId, ticketError);
+
+            // get
+            ticket = await ticketing.Get(ticketId);
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
             // complete
             const string complete = "Complete";

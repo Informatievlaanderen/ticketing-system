@@ -21,7 +21,7 @@ public class TicketingServiceTests
 {
 
     [Fact]
-    public async Task CreateGetUpdatePendingCompleteDelete()
+    public async Task CreateGetUpdatePendingErrorCompleteDelete()
     {
         // start postgres
         var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
@@ -76,6 +76,19 @@ public class TicketingServiceTests
             Assert.True(ticket.Created < ticket.LastModified);
 
             var ticketLastModified = ticket.LastModified;
+
+            // error
+            var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
+            request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/error");
+            request.Headers.Authorization = new AuthenticationHeaderValue(jwtToken);
+            request.Content = JsonContent.Create(ticketError);
+            await client.SendAsync(request);
+
+            // get
+            ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(ticketError, JsonSerializer.Deserialize<TicketError>((string) ticket.Result!.Result!));
 
             // complete
             const string complete = "Complete";
