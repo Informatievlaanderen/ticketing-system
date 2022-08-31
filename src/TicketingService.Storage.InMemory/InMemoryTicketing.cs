@@ -40,6 +40,8 @@ public class InMemoryTicketing : ITicketing
 
     public Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Complete, result, cancellationToken);
 
+    public Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Error, new TicketResult(error), cancellationToken);
+
     public Task Delete(Guid ticketId, CancellationToken cancellationToken = default)
     {
         _tickets.Remove(ticketId);

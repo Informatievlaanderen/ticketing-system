@@ -9,7 +9,7 @@ using Xunit;
 public class InMemoryTicketingTests
 {
     [Fact]
-    public async Task CreateGetUpdatePendingCompleteDelete()
+    public async Task CreateGetUpdatePendingErrorCompleteDelete()
     {
         var ticketing = new InMemoryTicketing() as ITicketing;
 
@@ -30,6 +30,16 @@ public class InMemoryTicketingTests
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Pending, ticket!.Status);
+
+            // error
+            var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
+            await ticketing.Error(ticketId, ticketError);
+
+            // get
+            ticket = await ticketing.Get(ticketId);
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
             // complete
             const string complete = "Complete";

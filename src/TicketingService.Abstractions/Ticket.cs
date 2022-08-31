@@ -2,6 +2,7 @@ namespace TicketingService.Abstractions;
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 public record Ticket(
@@ -20,7 +21,7 @@ public record Ticket(
         Status = newStatus;
         LastModified = DateTimeOffset.UtcNow;
 
-        if (Status == TicketStatus.Complete && result is not null)
+        if (Status is TicketStatus.Complete or TicketStatus.Error && result is not null)
         {
             Result = result;
         }
@@ -31,8 +32,17 @@ public enum TicketStatus
 {
     Created,
     Pending,
-    Complete
+    Complete,
+    Error
 }
 
 [JsonConverter(typeof(TicketResultJsonConverter))]
 public record TicketResult(object? Result);
+
+public record TicketError(string ErrorMessage, string ErrorCode)
+{
+    public override string ToString()
+    {
+        return JsonSerializer.Serialize(this);
+    }
+}
