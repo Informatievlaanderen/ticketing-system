@@ -59,6 +59,11 @@ public class TicketingServiceTests
             var ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Created, ticket!.Status);
+            Assert.NotEqual(default, ticket.Created);
+            Assert.NotEqual(default, ticket.LastModified);
+
+            var ticketCreatedOn = ticket.Created;
+
             Assert.Equal(originator, ticket.Metadata[originator]);
 
             // pending
@@ -67,6 +72,10 @@ public class TicketingServiceTests
             ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Pending, ticket!.Status);
+            Assert.Equal(ticketCreatedOn, ticket.Created);
+            Assert.True(ticket.Created < ticket.LastModified);
+
+            var ticketLastModified = ticket.LastModified;
 
             // complete
             const string complete = "Complete";
@@ -79,6 +88,7 @@ public class TicketingServiceTests
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Complete, ticket!.Status);
             Assert.Equal(new TicketResult(complete), ticket.Result);
+            Assert.True(ticketLastModified < ticket.LastModified);
         }
         finally
         {

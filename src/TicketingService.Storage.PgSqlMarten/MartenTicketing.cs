@@ -46,11 +46,7 @@ public class MartenTicketing : ITicketing
         var ticket = await session.LoadAsync<Ticket>(ticketId, cancellationToken);
         if (ticket is not null)
         {
-            ticket.Status = newStatus;
-            if (ticket.Status == TicketStatus.Complete && result is not null)
-            {
-                ticket.Result = result;
-            }
+            ticket.ChangeStatus(newStatus, result);
             session.Update(ticket);
             await session.SaveChangesAsync(cancellationToken);
         }

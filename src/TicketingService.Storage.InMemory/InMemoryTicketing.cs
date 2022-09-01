@@ -30,11 +30,7 @@ public class InMemoryTicketing : ITicketing
         _ = cancellationToken.IsCancellationRequested;
         if (_tickets.TryGetValue(ticketId, out var ticket))
         {
-            ticket.Status = newStatus;
-            if (ticket.Status == TicketStatus.Complete && result is not null)
-            {
-                ticket.Result = result;
-            }
+            ticket.ChangeStatus(newStatus, result);
         }
 
         return Task.CompletedTask;

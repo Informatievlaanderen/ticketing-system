@@ -12,6 +12,19 @@ public record Ticket(
 {
     public TicketStatus Status { get; set; } = Status;
     public TicketResult? Result { get; set; } = Result;
+    public DateTimeOffset Created { get; init; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset LastModified { get; set; } = DateTimeOffset.UtcNow;
+
+    public void ChangeStatus(TicketStatus newStatus, TicketResult? result = null)
+    {
+        Status = newStatus;
+        LastModified = DateTimeOffset.UtcNow;
+
+        if (Status == TicketStatus.Complete && result is not null)
+        {
+            Result = result;
+        }
+    }
 }
 
 public enum TicketStatus
