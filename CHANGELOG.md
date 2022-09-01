@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.4.0...v1.5.0) (2022-09-01)
+
+
+### Features
+
+* add created and last modified timestamps on a ticket ([#41](https://github.com/informatievlaanderen/ticketing-system/issues/41)) ([55fbed9](https://github.com/informatievlaanderen/ticketing-system/commit/55fbed965c16cdffd28b2afb7ade84b3ac0daf7a))
+
 # [1.4.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.3.4...v1.4.0) (2022-07-29)
 
 
