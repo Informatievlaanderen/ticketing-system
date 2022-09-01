@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.5.0...v1.6.0) (2022-09-01)
+
+
+### Features
+
+* faulted ticket ([867a3ed](https://github.com/informatievlaanderen/ticketing-system/commit/867a3ed3c9a82ee3bd0a8cd8f28e91bca6ed5940))
+
 # [1.5.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.4.0...v1.5.0) (2022-09-01)
 
 
