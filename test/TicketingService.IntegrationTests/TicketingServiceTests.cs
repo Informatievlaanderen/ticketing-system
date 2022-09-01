@@ -1,6 +1,7 @@
 namespace TicketingService.IntegrationTests;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -40,32 +41,33 @@ public class TicketingServiceTests
           });
 
         var client = application.CreateClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(jwtToken);
 
         // create ticket
         const string originator = "originator";
         var ticketId = Guid.Empty;
-        var request = new HttpRequestMessage(HttpMethod.Post, $"/tickets/create/{originator}");
-        request.Headers.Authorization = new AuthenticationHeaderValue(jwtToken);
-        var response = await client.SendAsync(request);
+        var response = await client.PostAsync("/tickets/create", JsonContent.Create(new Dictionary<string, string> { { originator, originator } }));
+
         if (response.IsSuccessStatusCode)
         {
             ticketId = await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync());
         }
+
         try
         {
             // get
             var ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Created, ticket!.Status);
-            Assert.Equal(originator, ticket.Originator);
             Assert.NotEqual(default, ticket.Created);
             Assert.NotEqual(default, ticket.LastModified);
 
             var ticketCreatedOn = ticket.Created;
 
+            Assert.Equal(originator, ticket.Metadata[originator]);
+
             // pending
-            request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/pending");
-            request.Headers.Authorization = new AuthenticationHeaderValue(jwtToken);
+            var request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/pending");
             await client.SendAsync(request);
             ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
             Assert.NotNull(ticket);
@@ -78,7 +80,6 @@ public class TicketingServiceTests
             // complete
             const string complete = "Complete";
             request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/complete");
-            request.Headers.Authorization = new AuthenticationHeaderValue(jwtToken);
             request.Content = JsonContent.Create(new TicketResult(complete));
             await client.SendAsync(request);
 
@@ -92,7 +93,7 @@ public class TicketingServiceTests
         finally
         {
             // delete
-            request = new HttpRequestMessage(HttpMethod.Delete, $"/tickets/{ticketId:D}");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"/tickets/{ticketId:D}");
             await client.SendAsync(request);
             var ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
             Assert.Null(ticket);

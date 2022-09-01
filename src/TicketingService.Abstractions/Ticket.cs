@@ -1,9 +1,14 @@
 namespace TicketingService.Abstractions;
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-public record Ticket(Guid TicketId, string Originator, TicketStatus Status, TicketResult? Result = null)
+public record Ticket(
+    Guid TicketId,
+    TicketStatus Status,
+    IDictionary<string, string> Metadata,
+    TicketResult? Result = null)
 {
     public TicketStatus Status { get; set; } = Status;
     public TicketResult? Result { get; set; } = Result;
