@@ -88,7 +88,7 @@ public class TicketingServiceTests
             ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Error, ticket!.Status);
-            Assert.Equal(ticketError, JsonSerializer.Deserialize<TicketError>((string) ticket.Result!.Result!));
+            Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
             // complete
             const string complete = "Complete";

@@ -3,6 +3,7 @@ namespace TicketingService.Storage.PgSqlMarten;
 using Abstractions;
 using Marten;
 using Marten.Schema.Identity;
+using Marten.Services.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Weasel.Core;
 
@@ -23,8 +24,10 @@ public static class ServiceCollectionExtensions
                 .WithOwner("postgres")
                 .WithEncoding("UTF-8")
                 .ConnectionLimit(-1));
+
+            options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
         });
-        
+
         services.AddSingleton<ITicketing, MartenTicketing>();
         return services;
     }
