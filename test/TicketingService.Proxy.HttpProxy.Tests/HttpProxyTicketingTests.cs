@@ -46,7 +46,8 @@ public class HttpProxyTicketingTests
         var expectedResult = new[]
         {
             new Ticket(Guid.NewGuid(), TicketStatus.Created, new Dictionary<string, string> { { "originator", "ticketing" } }),
-            new Ticket(Guid.NewGuid(), TicketStatus.Complete, new Dictionary<string, string>(), new TicketResult("Complete"))
+            new Ticket(Guid.NewGuid(), TicketStatus.Complete, new Dictionary<string, string>(), new TicketResult("Complete")),
+            new Ticket(Guid.NewGuid(), TicketStatus.Complete, new Dictionary<string, string>(), new TicketResult(new TicketError("foo", "bar")))
         };
         var httpClient = MockHttpClient(expectedResult);
 

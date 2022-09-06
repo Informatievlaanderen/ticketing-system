@@ -36,13 +36,18 @@ public enum TicketStatus
     Error
 }
 
-[JsonConverter(typeof(TicketResultJsonConverter))]
-public record TicketResult(object? Result);
-
-public record TicketError(string ErrorMessage, string ErrorCode)
+public record TicketResult
 {
-    public override string ToString()
+    [JsonInclude]
+    public string? ResultAsJson { get; set; }
+
+    public TicketResult(object? result)
     {
-        return JsonSerializer.Serialize(this);
+        ResultAsJson = result is not null ? JsonSerializer.Serialize(result) : null;
     }
+
+    public TicketResult()
+    { }
 }
+
+public record TicketError(string ErrorMessage, string ErrorCode);
