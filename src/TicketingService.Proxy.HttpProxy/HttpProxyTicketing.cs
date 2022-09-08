@@ -14,13 +14,13 @@ public class HttpProxyTicketing : ITicketing
 {
     private readonly HttpClient _httpClient;
 
-    public HttpProxyTicketing(string? baseAddress = null, HttpClient? httpClient = null)
+    public HttpProxyTicketing(HttpClient httpClient)
     {
-        _httpClient = httpClient ?? new HttpClient();
-        if (baseAddress is not null && baseAddress.EndsWith("/"))
-        {
-            _httpClient.BaseAddress = new Uri(baseAddress.TrimEnd('/'));
-        }
+        _httpClient = httpClient;
+        //if (baseAddress is not null && baseAddress.EndsWith("/"))
+        //{
+        //    _httpClient.BaseAddress = new Uri(baseAddress.TrimEnd('/'));
+        //}
     }
 
     public async Task<Guid> CreateTicket(IDictionary<string, string>? metadata = null, CancellationToken cancellationToken = default)
