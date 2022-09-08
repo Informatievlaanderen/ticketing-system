@@ -8,6 +8,7 @@ nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.5
 // PRODUCTION STUFF
 nuget AspNetCore.HealthChecks.NpgSql 6.0.2
 nuget Marten.AspNetCore 5.5.2
+nuget Microsoft.Extensions.Http 6.0.0
 
 // TEST STUFF
 nuget Ductus.FluentDocker 2.10.55

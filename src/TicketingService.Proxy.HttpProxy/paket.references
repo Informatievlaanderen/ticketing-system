@@ -1,4 +1,5 @@
 Microsoft.Extensions.DependencyInjection
+Microsoft.Extensions.Http
 
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles
