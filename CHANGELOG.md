@@ -1,3 +1,17 @@
+# [1.7.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.6.1...v1.7.0) (2022-09-08)
+
+
+### Bug Fixes
+
+* change workflow ([0b150c4](https://github.com/informatievlaanderen/ticketing-system/commit/0b150c4b42e68c3a82ce3994a23f6244138d58d5))
+* remove release check ([c41f339](https://github.com/informatievlaanderen/ticketing-system/commit/c41f339f7cecc69111c442d2ce3c52d8e9c29fd2))
+
+
+### Features
+
+* add httpproxyticketing registration ([dafa051](https://github.com/informatievlaanderen/ticketing-system/commit/dafa05195064f3263630eb24b63997ef506c4a57))
+* add ticketingurl ([9974196](https://github.com/informatievlaanderen/ticketing-system/commit/9974196859178994257fdae7bc648ea00bde47f0))
+
 ## [1.6.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.6.0...v1.6.1) (2022-09-06)
 
 # [1.6.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.5.0...v1.6.0) (2022-09-01)
