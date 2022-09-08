@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.0...v1.7.1) (2022-09-08)
+
+
+### Bug Fixes
+
+* correct usage of httpclient ([d31459b](https://github.com/informatievlaanderen/ticketing-system/commit/d31459bf9cac5a3009f6d5ff57e9563374c363f8))
+
 # [1.7.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.6.1...v1.7.0) (2022-09-08)
 
 
