@@ -17,10 +17,6 @@ public class HttpProxyTicketing : ITicketing
     public HttpProxyTicketing(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        //if (baseAddress is not null && baseAddress.EndsWith("/"))
-        //{
-        //    _httpClient.BaseAddress = new Uri(baseAddress.TrimEnd('/'));
-        //}
     }
 
     public async Task<Guid> CreateTicket(IDictionary<string, string>? metadata = null, CancellationToken cancellationToken = default)
@@ -35,16 +31,21 @@ public class HttpProxyTicketing : ITicketing
         return ticketId;
     }
 
-    public async Task<IEnumerable<Ticket>> GetAll(CancellationToken cancellationToken = default) => await _httpClient.GetFromJsonAsync<IEnumerable<Ticket>>("/tickets", cancellationToken)
-        ?? Enumerable.Empty<Ticket>();
+    public async Task<IEnumerable<Ticket>> GetAll(CancellationToken cancellationToken = default)
+        => await _httpClient.GetFromJsonAsync<IEnumerable<Ticket>>("/tickets", cancellationToken) ?? Enumerable.Empty<Ticket>();
 
-    public async Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default) => await _httpClient.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}", cancellationToken: cancellationToken);
+    public async Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default)
+        => await _httpClient.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}", cancellationToken: cancellationToken);
 
-    public async Task Pending(Guid ticketId, CancellationToken cancellationToken = default) => await _httpClient.PutAsync($"/tickets/{ticketId}/pending", new ReadOnlyMemoryContent(null), cancellationToken);
+    public async Task Pending(Guid ticketId, CancellationToken cancellationToken = default)
+        => await _httpClient.PutAsync($"/tickets/{ticketId}/pending", new ReadOnlyMemoryContent(null), cancellationToken);
 
-    public async Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default) => await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/complete", result, cancellationToken: cancellationToken);
+    public async Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default)
+        => await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/complete", result, cancellationToken: cancellationToken);
 
-    public async Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default) => await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/error", error, cancellationToken: cancellationToken);
+    public async Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default)
+        => await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/error", error, cancellationToken: cancellationToken);
 
-    public async Task Delete(Guid ticketId, CancellationToken cancellationToken = default) => await _httpClient.DeleteAsync($"/tickets/{ticketId}", cancellationToken);
+    public async Task Delete(Guid ticketId, CancellationToken cancellationToken = default)
+        => await _httpClient.DeleteAsync($"/tickets/{ticketId}", cancellationToken);
 }

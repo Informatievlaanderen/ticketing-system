@@ -2,8 +2,6 @@ namespace TicketingService.Abstractions;
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 public record Ticket(
     Guid TicketId,
@@ -27,27 +25,3 @@ public record Ticket(
         }
     }
 }
-
-public enum TicketStatus
-{
-    Created,
-    Pending,
-    Complete,
-    Error
-}
-
-public record TicketResult
-{
-    [JsonInclude]
-    public string? ResultAsJson { get; set; }
-
-    public TicketResult(object? result)
-    {
-        ResultAsJson = result is not null ? JsonSerializer.Serialize(result) : null;
-    }
-
-    public TicketResult()
-    { }
-}
-
-public record TicketError(string ErrorMessage, string ErrorCode);

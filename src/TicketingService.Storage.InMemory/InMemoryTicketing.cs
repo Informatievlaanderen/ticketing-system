@@ -19,11 +19,11 @@ public class InMemoryTicketing : ITicketing
         return Task.FromResult(ticketId);
     }
 
-    public Task<IEnumerable<Ticket>> GetAll(CancellationToken cancellationToken = default) => Task.FromResult(_tickets.Values.AsEnumerable());
+    public Task<IEnumerable<Ticket>> GetAll(CancellationToken cancellationToken = default)
+        => Task.FromResult(_tickets.Values.AsEnumerable());
 
-    public Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default) => Task.FromResult(_tickets.TryGetValue(ticketId, out var ticket)
-        ? ticket
-        : null);
+    public Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default)
+        => Task.FromResult(_tickets.TryGetValue(ticketId, out var ticket) ? ticket : null);
 
     private Task ChangeStatus(Guid ticketId, TicketStatus newStatus, TicketResult? result = null, CancellationToken cancellationToken = default)
     {
@@ -36,11 +36,14 @@ public class InMemoryTicketing : ITicketing
         return Task.CompletedTask;
     }
 
-    public Task Pending(Guid ticketId, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Pending, cancellationToken: cancellationToken);
+    public Task Pending(Guid ticketId, CancellationToken cancellationToken = default)
+        => ChangeStatus(ticketId, TicketStatus.Pending, cancellationToken: cancellationToken);
 
-    public Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Complete, result, cancellationToken);
+    public Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default)
+        => ChangeStatus(ticketId, TicketStatus.Complete, result, cancellationToken);
 
-    public Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Error, new TicketResult(error), cancellationToken);
+    public Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default)
+        => ChangeStatus(ticketId, TicketStatus.Error, new TicketResult(error), cancellationToken);
 
     public Task Delete(Guid ticketId, CancellationToken cancellationToken = default)
     {
