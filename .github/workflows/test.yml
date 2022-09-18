@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        services: []
+        services: ['microservices-ticketing']
     steps:
     - name: CD
       env:
         BUILD_URL: ${{ secrets.VBR_AWS_BUILD_API }}/${{matrix.services}}
         STATUS_URL: ${{ secrets.VBR_AWS_BUILD_STATUS_API }}/${{matrix.services}}
-      uses: informatievlaanderen/awscurl-polling-action@main
+      uses: informatievlaanderen/awscurl-polling-action/polling-action@main
       with:
           environment: test
           version: ${{ github.event.inputs.version }}
