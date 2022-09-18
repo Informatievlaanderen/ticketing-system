@@ -1,27 +1,22 @@
-namespace TicketingService.Abstractions
+namespace TicketingService.Abstractions;
+
+using System;
+
+public class TicketingUrl : ITicketingUrl
 {
-    using System;
+    private readonly Uri _baseUrl;
 
-    public class TicketingUrl : ITicketingUrl
+    public TicketingUrl(string baseUrl) : this(new Uri(baseUrl))
+    { }
+
+    public TicketingUrl(Uri baseUrl)
     {
-        private readonly Uri _baseUrl;
-
-        public TicketingUrl(string baseUrl) : this(new Uri(baseUrl))
-        { }
-
-        public TicketingUrl(Uri baseUrl)
-        {
-            _baseUrl = baseUrl;
-        }
-
-        public Uri For(Guid ticketId)
-        {
-            return Combine(_baseUrl, ticketId.ToString("D"));
-        }
-
-        private static Uri Combine(Uri uri, string partOfPath)
-        {
-            return new Uri($"{uri.ToString().TrimEnd('/')}/{partOfPath.TrimStart('/')}");
-        }
+        _baseUrl = baseUrl;
     }
+
+    public Uri For(Guid ticketId)
+        => Combine(_baseUrl, ticketId.ToString("D"));
+
+    private static Uri Combine(Uri uri, string partOfPath)
+        => new Uri($"{uri.ToString().TrimEnd('/')}/{partOfPath.TrimStart('/')}");
 }

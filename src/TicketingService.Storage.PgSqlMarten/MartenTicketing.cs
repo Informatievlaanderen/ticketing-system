@@ -52,11 +52,14 @@ public class MartenTicketing : ITicketing
         }
     }
 
-    public Task Pending(Guid ticketId, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Pending, cancellationToken: cancellationToken);
+    public Task Pending(Guid ticketId, CancellationToken cancellationToken = default)
+        => ChangeStatus(ticketId, TicketStatus.Pending, cancellationToken: cancellationToken);
 
-    public Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default) => ChangeStatus(ticketId, TicketStatus.Complete, result, cancellationToken);
+    public Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default)
+        => ChangeStatus(ticketId, TicketStatus.Complete, result, cancellationToken);
 
-    public Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default)=> ChangeStatus(ticketId, TicketStatus.Error, new TicketResult(error), cancellationToken);
+    public Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default)
+        => ChangeStatus(ticketId, TicketStatus.Error, new TicketResult(error), cancellationToken);
 
     public async Task Delete(Guid ticketId, CancellationToken cancellationToken = default)
     {

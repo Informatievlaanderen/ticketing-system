@@ -6,7 +6,5 @@ using Microsoft.Extensions.DependencyInjection;
 public static class ServiceCollectionExtensions
 {
     public static void AddInMemoryTicketing(this IServiceCollection services, string connectionString)
-    {
-        services.AddSingleton<ITicketing, InMemoryTicketing>();
-    }
+        => services.AddSingleton<ITicketing, InMemoryTicketing>();
 }
