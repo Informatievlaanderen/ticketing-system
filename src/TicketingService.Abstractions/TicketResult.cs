@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 public record TicketResult
 {
     [JsonInclude]
+    [JsonPropertyName("result")]
     public string? ResultAsJson { get; set; }
 
     public TicketResult(object? result)
