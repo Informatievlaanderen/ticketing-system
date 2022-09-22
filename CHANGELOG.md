@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.2...v1.7.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* create readme file to trigger build ([8425be1](https://github.com/informatievlaanderen/ticketing-system/commit/8425be150c2451ca50fc9059e84d19a87dd839ea))
+
 ## [1.7.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.1...v1.7.2) (2022-09-22)
 
 ## [1.7.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.0...v1.7.1) (2022-09-08)
