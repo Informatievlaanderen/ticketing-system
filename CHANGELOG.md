@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.5...v1.7.6) (2022-09-26)
+
+
+### Bug Fixes
+
+* style to trigger build ([93b9c10](https://github.com/informatievlaanderen/ticketing-system/commit/93b9c107658ae1b6f255d4e194227eb63997a79d))
+
 ## [1.7.5](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.4...v1.7.5) (2022-09-26)
 
 
