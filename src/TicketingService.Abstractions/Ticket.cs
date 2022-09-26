@@ -8,7 +8,10 @@ public record Ticket(
     TicketStatus Status,
     IDictionary<string, string> Metadata,
     TicketResult? Result = null)
-{
+{    
+    private readonly DateTimeOffset _created = DateTimeOffset.UtcNow;
+    private DateTimeOffset _lastModified = DateTimeOffset.UtcNow;
+
     /// <summary>
     /// De unieke identificator van het ticket.
     /// </summary>
@@ -27,12 +30,20 @@ public record Ticket(
     /// <summary>
     /// De datum waarop het ticket is aangemaakt.
     /// </summary>
-    public DateTimeOffset Created { get; init; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset Created
+    {
+        get => ToWesternEuropeDateTimeOffset(_created);
+        init => _created = value;
+    }
 
     /// <summary>
     /// De datum waarop het ticket laatst is aangepast.
     /// </summary>
-    public DateTimeOffset LastModified { get; set; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset LastModified
+    {
+        get => ToWesternEuropeDateTimeOffset(_lastModified);
+        set => _lastModified = value;
+    }
 
     public void ChangeStatus(TicketStatus newStatus, TicketResult? result = null)
     {
@@ -43,5 +54,10 @@ public record Ticket(
         {
             Result = result;
         }
+    }
+
+    private static DateTimeOffset ToWesternEuropeDateTimeOffset(DateTimeOffset dateTimeOffset)
+    {
+        return new DateTimeOffset(dateTimeOffset.DateTime, TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time").GetUtcOffset(dateTimeOffset));
     }
 }
