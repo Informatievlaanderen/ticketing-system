@@ -1,3 +1,11 @@
+## [1.7.5](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.4...v1.7.5) (2022-09-26)
+
+
+### Bug Fixes
+
+* correct marten / api settings + rename ticketresult ([4714b64](https://github.com/informatievlaanderen/ticketing-system/commit/4714b64ffe84afc923937067addc5c5403322318))
+* return datetimes as western europe datetimes ([a40427a](https://github.com/informatievlaanderen/ticketing-system/commit/a40427a08dfe7608b0157a3fb894ed2b5553682e))
+
 ## [1.7.4](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.3...v1.7.4) (2022-09-22)
 
 
