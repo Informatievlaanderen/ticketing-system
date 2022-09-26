@@ -25,7 +25,10 @@ public static class ServiceCollectionExtensions
                 .WithEncoding("UTF-8")
                 .ConnectionLimit(-1));
 
-            options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
+            options.UseDefaultSerialization(
+                serializerType: SerializerType.SystemTextJson,
+                enumStorage: EnumStorage.AsString,
+                casing: Casing.CamelCase);
         });
 
         services.AddSingleton<ITicketing, MartenTicketing>();

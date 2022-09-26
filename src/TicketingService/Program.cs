@@ -1,9 +1,12 @@
 using System;
 using System.Net;
+using System.Net.Mime;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -37,6 +40,11 @@ builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 builder.Services.AddAuthorization();
 
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
 // add swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -58,25 +66,27 @@ app
 
 // map endpoints
 app.MapPost("/tickets/create", Handlers.Create)
-    .Produces((int)HttpStatusCode.OK)
+    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 app.MapGet("/tickets", Handlers.GetAll)
-    .Produces((int)HttpStatusCode.OK)
+    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 app.MapGet("/tickets/{ticketId:guid}", Handlers.Get)
     .AllowAnonymous()
-    .Produces<Ticket?>();
+    .Produces<Ticket?>(contentType: MediaTypeNames.Application.Json);
 app.MapPut("/tickets/{ticketId:guid}/pending", Handlers.Pending)
-    .Produces((int)HttpStatusCode.OK)
+    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 app.MapPut("/tickets/{ticketId:guid}/complete", Handlers.Complete)
-    .Produces((int)HttpStatusCode.OK)
+    .Accepts<TicketResult>(contentType: MediaTypeNames.Application.Json)
+    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 app.MapPut("/tickets/{ticketId:guid}/error", Handlers.Error)
-    .Produces((int)HttpStatusCode.OK)
+    .Accepts<TicketError>(contentType: MediaTypeNames.Application.Json)
+    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 app.MapDelete("/tickets/{ticketId:guid}", Handlers.Delete)
-    .Produces((int)HttpStatusCode.OK)
+    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 
 // use swagger
