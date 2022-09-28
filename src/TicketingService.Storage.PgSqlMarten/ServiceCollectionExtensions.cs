@@ -1,10 +1,13 @@
 namespace TicketingService.Storage.PgSqlMarten;
 
+using System.Text.Json;
 using Abstractions;
 using Marten;
 using Marten.Schema.Identity;
+using Marten.Services;
 using Marten.Services.Json;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Weasel.Core;
 
 public static class ServiceCollectionExtensions
@@ -25,10 +28,24 @@ public static class ServiceCollectionExtensions
                 .WithEncoding("UTF-8")
                 .ConnectionLimit(-1));
 
-            options.UseDefaultSerialization(
-                serializerType: SerializerType.SystemTextJson,
-                enumStorage: EnumStorage.AsString,
-                casing: Casing.CamelCase);
+            options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
+
+            // Optionally configure the serializer directly
+            var systemTextJsonSerializer = new SystemTextJsonSerializer
+            {
+                // Optionally override the enum storage
+                EnumStorage = EnumStorage.AsString,
+
+                // Optionally override the member casing
+                Casing = Casing.CamelCase,
+            };
+
+            systemTextJsonSerializer.Customize(serializerOptions =>
+            {
+                serializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+            });
+
+            options.Serializer(systemTextJsonSerializer);
         });
 
         services.AddSingleton<ITicketing, MartenTicketing>();
