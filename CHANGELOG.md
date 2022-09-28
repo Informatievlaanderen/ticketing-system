@@ -1,3 +1,10 @@
+## [1.7.7](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.6...v1.7.7) (2022-09-28)
+
+
+### Bug Fixes
+
+* use camelcase for dictionaries ([301a6a7](https://github.com/informatievlaanderen/ticketing-system/commit/301a6a76fb458bfecb97350dddce975ae0f350a7))
+
 ## [1.7.6](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.5...v1.7.6) (2022-09-26)
 
 
