@@ -21,14 +21,11 @@ public class HttpProxyTicketing : ITicketing
 
     public async Task<Guid> CreateTicket(IDictionary<string, string>? metadata = null, CancellationToken cancellationToken = default)
     {
-        var ticketId = Guid.Empty;
         var response = await _httpClient.PostAsync("/tickets/create", JsonContent.Create(metadata ?? new Dictionary<string, string>()), cancellationToken);
-        if (response.IsSuccessStatusCode)
-        {
-            ticketId = await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
-        }
 
-        return ticketId;
+        response.EnsureSuccessStatusCode();
+
+        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
     }
 
     public async Task<IEnumerable<Ticket>> GetAll(CancellationToken cancellationToken = default)
