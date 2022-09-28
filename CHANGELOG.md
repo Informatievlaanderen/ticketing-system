@@ -1,3 +1,10 @@
+## [1.7.8](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.7...v1.7.8) (2022-09-28)
+
+
+### Bug Fixes
+
+* don't return ticket Id when create ticket failed ([0731c98](https://github.com/informatievlaanderen/ticketing-system/commit/0731c98238d1aee32f7a58922a830a8a54a99653))
+
 ## [1.7.7](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.6...v1.7.7) (2022-09-28)
 
 
