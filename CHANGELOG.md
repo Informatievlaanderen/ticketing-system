@@ -1,3 +1,10 @@
+## [1.7.9](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.8...v1.7.9) (2022-09-29)
+
+
+### Reverts
+
+* Revert "docs: update ticket field docs GAWR-3716" ([0cbb639](https://github.com/informatievlaanderen/ticketing-system/commit/0cbb63943aa628f56597f72cd31baed22eeb7c52))
+
 ## [1.7.8](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.7...v1.7.8) (2022-09-28)
 
 
