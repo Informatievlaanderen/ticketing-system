@@ -8,19 +8,14 @@ public record Ticket(
     TicketStatus Status,
     IDictionary<string, string> Metadata,
     TicketResult? Result = null)
-{
+{    
     private readonly DateTimeOffset _created = DateTimeOffset.UtcNow;
     private DateTimeOffset _lastModified = DateTimeOffset.UtcNow;
 
     /// <summary>
-    /// De unieke identificator verkregen uit de edit API’s. Deze informatie bevindt zich in de location header van de response.
+    /// De unieke identificator van het ticket.
     /// </summary>
     public Guid TicketId { get; set; } = TicketId;
-
-    /// <summary>
-    /// Identificatie van het event, register, objectId en aggregate welke verantwoordelijk is voor het ticket.
-    /// </summary>
-    public IDictionary<string, string> Metadata { get; set; } = Metadata;
 
     /// <summary>
     /// De status van het ticket.
@@ -28,12 +23,12 @@ public record Ticket(
     public TicketStatus Status { get; set; } = Status;
 
     /// <summary>
-    /// Bij status ‘Complete' wordt de detail URL van het objectId getoond samen met de bijhorende ETag. Bij status ‘Error’ wordt de ErrorMessage & ErrorCode getoond.
+    /// De resultaat van het ticket in json formaat.
     /// </summary>
     public TicketResult? Result { get; set; } = Result;
 
     /// <summary>
-    /// De versie-identificator waarop het ticket is aangemaakt (timestamp volgens RFC 3339) (notatie: lokale tijd + verschil t.o.v. UTC).
+    /// De datum waarop het ticket is aangemaakt.
     /// </summary>
     public DateTimeOffset Created
     {
@@ -42,7 +37,7 @@ public record Ticket(
     }
 
     /// <summary>
-    /// De versie-identificator waarop het ticket het laatst is aangepast (timestamp volgens RFC 3339) (notatie: lokale tijd + verschil t.o.v. UTC).
+    /// De datum waarop het ticket laatst is aangepast.
     /// </summary>
     public DateTimeOffset LastModified
     {
