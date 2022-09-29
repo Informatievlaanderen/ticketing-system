@@ -8,7 +8,7 @@ public record Ticket(
     TicketStatus Status,
     IDictionary<string, string> Metadata,
     TicketResult? Result = null)
-{    
+{
     private readonly DateTimeOffset _created = DateTimeOffset.UtcNow;
     private DateTimeOffset _lastModified = DateTimeOffset.UtcNow;
 
@@ -23,12 +23,17 @@ public record Ticket(
     public TicketStatus Status { get; set; } = Status;
 
     /// <summary>
-    /// De resultaat van het ticket in json formaat.
+    /// De metadata van het ticket.
+    /// </summary>
+    public IDictionary<string, string> Metadata { get; set; } = Metadata;
+
+    /// <summary>
+    /// Het resultaat van het ticket in json formaat.
     /// </summary>
     public TicketResult? Result { get; set; } = Result;
 
     /// <summary>
-    /// De datum waarop het ticket is aangemaakt.
+    /// De datum en het tijdstip waarop het ticket is aangemaakt (timestamp volgens RFC 3339) (notatie: lokale tijd + verschil t.o.v. UTC).
     /// </summary>
     public DateTimeOffset Created
     {
@@ -37,7 +42,7 @@ public record Ticket(
     }
 
     /// <summary>
-    /// De datum waarop het ticket laatst is aangepast.
+    /// De datum en het tijdstip waarop het ticket laatst is aangepast (timestamp volgens RFC 3339) (notatie: lokale tijd + verschil t.o.v. UTC).
     /// </summary>
     public DateTimeOffset LastModified
     {
