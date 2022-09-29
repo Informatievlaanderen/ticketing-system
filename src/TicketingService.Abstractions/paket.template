@@ -18,5 +18,8 @@ dependencies
   framework: net6.0
 
 files
+  TicketingService.Abstractions.xml => lib\net6.0
+  TicketingService.Abstractions.xml => content
+
   TicketingService.Abstractions.dll => lib\net6.0
   TicketingService.Abstractions.pdb => lib\net6.0

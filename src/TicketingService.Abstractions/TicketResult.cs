@@ -4,6 +4,9 @@ using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Het resultaat van het ticket in json formaat.
+/// </summary>
 public record TicketResult
 {
     [JsonInclude]
