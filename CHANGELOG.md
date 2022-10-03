@@ -1,3 +1,10 @@
+## [1.7.11](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.10...v1.7.11) (2022-10-03)
+
+
+### Bug Fixes
+
+* update ticketresult contract ([d46c43a](https://github.com/informatievlaanderen/ticketing-system/commit/d46c43a7dd2fa0554b182fcd69f8a9934fd8c783))
+
 ## [1.7.10](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.9...v1.7.10) (2022-10-03)
 
 
