@@ -1,3 +1,10 @@
+## [1.7.10](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.9...v1.7.10) (2022-10-03)
+
+
+### Bug Fixes
+
+* camelcase enums ([628c231](https://github.com/informatievlaanderen/ticketing-system/commit/628c231b3eccd08f06dd11b473de0ab463b1605e))
+
 ## [1.7.9](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.8...v1.7.9) (2022-09-29)
 
 
