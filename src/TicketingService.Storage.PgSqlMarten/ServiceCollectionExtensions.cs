@@ -1,13 +1,13 @@
 namespace TicketingService.Storage.PgSqlMarten;
 
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Abstractions;
 using Marten;
 using Marten.Schema.Identity;
 using Marten.Services;
 using Marten.Services.Json;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Weasel.Core;
 
 public static class ServiceCollectionExtensions
@@ -43,6 +43,7 @@ public static class ServiceCollectionExtensions
             systemTextJsonSerializer.Customize(serializerOptions =>
             {
                 serializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                serializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             });
 
             options.Serializer(systemTextJsonSerializer);

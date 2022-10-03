@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Mime;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -42,7 +43,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.Configure<JsonOptions>(options =>
 {
-    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
 });
 
 // add swagger
