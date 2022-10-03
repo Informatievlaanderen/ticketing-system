@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 /// <summary>
 /// Het resultaat van het ticket in json formaat.
 /// </summary>
+[DataContract(Name = "TicketResult")]
 public record TicketResult
 {
     [JsonInclude]
