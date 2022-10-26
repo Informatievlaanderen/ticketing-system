@@ -1,0 +1,25 @@
+type file
+version 1.0.0
+
+id Be.Vlaanderen.Basisregisters.TicketingService.Monitoring
+title Be.Vlaanderen.Basisregisters.TicketingService.Monitoring
+
+authors Basisregisters.Vlaanderen
+owners Vlaamse overheid
+copyright Copyright (c) Vlaamse overheid
+requireLicenseAcceptance false
+projectUrl https://vlaanderen.be/digitaal-vlaanderen
+iconUrl https://raw.githubusercontent.com/Informatievlaanderen/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
+
+description TicketingService Monitoring.
+
+dependencies
+  framework: net6.0
+
+files
+  TicketingService.Monitoring.xml => lib\net6.0
+  TicketingService.Monitoring.xml => content
+
+  TicketingService.Monitoring.dll => lib\net6.0
+  TicketingService.Monitoring.pdb => lib\net6.0
