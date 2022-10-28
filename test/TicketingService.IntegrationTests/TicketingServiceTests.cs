@@ -6,16 +6,18 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Net.Sockets;
 using System.Security.Claims;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Abstractions;
 using ContainerHelper;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Storage.PgSqlMarten;
 using Xunit;
 using static JwtTokenHelper;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 public class TicketingServiceTests
 {
@@ -56,7 +58,8 @@ public class TicketingServiceTests
         try
         {
             // get
-            var ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
+            var s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            var ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Created, ticket!.Status);
             Assert.NotEqual(default, ticket.Created);
@@ -69,7 +72,8 @@ public class TicketingServiceTests
             // pending
             var request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/pending");
             await client.SendAsync(request);
-            ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
+            s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Pending, ticket!.Status);
             Assert.Equal(ticketCreatedOn, ticket.Created);
@@ -85,7 +89,8 @@ public class TicketingServiceTests
             await client.SendAsync(request);
 
             // get
-            ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
+            s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Error, ticket!.Status);
             Assert.Equal(new TicketResult(ticketError), ticket.Result);
@@ -97,7 +102,8 @@ public class TicketingServiceTests
             await client.SendAsync(request);
 
             // get
-            ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
+            s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Complete, ticket!.Status);
             Assert.Equal(new TicketResult(complete), ticket.Result);
@@ -108,7 +114,8 @@ public class TicketingServiceTests
             // delete
             var request = new HttpRequestMessage(HttpMethod.Delete, $"/tickets/{ticketId:D}");
             await client.SendAsync(request);
-            var ticket = await client.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}");
+            var s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            var ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.Null(ticket);
         }
     }
