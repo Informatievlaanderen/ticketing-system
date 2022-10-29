@@ -1,3 +1,10 @@
+## [1.7.12](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.11...v1.7.12) (2022-10-29)
+
+
+### Bug Fixes
+
+* enable pr's & coverage ([#59](https://github.com/informatievlaanderen/ticketing-system/issues/59)) ([0602bff](https://github.com/informatievlaanderen/ticketing-system/commit/0602bff30fb7b402e1338932f92aeb0513a024be))
+
 ## [1.7.11](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.10...v1.7.11) (2022-10-03)
 
 
