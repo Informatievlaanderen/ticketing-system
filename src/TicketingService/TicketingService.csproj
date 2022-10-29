@@ -7,8 +7,6 @@
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -26,11 +24,21 @@
   <ItemGroup>
     <InternalsVisibleTo Include="TicketingService.IntegrationTests" />
   </ItemGroup>
-  
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="SwashBuckle.AspNetCore.Swagger" />
+    <PackageReference Include="SwashBuckle.AspNetCore.SwaggerGen" />
+    <PackageReference Include="SwashBuckle.AspNetCore.SwaggerUI" />
+    <PackageReference Include="SourceLink.Embed.AllSourceFiles" />
+    <PackageReference Include="SourceLink.Copy.PdbFiles" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\TicketingService.Abstractions\TicketingService.Abstractions.csproj" />
     <ProjectReference Include="..\TicketingService.Storage.PgSqlMarten\TicketingService.Storage.PgSqlMarten.csproj" />
   </ItemGroup>
   
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>

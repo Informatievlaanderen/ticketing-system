@@ -1,7 +1,0 @@
-Microsoft.AspNetCore.Mvc.Testing
-Microsoft.NET.Test.Sdk
-Newtonsoft.Json
-xunit
-xunit.runner.visualstudio
-xunit.categories
-FluentAssertions
