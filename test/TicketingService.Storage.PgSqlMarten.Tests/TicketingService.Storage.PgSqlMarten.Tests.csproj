@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.App.props" />
+
   <PropertyGroup>
     <ApplicationIcon />
     <StartupObject />
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="xunit.categories" />
+    <PackageReference Include="FluentAssertions" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\TicketingService.Storage.PgSqlMarten\TicketingService.Storage.PgSqlMarten.csproj" />
     <ProjectReference Include="..\TicketingService.ContainerHelper\TicketingService.ContainerHelper.csproj" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+
+  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>

@@ -18,6 +18,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+
+  <ItemGroup>
+    <PackageReference Include="Marten.AspNetCore" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="SourceLink.Embed.AllSourceFiles" />
+    <PackageReference Include="SourceLink.Copy.PdbFiles" />
+  </ItemGroup>
+
+  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>
