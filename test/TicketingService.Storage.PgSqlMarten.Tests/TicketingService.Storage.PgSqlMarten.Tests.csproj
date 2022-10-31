@@ -20,5 +20,4 @@
     <ProjectReference Include="..\TicketingService.ContainerHelper\TicketingService.ContainerHelper.csproj" />
   </ItemGroup>
 
-  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>
