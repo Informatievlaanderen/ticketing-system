@@ -1,5 +1,4 @@
 <Project>
-
   <ItemGroup>
     <PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
     <PackageVersion Include="Be.Vlaanderen.Basisregisters.Build.Pipeline" Version="6.0.5" />
@@ -22,5 +21,4 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
     <PackageVersion Include="xunit.categories" Version="2.0.6" />
   </ItemGroup>
-
 </Project>

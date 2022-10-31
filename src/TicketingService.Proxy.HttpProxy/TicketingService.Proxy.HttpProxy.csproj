@@ -24,5 +24,4 @@
     <PackageReference Include="SourceLink.Copy.PdbFiles" />
   </ItemGroup>
 
-  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>

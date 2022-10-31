@@ -40,5 +40,4 @@
     <ProjectReference Include="..\TicketingService.Storage.PgSqlMarten\TicketingService.Storage.PgSqlMarten.csproj" />
   </ItemGroup>
   
-  <!--<Import Project="..\..\.paket\Paket.Restore.targets" />-->
 </Project>
