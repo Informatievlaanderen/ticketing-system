@@ -5,13 +5,7 @@
   <PropertyGroup>
     <!-- Error NETSDK1152: https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/duplicate-files-in-output -->
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TicketingService.Abstractions\TicketingService.Abstractions.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Update="paket.template">
@@ -24,6 +18,10 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="SourceLink.Embed.AllSourceFiles" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketingService.Abstractions\TicketingService.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
