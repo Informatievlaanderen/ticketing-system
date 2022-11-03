@@ -1,3 +1,15 @@
+## [1.7.13](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.12...v1.7.13) (2022-11-03)
+
+
+### Bug Fixes
+
+* add nuget to dependabot.yml ([6088659](https://github.com/informatievlaanderen/ticketing-system/commit/60886599f3b7e1d5ceac2e2f93f78c318e270fd2))
+* remove language & target framework from Storage.PgSqlMarten ([6a6d927](https://github.com/informatievlaanderen/ticketing-system/commit/6a6d9270fe553fcf58312f01a2f8404df4ab369e))
+* remove paket.dependencies & comments ([daa0122](https://github.com/informatievlaanderen/ticketing-system/commit/daa0122dbf48eb9f3eb75df5f799e479938de98d))
+* update ci & test branch protection ([0deb152](https://github.com/informatievlaanderen/ticketing-system/commit/0deb152d25915ed43881707c971b11f3925588c0))
+* use central package management ([81ed656](https://github.com/informatievlaanderen/ticketing-system/commit/81ed656060196f82d9cc37a734bae3cd2b2e78ff))
+* use VBR_SONAR_TOKEN ([5961ba7](https://github.com/informatievlaanderen/ticketing-system/commit/5961ba75a45cf6b3c3d30645ce908773a1393083))
+
 ## [1.7.12](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.11...v1.7.12) (2022-10-29)
 
 
