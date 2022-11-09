@@ -6,7 +6,7 @@
     <PackageVersion Include="FluentAssertions" Version="6.5.1" />
     <PackageVersion Include="Marten.AspNetCore" Version="5.10.1" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.6" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
