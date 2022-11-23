@@ -73,11 +73,11 @@ public static partial class Handlers
         return (from, to);
     }
 
-    private static TicketStatus[]? ConvertStatuses(string? statuses)
+    private static TicketStatus[] ConvertStatuses(string? statuses)
     {
         if (string.IsNullOrEmpty(statuses))
         {
-            return null;
+            return new[] { TicketStatus.Pending, TicketStatus.Created };
         }
 
         var statusList = statuses

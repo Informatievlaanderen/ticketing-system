@@ -1,6 +1,5 @@
 namespace TicketingService.Monitoring;
 
-using Abstractions;
 using Marten;
 
 public static partial class Handlers
@@ -16,7 +15,7 @@ public static partial class Handlers
         var tickets = await session
             .TicketsFromTo(fromDate, toDate)
             .TicketsByStatuses(
-                ConvertStatuses(statuses) ?? new[] {TicketStatus.Pending, TicketStatus.Created},
+                ConvertStatuses(statuses),
                 cancellationToken);
 
         var result = tickets
