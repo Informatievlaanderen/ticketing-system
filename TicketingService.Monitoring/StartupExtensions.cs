@@ -1,8 +1,8 @@
+namespace TicketingService.Monitoring;
+
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using TicketingService.Storage.PgSqlMarten;
-
-namespace TicketingService.Monitoring;
+using Storage.PgSqlMarten;
 
 public static class StartupExtensions
 {
