@@ -6,7 +6,6 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Net.Sockets;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Abstractions;
@@ -61,7 +60,7 @@ public class TicketingServiceTests
             var s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             var ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Created, ticket!.Status);
+            Assert.Equal(TicketStatus.Created, ticket.Status);
             Assert.NotEqual(default, ticket.Created);
             Assert.NotEqual(default, ticket.LastModified);
 
@@ -75,7 +74,7 @@ public class TicketingServiceTests
             s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Pending, ticket!.Status);
+            Assert.Equal(TicketStatus.Pending, ticket.Status);
             Assert.Equal(ticketCreatedOn, ticket.Created);
             Assert.True(ticket.Created < ticket.LastModified);
 
@@ -92,7 +91,7 @@ public class TicketingServiceTests
             s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
             Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
             // complete
@@ -105,7 +104,7 @@ public class TicketingServiceTests
             s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Complete, ticket!.Status);
+            Assert.Equal(TicketStatus.Complete, ticket.Status);
             Assert.Equal(new TicketResult(complete), ticket.Result);
             Assert.True(ticketLastModified < ticket.LastModified);
         }

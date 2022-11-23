@@ -25,7 +25,7 @@ public static class StartupExtensions
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services
-            .AddMartenTicketing(options.ConnectionString)
+            .AddMartenTicketing(options.ConnectionString ?? throw new ArgumentException("ConnectionString is null"))
             .AddHealthChecks().AddNpgSql(_ => options.ConnectionString);
 
         return builder;

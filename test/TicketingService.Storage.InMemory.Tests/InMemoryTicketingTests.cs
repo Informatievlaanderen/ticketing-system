@@ -21,14 +21,14 @@ public class InMemoryTicketingTests
             // get
             var ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Created, ticket!.Status);
+            Assert.Equal(TicketStatus.Created, ticket.Status);
             Assert.Equal(originator, ticket.Metadata[originator]);
 
             // pending
             await ticketing.Pending(ticketId);
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Pending, ticket!.Status);
+            Assert.Equal(TicketStatus.Pending, ticket.Status);
 
             // error
             var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
@@ -37,7 +37,7 @@ public class InMemoryTicketingTests
             // get
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
             Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
             // complete
@@ -47,7 +47,7 @@ public class InMemoryTicketingTests
             // get
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Complete, ticket!.Status);
+            Assert.Equal(TicketStatus.Complete, ticket.Status);
             Assert.Equal(new TicketResult(complete), ticket.Result);
         }
         finally

@@ -5,5 +5,5 @@ using System.ComponentModel.DataAnnotations;
 public class AppOptions
 {
     [Required]
-    public string ConnectionString { get; set; }
+    public string? ConnectionString { get; set; }
 }

@@ -30,14 +30,14 @@ public static class ServiceCollectionExtensions
 
             options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
 
-            // Optionally configure the serializer directly
+            // configure serializer directly
             var systemTextJsonSerializer = new SystemTextJsonSerializer
             {
-                // Optionally override the enum storage
+                // override enum storage
                 EnumStorage = EnumStorage.AsString,
 
-                // Optionally override the member casing
-                Casing = Casing.CamelCase,
+                // override member casing
+                Casing = Casing.CamelCase
             };
 
             systemTextJsonSerializer.Customize(serializerOptions =>

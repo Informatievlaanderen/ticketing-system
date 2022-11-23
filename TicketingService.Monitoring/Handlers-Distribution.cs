@@ -27,7 +27,8 @@ public static partial class Handlers
             .Select(t => (
                 ExecutionTime: t.LastModified.Subtract(t.Created),
                 Action: CreateActionString(t)))
-            .OrderBy(t => t.ExecutionTime);
+            .OrderBy(t => t.ExecutionTime)
+            .ToList();
 
         var groupSize = completionTimes.Max(t => t.ExecutionTime).TotalMilliseconds / (groupCount2*1000);
 
@@ -37,7 +38,8 @@ public static partial class Handlers
         foreach (var (min, max) in ranges)
         {
             var totalInRange = completionTimes
-                .Where(t => t.ExecutionTime.TotalMilliseconds > min && t.ExecutionTime.TotalMilliseconds < max);
+                .Where(t => t.ExecutionTime.TotalMilliseconds > min && t.ExecutionTime.TotalMilliseconds < max)
+                .ToList();
 
             var distinctActions = totalInRange
                 .DistinctBy(t => t.Action)
@@ -49,11 +51,12 @@ public static partial class Handlers
                 result.Add(new
                 {
                     ExecutionTime = $"{TimeSpan.FromMilliseconds(min)} - {TimeSpan.FromMilliseconds(max)}",
-                    Count = totalInRange.Count(),
+                    totalInRange.Count,
                     Actions = distinctActions
                 });
             }
         }
+
         return Results.Json(result);
     }
 
