@@ -1,8 +1,13 @@
 namespace TicketingService.Monitoring;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Abstractions;
 using Marten;
+using Microsoft.AspNetCore.Http;
 
 public static partial class Handlers
 {
@@ -60,11 +65,9 @@ public static partial class Handlers
         return Results.Json(result);
     }
 
-    private static IEnumerable<(double min, double max)> CreateDistributionRanges(int groupCount, double groupSize)
-    {
-        return from i in Enumerable.Range(0, groupCount)
-            let min = i * groupSize
-            let max = (i + 1) * groupSize
-            select (min, max);
-    }
+    private static IEnumerable<(double min, double max)> CreateDistributionRanges(int groupCount, double groupSize) =>
+        from i in Enumerable.Range(0, groupCount)
+        let min = i * groupSize
+        let max = (i + 1) * groupSize
+        select (min, max);
 }
