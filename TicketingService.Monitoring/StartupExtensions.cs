@@ -4,6 +4,12 @@ using TicketingService.Storage.PgSqlMarten;
 
 namespace TicketingService.Monitoring;
 
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 public static class StartupExtensions
 {
     public static WebApplicationBuilder AddAppSettings(this WebApplicationBuilder builder, string[] args)
