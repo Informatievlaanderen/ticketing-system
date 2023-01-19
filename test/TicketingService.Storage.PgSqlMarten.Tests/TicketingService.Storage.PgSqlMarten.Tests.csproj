@@ -13,11 +13,17 @@
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="xunit.categories" />
     <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.DockerUtilities" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\TicketingService.Storage.PgSqlMarten\TicketingService.Storage.PgSqlMarten.csproj" />
-    <ProjectReference Include="..\TicketingService.ContainerHelper\TicketingService.ContainerHelper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="postgres_test.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
