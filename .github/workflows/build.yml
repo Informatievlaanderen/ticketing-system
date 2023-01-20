@@ -77,10 +77,10 @@ jobs:
 
     - name: Debug
       run: |
-        echo ls ./packages
-        ls ./packages
-        echo ls ./packages/be.vlaanderen.basisregisters.build.pipeline/6.0.6
-        ls ./packages/be.vlaanderen.basisregisters.build.pipeline/6.0.6
+        echo ls /home/runner/work/ticketing-system/ticketing-system/packages
+        ls /home/runner/work/ticketing-system/ticketing-system/packages
+        echo ls /home/runner/work/ticketing-system/ticketing-system/packages/be.vlaanderen.basisregisters.build.pipeline/6.0.6
+        ls /home/runner/work/ticketing-system/ticketing-system/packages/be.vlaanderen.basisregisters.build.pipeline/6.0.6
         
     - name: Sonar begin build & analyze
       env:
