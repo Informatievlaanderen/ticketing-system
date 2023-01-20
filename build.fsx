@@ -50,6 +50,7 @@ Target.create "Publish_Solution" (fun _ ->
     "TicketingService.Proxy.HttpProxy"
     "TicketingService.Storage.InMemory"
     "TicketingService.Storage.PgSqlMarten"
+    "TicketingService.Monitoring"
   ] |> List.iter publishSource)
 
 Target.create "Pack_Solution" (fun _ ->
