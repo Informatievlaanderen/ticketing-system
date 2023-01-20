@@ -1,8 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-using TicketingService.Storage.PgSqlMarten;
-
 namespace TicketingService.Monitoring;
+
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Storage.PgSqlMarten;
 
 public static class StartupExtensions
 {
