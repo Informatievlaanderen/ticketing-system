@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.Build.Pipeline" />
     <PackageReference Include="Ductus.FluentDocker" />
   </ItemGroup>
 

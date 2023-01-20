@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.Build.Pipeline" />
     <PackageReference Include="SourceLink.Embed.AllSourceFiles" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" />
   </ItemGroup>

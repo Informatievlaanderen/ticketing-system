@@ -18,6 +18,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.Build.Pipeline" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Http" />
     <PackageReference Include="SourceLink.Embed.AllSourceFiles" />

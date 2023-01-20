@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.Build.Pipeline" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="SourceLink.Embed.AllSourceFiles" />
     <PackageReference Include="SourceLink.Copy.PdbFiles" />

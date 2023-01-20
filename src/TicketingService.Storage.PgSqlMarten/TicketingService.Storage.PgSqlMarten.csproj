@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.Build.Pipeline" />
     <PackageReference Include="Marten.AspNetCore" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="SourceLink.Embed.AllSourceFiles" />
