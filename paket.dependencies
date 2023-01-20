@@ -4,6 +4,7 @@ source https://api.nuget.org/v3/index.json
 
 // VBR STUFF
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
+nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
 
 // PRODUCTION STUFF
 nuget AspNetCore.HealthChecks.NpgSql 6.0.2
@@ -12,7 +13,6 @@ nuget Microsoft.Extensions.DependencyInjection 6.0.1
 nuget Microsoft.Extensions.Http 6.0.0
 
 // TEST STUFF
-nuget Ductus.FluentDocker 2.10.57
 nuget Microsoft.AspNetCore.Authentication.JwtBearer 6.0.10
 nuget Microsoft.AspNetCore.Mvc.Testing 6.0.6
 nuget Microsoft.NET.Test.Sdk 17.1.0

@@ -16,6 +16,8 @@ NUGET
       Fake.IO.FileSystem (>= 5.22)
       Fake.JavaScript.Npm (>= 5.22)
       Newtonsoft.Json (>= 13.0.1)
+    Be.Vlaanderen.Basisregisters.DockerUtilities (1.0.1)
+      Ductus.FluentDocker (>= 2.10.57) - restriction: || (&& (== net472) (>= net6.0)) (== net6.0)
     BlackFox.VsWhere (1.1)
       FSharp.Core (>= 4.0.0.1) - restriction: || (== net472) (&& (== net6.0) (>= net45))
       FSharp.Core (>= 4.2.3) - restriction: || (&& (== net472) (< net45)) (== net6.0)

@@ -7,7 +7,11 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\TicketingService\TicketingService.csproj" />
-    <ProjectReference Include="..\TicketingService.ContainerHelper\TicketingService.ContainerHelper.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="postgres_test.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
