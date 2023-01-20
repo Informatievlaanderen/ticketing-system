@@ -14,9 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		build.fsx = build.fsx
 		Directory.Build.props = Directory.Build.props
-		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
+		Directory.Packages.props.old = Directory.Packages.props.old
 		package.json = package.json
+		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingService.Abstractions", "src\TicketingService.Abstractions\TicketingService.Abstractions.csproj", "{779DDB25-FE6E-4FA9-B7E7-1609BED99AF8}"
