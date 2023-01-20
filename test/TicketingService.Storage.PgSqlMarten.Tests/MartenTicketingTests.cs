@@ -18,7 +18,7 @@ public class MartenTicketingTests
         using var _ = DockerComposer.Compose("postgres_test.yml", "ticketing-system-marten-integration-tests");
 
         // add Marten
-        const string connectionString = "Host=localhost;Port=5433;Database=tickets;Username=postgres;Password=postgres";
+        const string connectionString = "Host=localhost;Port=5434;Database=tickets;Username=postgres;Password=postgres";
         var services = new ServiceCollection();
         services.AddMartenTicketing(connectionString);
         var serviceProvider = services.BuildServiceProvider();
