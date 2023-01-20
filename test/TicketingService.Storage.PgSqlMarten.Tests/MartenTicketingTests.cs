@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Abstractions;
-using ContainerHelper;
+using Be.Vlaanderen.Basisregisters.DockerUtilities;
 using Marten;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -15,10 +15,10 @@ public class MartenTicketingTests
     public async Task CreateGetUpdatePendingErrorCompleteDelete()
     {
         var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
-        using var _ = Container.Compose(composeFileName, "postgres_test", "5433", "tcp");
+        using var _ = DockerComposer.Compose("postgres_test.yml", "ticketing-system-marten-integration-tests");
 
         // add Marten
-        const string connectionString = "Host=localhost;Port=5433;Database=tickets;Username=postgres;Password=postgres";
+        const string connectionString = "Host=localhost;Port=5434;Database=tickets;Username=postgres;Password=postgres";
         var services = new ServiceCollection();
         services.AddMartenTicketing(connectionString);
         var serviceProvider = services.BuildServiceProvider();

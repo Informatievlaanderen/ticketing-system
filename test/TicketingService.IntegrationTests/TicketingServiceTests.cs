@@ -2,15 +2,13 @@ namespace TicketingService.IntegrationTests;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Net.Sockets;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Abstractions;
-using ContainerHelper;
+using Be.Vlaanderen.Basisregisters.DockerUtilities;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -26,8 +24,7 @@ public class TicketingServiceTests
     public async Task CreateGetUpdatePendingErrorCompleteDelete()
     {
         // start postgres
-        var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
-        using var _ = Container.Compose(composeFileName, "postgres_test", "5433", "tcp");
+        using var _ = DockerComposer.Compose("postgres_test.yml", "ticketing-system-integration-tests");
 
         // construct claims identity
         var claimsIdentity = new ClaimsIdentity(new[] { new Claim("internal", "true") });

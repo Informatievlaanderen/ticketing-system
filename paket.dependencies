@@ -3,27 +3,28 @@ framework: net6.0, net472
 source https://api.nuget.org/v3/index.json
 
 // VBR STUFF
-nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.5
+nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
+nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
 
 // PRODUCTION STUFF
 nuget AspNetCore.HealthChecks.NpgSql 6.0.2
-nuget Marten.AspNetCore 5.5.2
+nuget Marten.AspNetCore 5.10.1
+nuget Microsoft.Extensions.DependencyInjection 6.0.1
 nuget Microsoft.Extensions.Http 6.0.0
 
 // TEST STUFF
-nuget Ductus.FluentDocker 2.10.55
-nuget Microsoft.AspNetCore.Authentication.JwtBearer 6.0.7
+nuget Microsoft.AspNetCore.Authentication.JwtBearer 6.0.10
 nuget Microsoft.AspNetCore.Mvc.Testing 6.0.6
 nuget Microsoft.NET.Test.Sdk 17.1.0
-nuget Moq 4.17.2
+nuget Moq 4.18.2
 nuget Newtonsoft.Json 13.0.1
-nuget xunit 2.4.1
-nuget xunit.runner.visualstudio 2.4.3
+nuget xunit 2.4.2
+nuget xunit.runner.visualstudio 2.4.5
 nuget xunit.categories 2.0.6
 nuget FluentAssertions 6.5.1
-nuget SwashBuckle.AspNetCore.Swagger 6.3.1
+nuget SwashBuckle.AspNetCore.Swagger 6.4.0
 nuget SwashBuckle.AspNetCore.SwaggerGen 6.3.1
-nuget SwashBuckle.AspNetCore.SwaggerUI 6.3.1
+nuget SwashBuckle.AspNetCore.SwaggerUI 6.4.0
 
 // BUILD STUFF
 nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true

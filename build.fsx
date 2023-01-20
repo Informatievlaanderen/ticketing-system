@@ -47,6 +47,7 @@ Target.create "Publish_Solution" (fun _ ->
   [
     "TicketingService"
     "TicketingService.Abstractions"
+    "TicketingService.Monitoring"
     "TicketingService.Proxy.HttpProxy"
     "TicketingService.Storage.InMemory"
     "TicketingService.Storage.PgSqlMarten"

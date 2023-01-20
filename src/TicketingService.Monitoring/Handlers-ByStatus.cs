@@ -1,7 +1,12 @@
 namespace TicketingService.Monitoring;
 
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Abstractions;
 using Marten;
+using Microsoft.AspNetCore.Http;
 
 public static partial class Handlers
 {

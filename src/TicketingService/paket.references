@@ -1,0 +1,7 @@
+AspNetCore.HealthChecks.NpgSql
+Microsoft.AspNetCore.Authentication.JwtBearer
+SwashBuckle.AspNetCore.Swagger
+SwashBuckle.AspNetCore.SwaggerGen
+SwashBuckle.AspNetCore.SwaggerUI
+SourceLink.Embed.AllSourceFiles
+SourceLink.Copy.PdbFiles
