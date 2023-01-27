@@ -24,7 +24,6 @@ public static class ServiceCollectionExtensions
 
             options.CreateDatabasesForTenants(configure => configure.ForTenant()
                 .CheckAgainstPgDatabase()
-                .WithOwner("postgres")
                 .WithEncoding("UTF-8")
                 .ConnectionLimit(-1));
 
