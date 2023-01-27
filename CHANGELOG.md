@@ -1,3 +1,16 @@
+# [1.8.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.13...v1.8.0) (2023-01-27)
+
+
+### Bug Fixes
+
+* fix build ([7990654](https://github.com/informatievlaanderen/ticketing-system/commit/799065423de008162479a807c95bf7d075f342e1))
+* remove ([8e0eccb](https://github.com/informatievlaanderen/ticketing-system/commit/8e0eccb080dda648958fc1ea343c1f861e634689))
+
+
+### Features
+
+* add monitoring proj ([16fb857](https://github.com/informatievlaanderen/ticketing-system/commit/16fb85752833ad16cc9c780cd8efdb0e10958169))
+
 ## [1.7.13](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.12...v1.7.13) (2022-11-03)
 
 
