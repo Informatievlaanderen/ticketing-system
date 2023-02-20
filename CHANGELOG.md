@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.8.0...v1.8.1) (2023-02-20)
+
+
+### Bug Fixes
+
+* return 404 when ticket not found ([7ad585a](https://github.com/informatievlaanderen/ticketing-system/commit/7ad585a9e1e0b3fed29f6f290b54c96f427b46b2))
+
 # [1.8.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.13...v1.8.0) (2023-01-27)
 
 
