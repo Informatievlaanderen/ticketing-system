@@ -14,7 +14,6 @@ public class MartenTicketingTests
     [Fact]
     public async Task CreateGetUpdatePendingErrorCompleteDelete()
     {
-        var composeFileName = Path.Combine(Directory.GetCurrentDirectory(), "postgres_test.yml");
         using var _ = DockerComposer.Compose("postgres_test.yml", "ticketing-system-marten-integration-tests");
 
         // add Marten

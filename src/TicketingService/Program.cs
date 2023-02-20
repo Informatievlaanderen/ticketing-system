@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -72,7 +73,13 @@ app.MapPost("/tickets/create", Handlers.Create)
 app.MapGet("/tickets", Handlers.GetAll)
     .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
-app.MapGet("/tickets/{ticketId:guid}", Handlers.Get)
+app.MapGet("/tickets/{ticketId:guid}", async (Guid ticketId, ITicketing ticketingService, CancellationToken cancellationToken) =>
+    {
+        var result = await Handlers.Get(ticketId, ticketingService, cancellationToken);
+        return result is null
+            ? Results.NotFound()
+            : Results.Ok(result);
+    })
     .AllowAnonymous()
     .Produces<Ticket?>(contentType: MediaTypeNames.Application.Json);
 app.MapPut("/tickets/{ticketId:guid}/pending", Handlers.Pending)

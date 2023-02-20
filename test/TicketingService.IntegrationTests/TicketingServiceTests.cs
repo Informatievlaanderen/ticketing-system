@@ -2,6 +2,7 @@ namespace TicketingService.IntegrationTests;
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -9,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Abstractions;
 using Be.Vlaanderen.Basisregisters.DockerUtilities;
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -111,9 +113,8 @@ public class TicketingServiceTests
             // delete
             var request = new HttpRequestMessage(HttpMethod.Delete, $"/tickets/{ticketId:D}");
             await client.SendAsync(request);
-            var s = await client.GetStringAsync($"/tickets/{ticketId:D}");
-            var ticket = JsonConvert.DeserializeObject<Ticket>(s);
-            Assert.Null(ticket);
+            var r = await client.GetAsync($"/tickets/{ticketId:D}");
+            Assert.Equal(HttpStatusCode.NotFound, r.StatusCode);
         }
     }
 }
