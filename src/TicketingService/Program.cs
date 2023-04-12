@@ -93,6 +93,10 @@ app.MapPut("/tickets/{ticketId:guid}/error", Handlers.Error)
     .Accepts<TicketError>(contentType: MediaTypeNames.Application.Json)
     .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
+app.MapPut("/tickets/{ticketId:guid}/errors", Handlers.Errors)
+    .Accepts<TicketError[]>(contentType: MediaTypeNames.Application.Json)
+    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
+    .ExcludeFromDescription();
 app.MapDelete("/tickets/{ticketId:guid}", Handlers.Delete)
     .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();

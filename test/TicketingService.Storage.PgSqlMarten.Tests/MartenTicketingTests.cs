@@ -44,7 +44,7 @@ public class MartenTicketingTests
 
             // error
             var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
-            await ticketing.Error(ticketId, ticketError);
+            await ticketing.Error(ticketId, new[] { ticketError });
 
             // get
             ticket = await ticketing.Get(ticketId);
