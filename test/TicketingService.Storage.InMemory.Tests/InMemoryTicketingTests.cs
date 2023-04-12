@@ -32,13 +32,28 @@ public class InMemoryTicketingTests
 
             // error
             var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
-            await ticketing.Error(ticketId, new[] { ticketError });
+            await ticketing.Error(ticketId, ticketError);
 
             // get
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Error, ticket!.Status);
             Assert.Equal(new TicketResult(ticketError), ticket.Result);
+
+            // errors
+            var ticketErrors = new[]
+            {
+                new TicketError("mockErrorMessage1", "mockErrorCode1"),
+                new TicketError("mockErrorMessage2", "mockErrorCode2"),
+                new TicketError("mockErrorMessage3", "mockErrorCode3")
+            };
+            await ticketing.Error(ticketId, ticketErrors);
+
+            // get
+            ticket = await ticketing.Get(ticketId);
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(new TicketResult(ticketErrors), ticket.Result);
 
             // complete
             const string complete = "Complete";
