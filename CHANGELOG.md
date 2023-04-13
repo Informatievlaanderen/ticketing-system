@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.8.1...v1.9.0) (2023-04-13)
+
+
+### Features
+
+* add support for multiple errors ([fc8ab7a](https://github.com/informatievlaanderen/ticketing-system/commit/fc8ab7a933c9d1279a7ed97ebb906eb88eebf93c))
+
 ## [1.8.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.8.0...v1.8.1) (2023-02-20)
 
 
