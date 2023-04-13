@@ -27,6 +27,9 @@ public static class Handlers
     public static async Task Error(Guid ticketId, TicketError error, ITicketing ticketing, CancellationToken cancellationToken = default)
         => await ticketing.Error(ticketId, error, cancellationToken);
 
+    public static async Task Errors(Guid ticketId, TicketError[] errors, ITicketing ticketing, CancellationToken cancellationToken = default)
+        => await ticketing.Error(ticketId, errors, cancellationToken);
+
     public static async Task Delete(Guid ticketId, ITicketing ticketing, CancellationToken cancellationToken = default)
         => await ticketing.Delete(ticketId, cancellationToken);
 }

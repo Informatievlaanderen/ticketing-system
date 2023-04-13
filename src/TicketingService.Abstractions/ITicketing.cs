@@ -13,5 +13,6 @@ public interface ITicketing
     Task Pending(Guid ticketId, CancellationToken cancellationToken = default);
     Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default);
     Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default);
+    Task Error(Guid ticketId, TicketError[] errors, CancellationToken cancellationToken = default);
     Task Delete(Guid ticketId, CancellationToken cancellationToken = default);
 }
