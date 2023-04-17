@@ -94,6 +94,25 @@ public class TicketingServiceTests
             Assert.Equal(TicketStatus.Error, ticket!.Status);
             Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
+            // errors
+            var ticketErrors = new TicketError(new[]
+            {
+                new TicketError("mockErrorMessage1", "mockErrorCode1"),
+                new TicketError("mockErrorMessage2", "mockErrorCode2"),
+                new TicketError("mockErrorMessage3", "mockErrorCode3")
+            });
+            request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/error");
+            request.Headers.Authorization = new AuthenticationHeaderValue(jwtToken);
+            request.Content = JsonContent.Create(ticketErrors);
+            await client.SendAsync(request);
+
+            // get
+            s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            ticket = JsonConvert.DeserializeObject<Ticket>(s);
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equivalent(new TicketResult(ticketErrors), ticket.Result);
+
             // complete
             const string complete = "Complete";
             request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/complete");
