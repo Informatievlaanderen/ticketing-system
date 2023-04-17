@@ -61,9 +61,6 @@ public class MartenTicketing : ITicketing
     public Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default)
         => ChangeStatus(ticketId, TicketStatus.Error, new TicketResult(error), cancellationToken);
 
-    public Task Error(Guid ticketId, TicketError[] errors, CancellationToken cancellationToken = default)
-        => ChangeStatus(ticketId, TicketStatus.Error, new TicketResult(errors), cancellationToken);
-
     public async Task Delete(Guid ticketId, CancellationToken cancellationToken = default)
     {
         await using var session = _store.DirtyTrackedSession();

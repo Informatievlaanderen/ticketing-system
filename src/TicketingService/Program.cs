@@ -45,6 +45,7 @@ builder.Services.AddAuthorization();
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+    options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
 
 // add swagger
@@ -91,10 +92,6 @@ app.MapPut("/tickets/{ticketId:guid}/complete", Handlers.Complete)
     .ExcludeFromDescription();
 app.MapPut("/tickets/{ticketId:guid}/error", Handlers.Error)
     .Accepts<TicketError>(contentType: MediaTypeNames.Application.Json)
-    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
-    .ExcludeFromDescription();
-app.MapPut("/tickets/{ticketId:guid}/errors", Handlers.Errors)
-    .Accepts<TicketError[]>(contentType: MediaTypeNames.Application.Json)
     .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 app.MapDelete("/tickets/{ticketId:guid}", Handlers.Delete)
