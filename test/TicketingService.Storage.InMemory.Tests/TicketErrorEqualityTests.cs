@@ -34,7 +34,7 @@ public class TicketErrorEqualityTests
     }
 
     [Fact]
-    public void ItShouldBeEqualWhenNoneAndMultiple()
+    public void ItShouldNotBeEqualWhenErrorCollectionDiffers()
     {
         var ticketError1 = new TicketError(new[]
         {
