@@ -1,3 +1,12 @@
+## [1.9.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.9.1...v1.9.2) (2023-04-18)
+
+
+### Bug Fixes
+
+* Equality for TicketError sequence ([4a283ff](https://github.com/informatievlaanderen/ticketing-system/commit/4a283ff251f3a7ec525ec2122f2bbb48f7b674c1))
+* Fixed test method name ([6be9492](https://github.com/informatievlaanderen/ticketing-system/commit/6be9492079d7f9886f429381117cc155d54cd50e))
+* TicketError equality checks ([1b9ad37](https://github.com/informatievlaanderen/ticketing-system/commit/1b9ad3768a7208fa3a9da9d1df4a14ad3d512621))
+
 ## [1.9.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.9.0...v1.9.1) (2023-04-17)
 
 # [1.9.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.8.1...v1.9.0) (2023-04-13)
