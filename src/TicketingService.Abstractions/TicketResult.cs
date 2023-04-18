@@ -28,7 +28,7 @@ public record TicketResult
     }
 }
 
-public record TicketError
+public record TicketError : IEquatable<TicketError>
 {
     private IList<TicketError>? _errors;
 
@@ -71,5 +71,16 @@ public record TicketError
         _errors = null;
         ErrorMessage = string.Empty;
         ErrorCode = string.Empty;
+    }
+
+    public virtual bool Equals(TicketError? other)
+    {
+        if (ReferenceEquals(this, null)) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        if (_errors is null || other._errors is null) return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode);
+
+        var sequenceEqual = _errors.SequenceEqual(other._errors);
+        return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && sequenceEqual;
     }
 }
