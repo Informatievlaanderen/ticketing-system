@@ -32,4 +32,18 @@ public class TicketErrorEqualityTests
 
         Assert.Equal(ticketError1, ticketError2);
     }
+
+    [Fact]
+    public void ItShouldBeEqualWhenNoneAndMultiple()
+    {
+        var ticketError1 = new TicketError(new[]
+        {
+            new TicketError("ErrorMessage1", "ErrorCode1"),
+            new TicketError("ErrorMessage2", "ErrorCode2"),
+            new TicketError("ErrorMessage3", "ErrorCode3")
+        });
+        var ticketError2 = new TicketError("ErrorMessage1", "ErrorCode1");
+
+        Assert.NotEqual(ticketError1, ticketError2);
+    }
 }
