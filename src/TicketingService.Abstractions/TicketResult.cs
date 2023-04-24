@@ -36,11 +36,14 @@ public record TicketError : IEquatable<TicketError>
     public string ErrorMessage { get; init; }
     public string ErrorCode { get; init; }
 
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public IReadOnlyCollection<TicketError>? Errors
     {
         get => _errors?.ToList().AsReadOnly();
         set => _errors = value?.ToList();
     }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public int? ErrorCount => _errors?.Count;
 
     public TicketError(string errorMessage, string errorCode)
