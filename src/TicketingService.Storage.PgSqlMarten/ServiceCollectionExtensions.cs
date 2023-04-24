@@ -43,6 +43,7 @@ public static class ServiceCollectionExtensions
             {
                 serializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
                 serializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+                serializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
             });
 
             options.Serializer(systemTextJsonSerializer);
