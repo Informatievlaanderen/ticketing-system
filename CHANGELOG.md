@@ -1,3 +1,11 @@
+## [1.9.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.9.2...v1.9.3) (2023-04-25)
+
+
+### Bug Fixes
+
+* don't write nullable ticketerror properties when null ([8236198](https://github.com/informatievlaanderen/ticketing-system/commit/823619890d26c7bed98ee7c940855f80c38906fc))
+* run containers non-root ([e2c8509](https://github.com/informatievlaanderen/ticketing-system/commit/e2c8509bcb9b40a8521104d7b07d61b2c2d9b3ab))
+
 ## [1.9.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.9.1...v1.9.2) (2023-04-18)
 
 
