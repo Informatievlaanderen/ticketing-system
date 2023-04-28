@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.11.0...v1.11.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* try metrics another way ([1033c75](https://github.com/informatievlaanderen/ticketing-system/commit/1033c75799223ba8157757af0bfb0b7ef1b3cde7))
+
 # [1.11.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.10.0...v1.11.0) (2023-04-28)
 
 
