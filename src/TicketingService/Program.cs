@@ -4,6 +4,9 @@ using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
+using Elastic.Apm.AspNetCore;
+using Elastic.Apm.AspNetCore.DiagnosticListener;
+using Elastic.Apm.DiagnosticSource;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -65,7 +68,11 @@ app
     })
     .UseCors()
     .UseAuthentication()
-    .UseAuthorization();
+    .UseAuthorization()
+    .UseElasticApm(builder.Configuration,
+        new HttpDiagnosticsSubscriber(),
+        new AspNetCoreDiagnosticSubscriber(),
+        new AspNetCoreErrorDiagnosticsSubscriber());
 
 // map endpoints
 app.MapPost("/tickets/create", Handlers.Create)
