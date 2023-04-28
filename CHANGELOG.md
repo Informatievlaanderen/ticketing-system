@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.10.0...v1.11.0) (2023-04-28)
+
+
+### Features
+
+* first try add a metric ([f87e896](https://github.com/informatievlaanderen/ticketing-system/commit/f87e8962686ea54ee928500f75e7813bdffb73f5))
+
 # [1.10.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.9.3...v1.10.0) (2023-04-28)
 
 
