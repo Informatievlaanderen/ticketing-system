@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.9.3...v1.10.0) (2023-04-28)
+
+
+### Features
+
+* add elastic apm tracing/apm ([06ae669](https://github.com/informatievlaanderen/ticketing-system/commit/06ae6696970be4535c3754b911989d6ed52e6784))
+
 ## [1.9.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.9.2...v1.9.3) (2023-04-25)
 
 
