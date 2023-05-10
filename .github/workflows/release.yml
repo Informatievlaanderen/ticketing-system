@@ -154,7 +154,7 @@ jobs:
         SEMVER: ${{ env.RELEASE_VERSION }}
         WORKSPACE: ${{ github.workspace }}
 
-   - name: Configure AWS credentials (New Production)
+    - name: Configure AWS credentials (New Production)
       if: env.RELEASE_VERSION != 'none'
       uses: aws-actions/configure-aws-credentials@v1
       with:
