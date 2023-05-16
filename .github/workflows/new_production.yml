@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        services: []
+        services: ['microservices-ticketing']
     steps:
     - name: CD
       env:
