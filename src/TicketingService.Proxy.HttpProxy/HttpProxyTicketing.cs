@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Abstractions;
@@ -13,26 +14,33 @@ using Abstractions;
 public class HttpProxyTicketing : ITicketing
 {
     private readonly HttpClient _httpClient;
+    private readonly JsonSerializerOptions _jsonSerializerOptions;
 
     public HttpProxyTicketing(HttpClient httpClient)
     {
         _httpClient = httpClient;
+        _jsonSerializerOptions = new JsonSerializerOptions();
+        _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+        _jsonSerializerOptions.PropertyNameCaseInsensitive = true;
     }
 
-    public async Task<Guid> CreateTicket(IDictionary<string, string>? metadata = null, CancellationToken cancellationToken = default)
+    public async Task<Guid> CreateTicket(IDictionary<string, string>? metadata = null,
+        CancellationToken cancellationToken = default)
     {
-        var response = await _httpClient.PostAsync("/tickets/create", JsonContent.Create(metadata ?? new Dictionary<string, string>()), cancellationToken);
+        var response = await _httpClient.PostAsync("/tickets/create",
+            JsonContent.Create(metadata ?? new Dictionary<string, string>()), cancellationToken);
 
         response.EnsureSuccessStatusCode();
 
-        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
+        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(cancellationToken),
+            cancellationToken: cancellationToken);
     }
 
     public async Task<IEnumerable<Ticket>> GetAll(CancellationToken cancellationToken = default)
-        => await _httpClient.GetFromJsonAsync<IEnumerable<Ticket>>("/tickets", cancellationToken) ?? Enumerable.Empty<Ticket>();
+        => await _httpClient.GetFromJsonAsync<IEnumerable<Ticket>>("/tickets", _jsonSerializerOptions, cancellationToken) ?? Enumerable.Empty<Ticket>();
 
-    public async Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default)
-        => await _httpClient.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}", cancellationToken: cancellationToken);
+    public async Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default) =>
+        await _httpClient.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}", _jsonSerializerOptions, cancellationToken: cancellationToken);
 
     public async Task Pending(Guid ticketId, CancellationToken cancellationToken = default)
         => await _httpClient.PutAsync($"/tickets/{ticketId}/pending", new ReadOnlyMemoryContent(null), cancellationToken);

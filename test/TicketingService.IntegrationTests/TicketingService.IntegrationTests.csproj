@@ -6,6 +6,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\TicketingService.Proxy.HttpProxy\TicketingService.Proxy.HttpProxy.csproj" />
     <ProjectReference Include="..\..\src\TicketingService\TicketingService.csproj" />
   </ItemGroup>
   <ItemGroup>
