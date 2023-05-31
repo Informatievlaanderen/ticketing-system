@@ -1,3 +1,10 @@
+## [1.11.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.11.2...v1.11.3) (2023-05-31)
+
+
+### Bug Fixes
+
+* http proxy json deserialization ([a4f1892](https://github.com/informatievlaanderen/ticketing-system/commit/a4f1892987f5d7c77a7ebfff28a06c71708059ae))
+
 ## [1.11.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.11.1...v1.11.2) (2023-05-10)
 
 
