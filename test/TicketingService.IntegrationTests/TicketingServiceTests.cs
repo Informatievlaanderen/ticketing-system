@@ -10,10 +10,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Abstractions;
 using Be.Vlaanderen.Basisregisters.DockerUtilities;
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Proxy.HttpProxy;
 using Storage.PgSqlMarten;
 using Xunit;
 using static JwtTokenHelper;
@@ -57,8 +57,8 @@ public class TicketingServiceTests
         try
         {
             // get
-            var s = await client.GetStringAsync($"/tickets/{ticketId:D}");
-            var ticket = JsonConvert.DeserializeObject<Ticket>(s);
+            var httpProxyTicketing = new HttpProxyTicketing(client);
+            var ticket = await httpProxyTicketing.Get(ticketId);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Created, ticket!.Status);
             Assert.NotEqual(default, ticket.Created);
@@ -71,7 +71,7 @@ public class TicketingServiceTests
             // pending
             var request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/pending");
             await client.SendAsync(request);
-            s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            var s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
             Assert.Equal(TicketStatus.Pending, ticket!.Status);
