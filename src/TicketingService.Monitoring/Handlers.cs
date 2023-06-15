@@ -10,7 +10,7 @@ using Marten;
 
 public static partial class Handlers
 {
-    public static DateTimeOffset DefaultFromDateFilter => DateTime.Now.AddMonths(-1);
+    public static DateTimeOffset DefaultFromDateFilter => DateTime.Now.AddMonths(-6);
 
     private static IQueryable<Ticket> TicketsFromTo(
         this IQuerySession session,
@@ -25,6 +25,16 @@ public static partial class Handlers
                 && t.Created <= to.UtcDateTime);
     }
 
+    private static IQueryable<Ticket> TicketsPaged(
+        this IQueryable<Ticket> tickets,
+        int offset,
+        int limit)
+    {
+        return tickets
+            .Skip(offset)
+            .Take(limit);
+    }
+
     private static async Task<IEnumerable<Ticket>> TicketsByStatuses(
         this IQueryable<Ticket> tickets,
         TicketStatus[] statuses,
@@ -33,11 +43,6 @@ public static partial class Handlers
         var resolvedResult = await tickets.ToListAsync(cancellationToken);
 
         return resolvedResult.Where(t => statuses.Contains(t.Status));
-    }
-
-    private static IQueryable<Ticket> WithStatus(this IQueryable<Ticket> query, TicketStatus status)
-    {
-        return query.Where(t => t.Status == status);
     }
 
     private static async Task<IEnumerable<Ticket>> TicketsByAction(

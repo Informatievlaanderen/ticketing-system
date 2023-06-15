@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 
 public static partial class Handlers
 {
-    public static async Task<IResult> GetList(
+    public static async Task<IResult> GetStatus(
         IDocumentStore store,
         string? fromDate,
         string? toDate,
@@ -21,7 +21,7 @@ public static partial class Handlers
         var tickets = await session
             .TicketsFromTo(fromDate, toDate)
             .TicketsByStatuses(
-                ConvertStatuses(statuses) ?? new[] {TicketStatus.Pending, TicketStatus.Created},
+                ConvertStatuses(statuses),
                 cancellationToken);
 
         var result = tickets

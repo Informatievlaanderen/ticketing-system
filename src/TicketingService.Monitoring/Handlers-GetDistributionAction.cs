@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 public static partial class Handlers
 {
-    public static async Task<IResult> GetActionDistribution(
+    public static async Task<IResult> GetDistributionAction(
         IDocumentStore store,
         string? fromDate,
         string? toDate,
@@ -26,7 +26,7 @@ public static partial class Handlers
         await using var session = store.QuerySession();
         var tickets = await session
             .TicketsFromTo(fromDate, toDate)
-            .WithStatus(TicketStatus.Complete)
+            .Where(t => t.Status == TicketStatus.Complete)
             .TicketsByAction(registry, action);
 
         if (!string.IsNullOrEmpty(aggregateId))

@@ -18,6 +18,7 @@ public static partial class Handlers
         string? fromDate,
         string? toDate,
         int? groupCount,
+        string? statuses,
         CancellationToken cancellationToken)
     {
         var groupCount2 = groupCount ?? DefaultDistributionGroupCount;
@@ -25,8 +26,9 @@ public static partial class Handlers
         await using var session = store.QuerySession();
         var tickets = await session
             .TicketsFromTo(fromDate, toDate)
-            .WithStatus(TicketStatus.Complete)
-            .ToListAsync(cancellationToken);
+            .TicketsByStatuses(
+                ConvertStatuses(statuses)?? new[] {TicketStatus.Pending, TicketStatus.Created, TicketStatus.Complete, TicketStatus.Error} ,
+                cancellationToken);
 
         var completionTimes = tickets
             .Select(t => (
