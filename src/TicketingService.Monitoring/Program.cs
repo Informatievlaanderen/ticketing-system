@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +23,6 @@ app
     });
 
 app.MapGet("/all", Handlers.GetAll);
-app.MapGet("/status", Handlers.GetStatus);
 
 app.MapGet("/distribution", Handlers.GetDistribution);
 app.MapGet("/distribution/action", Handlers.GetDistributionAction);

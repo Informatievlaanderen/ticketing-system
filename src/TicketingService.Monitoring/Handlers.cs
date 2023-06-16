@@ -3,7 +3,6 @@ namespace TicketingService.Monitoring;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Abstractions;
 using Marten;
@@ -13,13 +12,13 @@ public static partial class Handlers
     public static DateTimeOffset DefaultFromDateFilter => DateTime.Now.AddMonths(-6);
 
     private static IQueryable<Ticket> TicketsFromTo(
-        this IQuerySession session,
+        this IQueryable<Ticket> tickets,
         string? fromDate,
         string? toDate)
     {
         var (from, to) = CreateDateRange(fromDate, toDate);
 
-        return session.Query<Ticket>()
+        return tickets
             .Where(t =>
                 t.Created >= from.UtcDateTime
                 && t.Created <= to.UtcDateTime);
@@ -35,14 +34,17 @@ public static partial class Handlers
             .Take(limit);
     }
 
-    private static async Task<IEnumerable<Ticket>> TicketsByStatuses(
+    private static IQueryable<Ticket> TicketsByStatuses(
         this IQueryable<Ticket> tickets,
-        TicketStatus[] statuses,
-        CancellationToken cancellationToken)
+        TicketStatus[]? statuses)
     {
-        var resolvedResult = await tickets.ToListAsync(cancellationToken);
+        if (statuses is null || !statuses.Any())
+        {
+            return tickets;
+        }
 
-        return resolvedResult.Where(t => statuses.Contains(t.Status));
+        return tickets
+            .Where(t => t.Status.In(statuses));
     }
 
     private static async Task<IEnumerable<Ticket>> TicketsByAction(

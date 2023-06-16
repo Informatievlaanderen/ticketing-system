@@ -25,6 +25,7 @@ public static partial class Handlers
 
         await using var session = store.QuerySession();
         var tickets = await session
+            .Query<Ticket>()
             .TicketsFromTo(fromDate, toDate)
             .Where(t => t.Status == TicketStatus.Complete)
             .TicketsByAction(registry, action);
