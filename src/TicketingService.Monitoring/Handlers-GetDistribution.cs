@@ -24,13 +24,13 @@ public static partial class Handlers
         var groupCount2 = groupCount ?? DefaultDistributionGroupCount;
 
         await using var session = store.QuerySession();
-        var tickets = await session
+        var tickets = session
+            .Query<Ticket>()
             .TicketsFromTo(fromDate, toDate)
-            .TicketsByStatuses(
-                ConvertStatuses(statuses)?? new[] {TicketStatus.Pending, TicketStatus.Created, TicketStatus.Complete, TicketStatus.Error} ,
-                cancellationToken);
+            .TicketsByStatuses(ConvertStatuses(statuses));
 
         var completionTimes = tickets
+            .ToList()
             .Select(t => (
                 ExecutionTime: t.LastModified.Subtract(t.Created),
                 Action: CreateActionString(t)))
