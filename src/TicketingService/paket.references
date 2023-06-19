@@ -4,9 +4,7 @@ SwashBuckle.AspNetCore.Swagger
 SwashBuckle.AspNetCore.SwaggerGen
 SwashBuckle.AspNetCore.SwaggerUI
 
-Elastic.Apm
-Elastic.Apm.AspNetCore
-Elastic.Apm.Extensions.Hosting
+Datadog.Trace.Bundle
 
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles
