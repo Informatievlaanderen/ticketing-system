@@ -6,6 +6,9 @@ source https://api.nuget.org/v3/index.json
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
 nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
 
+// Datadog
+nuget Datadog.Trace.Bundle 2.31.0
+
 // PRODUCTION STUFF
 nuget AspNetCore.HealthChecks.NpgSql 6.0.2
 nuget Marten.AspNetCore 5.10.1

@@ -4,9 +4,6 @@ using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
-using Elastic.Apm.AspNetCore;
-using Elastic.Apm.AspNetCore.DiagnosticListener;
-using Elastic.Apm.DiagnosticSource;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -20,7 +17,7 @@ using TicketingService.Endpoints;
 using TicketingService.Extensions;
 using TicketingService.Storage.PgSqlMarten;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // add configuration
 builder.Configuration
@@ -68,11 +65,7 @@ app
     })
     .UseCors()
     .UseAuthentication()
-    .UseAuthorization()
-    .UseElasticApm(builder.Configuration,
-        new HttpDiagnosticsSubscriber(),
-        new AspNetCoreDiagnosticSubscriber(),
-        new AspNetCoreErrorDiagnosticsSubscriber());
+    .UseAuthorization();
 
 // map endpoints
 app.MapPost("/tickets/create", Handlers.Create)
