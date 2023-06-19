@@ -7,7 +7,7 @@ using TicketingService.Monitoring;
 var app = WebApplication
     .CreateBuilder(args)
     .AddAppSettings(args)
-    .AddOptions<AppOptions>()
+    .AddOptions<ConnectionStrings>()
     .AddServices()
     .Build();
 

@@ -2,8 +2,8 @@ namespace TicketingService.Monitoring;
 
 using System.ComponentModel.DataAnnotations;
 
-public class AppOptions
+public class ConnectionStrings
 {
     [Required]
-    public string ConnectionString { get; set; }
+    public string Ticketing { get; set; }
 }

@@ -125,6 +125,7 @@ jobs:
       shell: bash
       run: |
         docker push $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER
+        docker push $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER
       env:
         BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
         SEMVER: ${{ env.RELEASE_VERSION }}
@@ -148,6 +149,8 @@ jobs:
       run: |
         docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
         docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER 
+        docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
+        docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER 
       env:
         BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
         BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY }}
@@ -172,6 +175,8 @@ jobs:
       run: |
         docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
         docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
+        docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
+        docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
 
       env:
         BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
@@ -197,6 +202,8 @@ jobs:
       run: |
         docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/ticketing-service/ticketing:$SEMVER
         docker push $BUILD_DOCKER_REGISTRY_PRD/ticketing-service/ticketing:$SEMVER
+        docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/ticketing-service/ticketing-monitoring:$SEMVER
+        docker push $BUILD_DOCKER_REGISTRY_PRD/ticketing-service/ticketing-monitoring:$SEMVER
         
       env:
         BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
