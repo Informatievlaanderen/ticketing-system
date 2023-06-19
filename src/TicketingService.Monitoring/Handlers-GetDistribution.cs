@@ -36,7 +36,7 @@ public static partial class Handlers
                 Action: CreateActionString(t)))
             .OrderBy(t => t.ExecutionTime);
 
-        var groupSize = completionTimes.Max(t => t.ExecutionTime).TotalMilliseconds / (groupCount2*1000);
+        var groupSize = completionTimes.Max(t => t.ExecutionTime).TotalMilliseconds / (groupCount2);
 
         var ranges = CreateDistributionRanges(groupCount2, groupSize);
 
@@ -44,7 +44,7 @@ public static partial class Handlers
         foreach (var (min, max) in ranges)
         {
             var totalInRange = completionTimes
-                .Where(t => t.ExecutionTime.TotalMilliseconds > min && t.ExecutionTime.TotalMilliseconds < max);
+                .Where(t => t.ExecutionTime.TotalMilliseconds > min && t.ExecutionTime.TotalMilliseconds <= max);
 
             var distinctActions = totalInRange
                 .DistinctBy(t => t.Action)

@@ -25,13 +25,13 @@ public static class StartupExtensions
 
     public static WebApplicationBuilder AddServices(this WebApplicationBuilder builder)
     {
-        var options = builder.GetAppOptions<AppOptions>();
+        var options = builder.GetAppOptions<ConnectionStrings>();
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services
-            .AddMartenTicketing(options.ConnectionString)
-            .AddHealthChecks().AddNpgSql(_ => options.ConnectionString);
+            .AddMartenTicketing(options.Ticketing)
+            .AddHealthChecks().AddNpgSql(_ => options.Ticketing);
 
         return builder;
     }
