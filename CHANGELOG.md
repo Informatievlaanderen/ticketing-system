@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.0...v1.12.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* style to trigger build ([3ee3c9f](https://github.com/informatievlaanderen/ticketing-system/commit/3ee3c9ff51f37205d32c0e4155462e99a7dfe2a8))
+
 # [1.12.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.11.3...v1.12.0) (2023-06-20)
 
 
