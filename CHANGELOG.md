@@ -1,3 +1,16 @@
+# [1.12.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.11.3...v1.12.0) (2023-06-20)
+
+
+### Bug Fixes
+
+* correct filter on status query + remove status endpoint ([c7262bb](https://github.com/informatievlaanderen/ticketing-system/commit/c7262bb4406717c99607d1302af0a1ce1de7c2bf))
+* release monitoring ([bbf599d](https://github.com/informatievlaanderen/ticketing-system/commit/bbf599dbff8a6d315b3ab4a05fd2828b3735484f))
+
+
+### Features
+
+* add getall endpoint ([c1dd257](https://github.com/informatievlaanderen/ticketing-system/commit/c1dd257a6413b4d2d4596c1c2c47afd99c7bd04e))
+
 ## [1.11.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.11.2...v1.11.3) (2023-05-31)
 
 
