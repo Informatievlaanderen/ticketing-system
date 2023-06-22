@@ -1,3 +1,10 @@
+## [1.12.4](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.3...v1.12.4) (2023-06-22)
+
+
+### Bug Fixes
+
+* build.fsx monitoring ([7ebcadf](https://github.com/informatievlaanderen/ticketing-system/commit/7ebcadf102ab5ec73691d64c39984f6aa79b55c0))
+
 ## [1.12.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.2...v1.12.3) (2023-06-22)
 
 
