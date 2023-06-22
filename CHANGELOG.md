@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.1...v1.12.2) (2023-06-22)
+
+
+### Bug Fixes
+
+* set file properties to copy always ([50c8c03](https://github.com/informatievlaanderen/ticketing-system/commit/50c8c032d440238d338ccccaaf0dd2106cb39689))
+
 ## [1.12.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.0...v1.12.1) (2023-06-20)
 
 
