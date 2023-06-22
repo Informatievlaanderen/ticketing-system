@@ -64,7 +64,7 @@ Target.create "Pack_Solution" (fun _ ->
 Target.create "Containerize_TicketingService" (fun _ -> containerize "TicketingService" "ticketing")
 Target.create "PushContainer_TicketingService" (fun _ -> push "ticketing")
 
-Target.create "Containerize_TicketingMonitoring" (fun _ -> containerize "TicketingService" "ticketing-monitoring")
+Target.create "Containerize_TicketingMonitoring" (fun _ -> containerize "TicketingService.Monitoring" "ticketing-monitoring")
 Target.create "PushContainer_TicketingMonitoring" (fun _ -> push "ticketing-monitoring")
 
 // --------------------------------------------------------------------------------
