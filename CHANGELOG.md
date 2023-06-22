@@ -1,3 +1,10 @@
+## [1.12.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.2...v1.12.3) (2023-06-22)
+
+
+### Bug Fixes
+
+* monitoring init ([08ac5db](https://github.com/informatievlaanderen/ticketing-system/commit/08ac5dbb62022e51a3703a000bc1f2e6f07b9c8b))
+
 ## [1.12.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.1...v1.12.2) (2023-06-22)
 
 
