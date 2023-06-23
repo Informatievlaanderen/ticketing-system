@@ -13,17 +13,17 @@ public static partial class Handlers
         string? fromDate,
         string? toDate,
         string? statuses,
-        int offset,
-        int limit,
+        int? offset,
+        int? limit,
         CancellationToken cancellationToken)
     {
-        var max = 500;
+        const int maxLimit = 500;
 
         await using var session = store.QuerySession();
         var tickets = await session
             .Query<Ticket>()
             .TicketsFromTo(fromDate, toDate)
-            .TicketsPaged(offset, limit > max ? max : limit)
+            .TicketsPaged(offset is null or < 0 ? 0 : offset.Value, limit is null or > maxLimit ? maxLimit : limit.Value)
             .TicketsByStatuses(ConvertStatuses(statuses))
             .OrderBy(nameof(Ticket.Created))
             .ToListAsync(token: cancellationToken);
