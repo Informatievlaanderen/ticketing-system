@@ -4,6 +4,7 @@ SwashBuckle.AspNetCore.Swagger
 SwashBuckle.AspNetCore.SwaggerGen
 SwashBuckle.AspNetCore.SwaggerUI
 
+Datadog.Trace
 Datadog.Trace.Bundle
 
 SourceLink.Embed.AllSourceFiles

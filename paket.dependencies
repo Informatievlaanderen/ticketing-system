@@ -7,7 +7,8 @@ nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
 nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
 
 // Datadog
-nuget Datadog.Trace.Bundle 2.31.0
+nuget Datadog.Trace 2.32.0
+nuget Datadog.Trace.Bundle 2.32.0
 
 // PRODUCTION STUFF
 nuget AspNetCore.HealthChecks.NpgSql 6.0.2
