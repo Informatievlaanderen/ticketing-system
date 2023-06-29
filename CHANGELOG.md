@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.13.0...v1.14.0) (2023-06-29)
+
+
+### Bug Fixes
+
+* set max on GetAll ([4d70ff9](https://github.com/informatievlaanderen/ticketing-system/commit/4d70ff942ff2927bc3205053325596e93aab8b0a))
+
+
+### Features
+
+* add datadog spans ([bbb0037](https://github.com/informatievlaanderen/ticketing-system/commit/bbb00376f9fc2c712fa49a92c094643e99b474ce))
+
 # [1.13.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.4...v1.13.0) (2023-06-29)
 
 
