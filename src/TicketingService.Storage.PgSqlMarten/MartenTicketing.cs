@@ -2,6 +2,7 @@ namespace TicketingService.Storage.PgSqlMarten;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Abstractions;
@@ -31,7 +32,7 @@ public class MartenTicketing : ITicketing
     public async Task<IEnumerable<Ticket>> GetAll(CancellationToken cancellationToken = default)
     {
         await using var session = _store.QuerySession();
-        return await session.Query<Ticket>().ToListAsync(cancellationToken);
+        return await session.Query<Ticket>().Take(500).ToListAsync(cancellationToken);
     }
 
     public async Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default)
