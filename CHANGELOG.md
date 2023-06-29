@@ -1,3 +1,15 @@
+# [1.13.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.4...v1.13.0) (2023-06-29)
+
+
+### Bug Fixes
+
+* all endpoint ([11da174](https://github.com/informatievlaanderen/ticketing-system/commit/11da1748197920dbe13ac9e0045a7d6e45c289b0))
+
+
+### Features
+
+* add datadog trace ([f1d284f](https://github.com/informatievlaanderen/ticketing-system/commit/f1d284f57fade7940e0899bf2fabd8f711989100))
+
 ## [1.12.4](https://github.com/informatievlaanderen/ticketing-system/compare/v1.12.3...v1.12.4) (2023-06-22)
 
 
