@@ -71,9 +71,6 @@ app
 app.MapPost("/tickets/create", Handlers.Create)
     .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
-app.MapGet("/tickets", Handlers.GetAll)
-    .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
-    .ExcludeFromDescription();
 app.MapGet("/tickets/{ticketId:guid}", async (Guid ticketId, ITicketing ticketingService, CancellationToken cancellationToken) =>
     {
         var result = await Handlers.Get(ticketId, ticketingService, cancellationToken);
