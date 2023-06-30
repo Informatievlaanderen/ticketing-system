@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.0...v1.14.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* datadog spans + remove getall endpoint ([74166bb](https://github.com/informatievlaanderen/ticketing-system/commit/74166bbbf73993fe0bd2019925b3e3ebbf7ccc60))
+
 # [1.14.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.13.0...v1.14.0) (2023-06-29)
 
 
