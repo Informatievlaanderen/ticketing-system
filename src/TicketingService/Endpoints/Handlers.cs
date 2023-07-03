@@ -13,10 +13,11 @@ public static class Handlers
     public static async Task<Guid> Create([FromBody] IDictionary<string, string>? metadata, ITicketing ticketing,
         CancellationToken cancellationToken = default)
     {
+        using var scope = Tracer.Instance.StartActive("CreateTicket");
+        
         var ticketId = Guid.Empty;
         ticketId = await ticketing.CreateTicket(metadata, cancellationToken);
 
-        using var scope = Tracer.Instance.StartActive("CreateTicket");
         scope.Span.SetTag("ticketId", ticketId.ToString("D"));
         scope.Span.SetTag("status", "Created");
         scope.Span.SetTag("createdTimestamp", DateTime.UtcNow.ToString("o"));
