@@ -1,3 +1,10 @@
+## [1.14.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.1...v1.14.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* created span datadog ([0cafec8](https://github.com/informatievlaanderen/ticketing-system/commit/0cafec8b9fe418aa3281bb2d3171ac95d8856aea))
+
 ## [1.14.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.0...v1.14.1) (2023-06-30)
 
 
