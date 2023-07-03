@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Abstractions;
 using Datadog.Trace;
+using Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 public static class Handlers
@@ -13,14 +14,15 @@ public static class Handlers
     public static async Task<Guid> Create([FromBody] IDictionary<string, string>? metadata, ITicketing ticketing,
         CancellationToken cancellationToken = default)
     {
-        using var scope = Tracer.Instance.StartActive("CreateTicket");
-        
         var ticketId = Guid.Empty;
         ticketId = await ticketing.CreateTicket(metadata, cancellationToken);
 
-        scope.Span.SetTag("ticketId", ticketId.ToString("D"));
-        scope.Span.SetTag("status", "Created");
-        scope.Span.SetTag("createdTimestamp", DateTime.UtcNow.ToString("o"));
+        using(var scope = Tracer.Instance.StartActive("CreateTicket", new SpanCreationSettings { Parent = new SpanContext(null, ticketId.ToULong()) }))
+        {
+            scope.Span.SetTag("ticketId", ticketId.ToString("D"));
+            scope.Span.SetTag("status", "Created");
+            scope.Span.SetTag("createdTimestamp", DateTime.UtcNow.ToString("o"));
+        }
 
         return ticketId;
     }
