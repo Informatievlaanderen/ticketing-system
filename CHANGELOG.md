@@ -1,3 +1,10 @@
+## [1.14.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.2...v1.14.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* use parent spancontext on create ticket ([1ec1150](https://github.com/informatievlaanderen/ticketing-system/commit/1ec11504fd3ffc633dafab234cf101495358fa13))
+
 ## [1.14.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.1...v1.14.2) (2023-07-03)
 
 
