@@ -32,6 +32,7 @@ public record TicketError : IEquatable<TicketError>
 {
     private IList<TicketError>? _errors;
 
+    public string? Identifier { get; set; }
     // init needed for minimal api (de)serialization
     public string ErrorMessage { get; init; }
     public string ErrorCode { get; init; }
@@ -46,9 +47,10 @@ public record TicketError : IEquatable<TicketError>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public int? ErrorCount => _errors?.Count;
 
-    public TicketError(string errorMessage, string errorCode)
+    public TicketError(string errorMessage, string errorCode, string? identifier = null)
         : this()
     {
+        Identifier = identifier;
         ErrorMessage = errorMessage;
         ErrorCode = errorCode;
     }
