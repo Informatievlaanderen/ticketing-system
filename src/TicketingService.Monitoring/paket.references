@@ -2,3 +2,8 @@ AspNetCore.HealthChecks.NpgSql
 Swashbuckle.AspNetCore.Swagger
 Swashbuckle.AspNetCore.SwaggerGen
 Swashbuckle.AspNetCore.SwaggerUI
+
+Be.Vlaanderen.Basisregisters.GrAr.Notifications
+
+AWSSDK.SimpleNotificationService
+AWSSDK.Extensions.NETCore.Setup

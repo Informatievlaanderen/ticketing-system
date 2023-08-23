@@ -4,6 +4,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using Amazon.SimpleNotificationService;
+using Be.Vlaanderen.Basisregisters.GrAr.Notifications;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,11 +29,23 @@ public static class StartupExtensions
     {
         var options = builder.GetAppOptions<ConnectionStrings>();
 
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
         builder.Services
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGen()
             .AddMartenTicketing(options.Ticketing)
             .AddHealthChecks().AddNpgSql(_ => options.Ticketing);
+
+        builder.Services.AddAWSService<IAmazonSimpleNotificationService>();
+        builder.Services.AddScoped<INotificationService>(provider =>
+        {
+            var snsService = provider.GetRequiredService<IAmazonSimpleNotificationService>();
+            var topicArn = string.IsNullOrWhiteSpace(builder.Configuration["TopicArn"])
+                ? throw new ArgumentException("Configuration has no TopicArn.")
+                : builder.Configuration["TopicArn"];
+            return new NotificationService(snsService, topicArn);
+        });
+
+        builder.Services.AddHostedService<NotificationBackgroundService>();
 
         return builder;
     }

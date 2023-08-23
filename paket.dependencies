@@ -2,9 +2,14 @@ framework: net6.0, net472
 
 source https://api.nuget.org/v3/index.json
 
+// AWS STUFF
+nuget AWSSDK.Extensions.NETCore.Setup 3.7.5
+nuget AWSSDK.SimpleNotificationService 3.7.101.86
+
 // VBR STUFF
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
 nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
+nuget Be.Vlaanderen.Basisregisters.GrAr.Notifications 20.3.1
 
 // Datadog
 nuget Datadog.Trace 2.32.0
