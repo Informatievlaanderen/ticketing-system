@@ -8,6 +8,7 @@ var app = WebApplication
     .CreateBuilder(args)
     .AddAppSettings(args)
     .AddOptions<ConnectionStrings>()
+    .AddOptions<NotificationsOptions>()
     .AddServices()
     .Build();
 
@@ -23,7 +24,6 @@ app
     });
 
 app.MapGet("/all", Handlers.GetAll);
-
 app.MapGet("/distribution", Handlers.GetDistribution);
 app.MapGet("/distribution/action", Handlers.GetDistributionAction);
 
