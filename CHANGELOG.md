@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.3...v1.15.0) (2023-08-24)
+
+
+### Features
+
+* add notification background service ([f1ecf40](https://github.com/informatievlaanderen/ticketing-system/commit/f1ecf409622f8a3dc2b1efbc5347054dcc8cfa24))
+
 ## [1.14.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.2...v1.14.3) (2023-07-03)
 
 
