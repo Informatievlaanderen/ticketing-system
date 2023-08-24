@@ -65,6 +65,19 @@ public record Ticket(
 
     private static DateTimeOffset ToWesternEuropeDateTimeOffset(DateTimeOffset dateTimeOffset)
     {
-        return new DateTimeOffset(dateTimeOffset.DateTime, TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time").GetUtcOffset(dateTimeOffset));
+        var utcOffset = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time").GetUtcOffset(dateTimeOffset);
+
+        if (utcOffset == dateTimeOffset.Offset)
+        {
+            return dateTimeOffset;
+        }
+
+        var dateTime = TimeZoneInfo.ConvertTimeFromUtc(
+            dateTimeOffset.DateTime,
+            TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
+
+        return new DateTimeOffset(
+            dateTime,
+            utcOffset);
     }
 }

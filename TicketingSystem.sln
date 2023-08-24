@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingService.Proxy.Http
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingService.Monitoring", "src\TicketingService.Monitoring\TicketingService.Monitoring.csproj", "{F4B16683-F0DA-46D3-818B-E61BAF5500A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingService.Monitoring.Tests", "test\TicketingService.Monitoring.Tests\TicketingService.Monitoring.Tests.csproj", "{278000FC-98BA-4A42-B4C8-88825CD6C520}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{F4B16683-F0DA-46D3-818B-E61BAF5500A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4B16683-F0DA-46D3-818B-E61BAF5500A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4B16683-F0DA-46D3-818B-E61BAF5500A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278000FC-98BA-4A42-B4C8-88825CD6C520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278000FC-98BA-4A42-B4C8-88825CD6C520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278000FC-98BA-4A42-B4C8-88825CD6C520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278000FC-98BA-4A42-B4C8-88825CD6C520}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +106,7 @@ Global
 		{136E8EE0-19EB-406A-8F41-1A5FB272ADAC} = {24B47154-C5F0-4356-B059-49A1E72C38A6}
 		{12C570D8-AE15-46D4-B638-81F19A8439EB} = {1A034126-30E6-416B-BB2E-F5786E07B178}
 		{F4B16683-F0DA-46D3-818B-E61BAF5500A7} = {24B47154-C5F0-4356-B059-49A1E72C38A6}
+		{278000FC-98BA-4A42-B4C8-88825CD6C520} = {1A034126-30E6-416B-BB2E-F5786E07B178}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65FA30D5-DDFC-40EC-9BC9-3BF93D1B430F}
