@@ -20,7 +20,8 @@ public static class ServiceCollectionExtensions
             options.AutoCreateSchemaObjects = AutoCreate.All;
             options.Schema.For<Ticket>()
                 .IdStrategy(new CombGuidIdGeneration())
-                .Identity(x => x.TicketId);
+                .Identity(x => x.TicketId)
+                .Index(x => x.Status);
 
             options.CreateDatabasesForTenants(configure => configure.ForTenant()
                 .CheckAgainstPgDatabase()
