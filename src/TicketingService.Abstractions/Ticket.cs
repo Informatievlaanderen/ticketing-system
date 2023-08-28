@@ -2,6 +2,7 @@ namespace TicketingService.Abstractions;
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 public record Ticket(
     Guid TicketId,
@@ -20,6 +21,7 @@ public record Ticket(
     /// <summary>
     /// De status van het ticket.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
     public TicketStatus Status { get; set; } = Status;
 
     /// <summary>
