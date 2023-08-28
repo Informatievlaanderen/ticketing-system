@@ -1,3 +1,11 @@
+## [1.15.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.15.0...v1.15.1) (2023-08-28)
+
+
+### Bug Fixes
+
+* query open tickets ([511e3b7](https://github.com/informatievlaanderen/ticketing-system/commit/511e3b7027454d7362707bea69366f8f187f64e4))
+* save created status on create ticket ([40f19c8](https://github.com/informatievlaanderen/ticketing-system/commit/40f19c8c498fa9a0976e1a8aa5a5e9fd32ef2522))
+
 # [1.15.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.14.3...v1.15.0) (2023-08-24)
 
 
