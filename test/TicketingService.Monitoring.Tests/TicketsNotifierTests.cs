@@ -3,8 +3,13 @@ namespace TicketingService.Monitoring.Tests;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Abstractions;
 using Be.Vlaanderen.Basisregisters.GrAr.Notifications;
+using FluentAssertions;
+using Marten;
 using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
@@ -16,6 +21,71 @@ public class MonitorsTests : IClassFixture<SetupMartenFixture>
     public MonitorsTests(SetupMartenFixture fixture)
     {
         _fixture = fixture;
+    }
+
+    [Fact]
+    public async Task FilterTicketByRegistry()
+    {
+        const string registry = "TestRegistry";
+        const string registry2 = "TestRegistry2";
+
+        foreach (var i in Enumerable.Range(0, 5000))
+        {
+            await _fixture.MartenTicketing.CreateTicket(new Dictionary<string, string>
+            {
+                {MetaDataConstants.Registry, "otherregistry"},
+                {MetaDataConstants.Action, "dummy"}
+            });
+        }
+
+        var id = await _fixture.MartenTicketing.CreateTicket(new Dictionary<string, string>
+        {
+            {MetaDataConstants.Registry, registry},
+            {MetaDataConstants.Action, "dummy"}
+        });
+
+        foreach (var i in Enumerable.Range(0, 10000))
+        {
+            await _fixture.MartenTicketing.CreateTicket(new Dictionary<string, string>
+            {
+                {MetaDataConstants.Registry, "otherregistry"},
+                {MetaDataConstants.Action, "dummy"}
+            });
+        }
+
+        await _fixture.MartenTicketing.CreateTicket(new Dictionary<string, string>
+        {
+            {MetaDataConstants.Registry, registry2},
+            {MetaDataConstants.Action, "dummy"}
+        });
+
+        await _fixture.MartenTicketing.Pending(id);
+
+        var registries = new string[] {registry, registry2};
+
+        // var tickets = _fixture.DocumentStore.QuerySession().
+        //     .Query<Ticket>()
+        //     .Where(t => registries.Contains(t.Metadata[MetaDataConstants.Registry]))
+        //     .ToList();
+
+        var q = _fixture.DocumentStore.QuerySession()
+            .Query<Ticket>($"select data " +
+                           $"from mt_doc_ticket " +
+                           $"where data -> 'metadata'->> 'registry' = '{registry}' " +
+                           $"or data -> 'metadata'->> 'registry' = '{registry2}'")
+            .Where(x => x.Status == TicketStatus.Pending)
+            .ToList();
+
+        var q2 = _fixture.DocumentStore.QuerySession()
+            .Query<Ticket>($"select data from mt_doc_ticket where data ->> 'ticketId' = '{id}'")
+            .ToList();
+
+
+        // Assert
+        q.Count.Should().Be(0);
+        q2.Count.Should().Be(1);
+
+
     }
 
     [Fact]

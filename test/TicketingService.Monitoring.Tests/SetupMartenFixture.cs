@@ -18,7 +18,7 @@
         {
             _container = DockerComposer.Compose("postgres_test.yml", "ticketing-system-monitoring-integration-tests");
             const string connectionString =
-                "Host=localhost;Port=5435;Database=tickets;Username=postgres;Password=postgres";
+                "Host=localhost;Port=5435;Database=tickets;Username=postgres;Password=postgres;Include Error Detail=True;";
 
             var services = new ServiceCollection();
             services.AddMartenTicketing(connectionString);

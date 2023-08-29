@@ -3,6 +3,7 @@ namespace TicketingService.Monitoring;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Abstractions;
 using Marten;
@@ -10,6 +11,29 @@ using Marten;
 public static partial class Handlers
 {
     public static DateTimeOffset DefaultFromDateFilter => DateTime.Now.AddMonths(-6);
+
+
+    private static IQueryable<Ticket> ByRegistry(
+        this IQuerySession querySession,
+        params string[] registries)
+    {
+        if (!registries.Any())
+        {
+            return querySession.Query<Ticket>();
+        }
+
+        var sb = new StringBuilder($"select data " +
+                                   $"from mt_doc_ticket ");
+
+        sb.Append($"where data -> 'metadata'->> 'registry' = '{registries[0]}' ");
+
+        foreach (var registry in registries.Skip(1))
+        {
+            sb.Append($"or data -> 'metadata'->> 'registry' = '{registry}'");
+        }
+
+        return querySession.Query<Ticket>(sb.ToString()).AsQueryable();
+    }
 
     private static IQueryable<Ticket> TicketsFromTo(
         this IQueryable<Ticket> tickets,
@@ -45,6 +69,14 @@ public static partial class Handlers
 
         return tickets
             .Where(t => t.Status.In(statuses));
+    }
+
+    public static IQueryable<Ticket> TicketsByRegistry(
+        this IQueryable<Ticket> tickets,
+        params string[] registries)
+    {
+        //return tickets.Where(p => p.Metadata[MetaDataConstants.Registry] == registry);
+        return tickets.Where(t => registries.Contains(t.Metadata[MetaDataConstants.Registry]));
     }
 
     private static async Task<IEnumerable<Ticket>> TicketsByAction(

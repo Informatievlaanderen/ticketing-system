@@ -13,6 +13,7 @@ public static partial class Handlers
         string? fromDate,
         string? toDate,
         string? statuses,
+        string? registry,
         int? offset,
         int? limit,
         CancellationToken cancellationToken)
@@ -25,6 +26,7 @@ public static partial class Handlers
             .TicketsFromTo(fromDate, toDate)
             .TicketsPaged(offset is null or < 0 ? 0 : offset.Value, limit is null or > maxLimit ? maxLimit : limit.Value)
             .TicketsByStatuses(ConvertStatuses(statuses))
+            .TicketsByRegistry("buildingregistry")
             .OrderBy(nameof(Ticket.Created))
             .ToListAsync(token: cancellationToken);
 

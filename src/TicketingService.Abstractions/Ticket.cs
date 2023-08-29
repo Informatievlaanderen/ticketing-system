@@ -4,6 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+public record Metadata(string Registry, string Action);
+
+public record TicketSearch(
+    Guid TicketId,
+    Metadata Metadata)
+{
+    public Guid TicketId { get; set; } = TicketId;
+
+    public Metadata Metadata { get; set; } = Metadata;
+}
+
 public record Ticket(
     Guid TicketId,
     TicketStatus Status,
