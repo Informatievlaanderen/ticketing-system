@@ -22,8 +22,6 @@ public static class ServiceCollectionExtensions
                 .IdStrategy(new CombGuidIdGeneration())
                 .Identity(x => x.TicketId);
 
-            //options.Schema.For<Ticket>().DocumentAlias("TicketSearch");
-
             options.CreateDatabasesForTenants(configure => configure.ForTenant()
                 .CheckAgainstPgDatabase()
                 .WithEncoding("UTF-8")

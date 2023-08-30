@@ -30,21 +30,13 @@
             var from = DateTimeOffset.UtcNow.Subtract(timeWindow * 2);
             var until = DateTimeOffset.UtcNow.Subtract(timeWindow);
 
-            var tickets = session
-                .Query<Ticket>()
-                .Where(t =>
-                    t.Created >= from
-                    && t.Created < until
-                    && !t.Status.In(TicketStatus.Complete, TicketStatus.Error))
-                .ToList();
-
-            var numberOfTickets = tickets
-                .Count(t =>
-                    t.Metadata.TryGetValue(MetaDataConstants.Registry, out var registry)
-                    && _options.WhitelistedRegistries.Contains(registry)
-                    && (!t.Metadata.TryGetValue(MetaDataConstants.Action, out var action)
-                        || !_options.BlacklistedActions.Contains(action))
-                );
+            var numberOfTickets = new TicketQueryBuilder(session.DocumentStore)
+                .FromTo(Operators.WHERE, from, until)
+                .ByStatuses(Operators.AND, TicketStatus.Created, TicketStatus.Pending)
+                .WhitelistedRegistries(Operators.AND, _options.WhitelistedRegistries)
+                .BlacklistedActions(Operators.AND, _options.BlacklistedActions)
+                .Execute()
+                .Count;
 
             if (numberOfTickets > 0)
             {
