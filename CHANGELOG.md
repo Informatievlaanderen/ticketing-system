@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.16.0...v1.16.1) (2023-09-01)
+
+
+### Bug Fixes
+
+* filter on datetime query ([698d00c](https://github.com/informatievlaanderen/ticketing-system/commit/698d00ccb26c61cd63e0b7f41b6d8da9afdfad52))
+
 # [1.16.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.15.1...v1.16.0) (2023-09-01)
 
 
