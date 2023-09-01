@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.15.1...v1.16.0) (2023-09-01)
+
+
+### Features
+
+* add registry filtering ([ba653b1](https://github.com/informatievlaanderen/ticketing-system/commit/ba653b1c4d1ac503eeac8dbc4ead15be379f704c))
+
 ## [1.15.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.15.0...v1.15.1) (2023-08-28)
 
 
