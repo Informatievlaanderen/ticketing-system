@@ -66,7 +66,7 @@
             query.Append($" {op.ToString()} ");
             query.Append(
                 $"(data ->> 'created')::timestamp with time zone >= '{fromDate.ToString(format)}'::timestamp with time zone " +
-                $"AND (data ->> 'created')::timestamp with time zone <= '{toDate.ToString(format)}'::timestamp with time zone");
+                $"AND (data ->> 'created')::timestamp with time zone <= '{toDate.ToString(format)}'::timestamp with time zone ");
             return this;
         }
 
