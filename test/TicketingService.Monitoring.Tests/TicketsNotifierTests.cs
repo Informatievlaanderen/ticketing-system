@@ -9,14 +9,18 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
-public class MonitorsTests : IClassFixture<SetupMartenFixture>
+[Collection("PostgreSQL")]
+public class TicketsNotifierTests : IDisposable
 {
     private readonly SetupMartenFixture _fixture;
 
-    public MonitorsTests(SetupMartenFixture fixture)
+    public TicketsNotifierTests(SetupMartenFixture fixture)
     {
         _fixture = fixture;
     }
+
+    public void Dispose()
+    { }
 
     [Fact]
     public async Task TicketInStatusCreated()

@@ -2,8 +2,8 @@ namespace TicketingService.Monitoring
 {
     public static class MetaDataConstants
     {
-        public const string AggregateId = "aggregateId";
-        public const string Registry = "registry";
-        public const string Action = "action";
+        public const string AggregateId = "AggregateId";
+        public const string Registry = "Registry";
+        public const string Action = "Action";
     }
 }

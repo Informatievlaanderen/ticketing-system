@@ -24,16 +24,6 @@ public static partial class Handlers
                 && t.Created <= to.UtcDateTime);
     }
 
-    private static IQueryable<Ticket> TicketsPaged(
-        this IQueryable<Ticket> tickets,
-        int offset,
-        int limit)
-    {
-        return tickets
-            .Skip(offset)
-            .Take(limit);
-    }
-
     private static IQueryable<Ticket> TicketsByStatuses(
         this IQueryable<Ticket> tickets,
         TicketStatus[]? statuses)
@@ -110,6 +100,19 @@ public static partial class Handlers
         });
 
         return statusesToFilterOn.ToArray();
+    }
+
+    private static string[]? SplitRegistryString(string? registries)
+    {
+        if (string.IsNullOrEmpty(registries))
+        {
+            return null;
+        }
+
+        return registries
+            .Replace(" ", string.Empty)
+            .Split(",")
+            .ToArray();
     }
 
     private static string CreateActionString(Ticket ticket)
