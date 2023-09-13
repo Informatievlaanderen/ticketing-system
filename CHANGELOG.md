@@ -1,3 +1,11 @@
+## [1.16.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.16.1...v1.16.2) (2023-09-13)
+
+
+### Bug Fixes
+
+* dispose session after executing query ([014d013](https://github.com/informatievlaanderen/ticketing-system/commit/014d013ac23c0cf29c1bd98595ad977f662048b3))
+* prevent notificationBackgroundService runs from overlapping ([be27fa0](https://github.com/informatievlaanderen/ticketing-system/commit/be27fa009b9a9985df9011fcda6f47bb17a5d74b))
+
 ## [1.16.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.16.0...v1.16.1) (2023-09-01)
 
 
