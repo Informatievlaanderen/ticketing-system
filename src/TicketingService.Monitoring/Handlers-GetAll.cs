@@ -28,7 +28,7 @@ public static partial class Handlers
             .WhitelistedRegistries(Operators.AND, SplitRegistryString(registries))
             .ByStatuses(Operators.AND, ConvertStatuses(statuses))
             .Paged(offset is null or < 0 ? 0 : offset.Value, limit is null or > maxLimit ? maxLimit : limit.Value)
-            .Execute()
+            .Execute().GetAwaiter().GetResult()
             .AsQueryable()
             .OrderBy(nameof(Ticket.Created));
 

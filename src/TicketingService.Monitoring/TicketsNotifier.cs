@@ -1,7 +1,6 @@
 ﻿namespace TicketingService.Monitoring
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Abstractions;
     using Be.Vlaanderen.Basisregisters.GrAr.Notifications;
@@ -26,16 +25,15 @@
 
         public async Task OnTicketsOpenLongerThan(TimeSpan timeWindow)
         {
-            await using var session = _store.QuerySession();
             var from = DateTimeOffset.UtcNow.Subtract(timeWindow * 2);
             var until = DateTimeOffset.UtcNow.Subtract(timeWindow);
 
-            var numberOfTickets = new TicketQueryBuilder(session.DocumentStore)
+            var numberOfTickets = new TicketQueryBuilder(_store)
                 .FromTo(Operators.WHERE, from, until)
                 .ByStatuses(Operators.AND, TicketStatus.Created, TicketStatus.Pending)
                 .WhitelistedRegistries(Operators.AND, _options.WhitelistedRegistries)
                 .BlacklistedActions(Operators.AND, _options.BlacklistedActions)
-                .Execute()
+                .Execute().GetAwaiter().GetResult()
                 .Count;
 
             if (numberOfTickets > 0)
