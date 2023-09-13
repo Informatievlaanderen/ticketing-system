@@ -32,6 +32,7 @@
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation($"Starting notification background service, monitoring every {Interval:g}.");
+
             _timer = new Timer(DoWork, null, TimeSpan.Zero, Interval);
 
             return Task.CompletedTask;

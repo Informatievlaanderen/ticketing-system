@@ -4,12 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Abstractions;
     using Marten;
 
     public enum Operators
     {
-        WHERE, AND, OR
+        WHERE,
+        AND,
+        OR
     }
 
     public class TicketQueryBuilder
@@ -87,20 +90,22 @@
 
             query.Append($" {op.ToString()} ");
             query.Append($"data ->> 'status' IN (");
-                query.Append(string.Join(", ", statuses.Select(s => $"'{s}'")));
-                query.Append(")");
+            query.Append(string.Join(", ", statuses.Select(s => $"'{s}'")));
+            query.Append(")");
 
             return this;
         }
+
         public TicketQueryBuilder Paged(int offset, int limit)
         {
             query.Append($"OFFSET {offset} LIMIT {limit}");
             return this;
         }
 
-        public IReadOnlyList<Ticket> Execute()
+        public async Task<IReadOnlyList<Ticket>> Execute()
         {
-           return _documentStore.QuerySession().Query<Ticket>(query.ToString());
+            await using var session = _documentStore.QuerySession();
+            return session.Query<Ticket>(query.ToString());
         }
 
         private static (DateTimeOffset from, DateTimeOffset to) CreateDateRange(string? fromDate, string? toDate)
