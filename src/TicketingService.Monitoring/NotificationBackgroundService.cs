@@ -37,9 +37,18 @@
             return Task.CompletedTask;
         }
 
+        private bool _working;
         private void DoWork(object? state)
         {
+            if (_working)
+            {
+                _logger.LogWarning($"{nameof(NotificationBackgroundService)} run time exceeded interval of {Interval}...");
+                return;
+            }
+
+            _working = true;
             _ticketsNotifier.OnTicketsOpenLongerThan(Interval).Wait();
+            _working = false;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
