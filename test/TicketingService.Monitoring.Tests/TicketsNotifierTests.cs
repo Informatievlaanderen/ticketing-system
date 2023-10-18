@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Be.Vlaanderen.Basisregisters.GrAr.Notifications;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
@@ -45,7 +46,8 @@ public class TicketsNotifierTests : IDisposable
             {
                 WhitelistedRegistries = new[] { registry },
                 BlacklistedActions = Array.Empty<string>()
-            }));
+            }),
+            NullLoggerFactory.Instance);
 
         stopwatch.Stop();
         var interval = stopwatch.Elapsed.Add(TimeSpan.FromMilliseconds(500)); // Let's wait a bit to enlarge the interval and give us some margin.
@@ -85,7 +87,7 @@ public class TicketsNotifierTests : IDisposable
             {
                 WhitelistedRegistries = new[] { registry },
                 BlacklistedActions = Array.Empty<string>()
-            }));
+            }), NullLoggerFactory.Instance);
 
         stopwatch.Stop();
         var interval = stopwatch.Elapsed.Add(TimeSpan.FromMilliseconds(500)); // Let's wait a bit to enlarge the interval and give us some margin.
