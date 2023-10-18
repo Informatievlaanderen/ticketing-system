@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.16.2...v1.17.0) (2023-10-18)
+
+
+### Features
+
+* add serilog logging ([7e6506b](https://github.com/informatievlaanderen/ticketing-system/commit/7e6506bc847a877b16a2b0ba97b29d4a53b8f04a))
+
 ## [1.16.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.16.1...v1.16.2) (2023-09-13)
 
 
