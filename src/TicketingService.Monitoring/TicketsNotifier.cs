@@ -27,25 +27,35 @@
             _logger = loggerFactory.CreateLogger<TicketsNotifier>();
         }
 
+        private DateTimeOffset? _until;
+
         public async Task OnTicketsOpenLongerThan(TimeSpan timeWindow)
         {
             var from = DateTimeOffset.UtcNow.Subtract(timeWindow * 2);
-            var until = DateTimeOffset.UtcNow.Subtract(timeWindow);
 
-            _logger.LogInformation($"Checking for stale tickets between {from} - {until}");
+            if (_until is not null)
+            {
+                from = _until.Value;
+            }
+
+            _until = DateTimeOffset.UtcNow.Subtract(timeWindow);
+
+            _logger.LogInformation($"Checking for stale tickets between {from} - {_until}");
 
             var numberOfTickets = new TicketQueryBuilder(_store)
-                .FromTo(Operators.WHERE, from, until)
-                .ByStatuses(Operators.AND, TicketStatus.Created, TicketStatus.Pending)
+                .FromTo(Operators.WHERE, from, _until.Value)
+                .ByStatuses(Operators.AND, TicketStatus.Created, TicketStatus.Pending, TicketStatus.Complete)
                 .WhitelistedRegistries(Operators.AND, _options.WhitelistedRegistries)
                 .BlacklistedActions(Operators.AND, _options.BlacklistedActions)
                 .Execute().GetAwaiter().GetResult()
                 .Count;
 
-            _logger.LogInformation($"Number of stale tickets: {numberOfTickets}");
+            _logger.LogInformation($"{numberOfTickets} stale tickets between {from} - {_until.Value}");
 
             if (numberOfTickets > 0)
             {
+                _logger.LogWarning($"{numberOfTickets} stale tickets between {from} - {_until.Value}");
+                
                 await _notificationService
                     .PublishToTopicAsync(new NotificationMessage(
                         "OpenTickets",

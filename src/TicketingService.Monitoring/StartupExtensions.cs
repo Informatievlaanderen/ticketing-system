@@ -40,14 +40,14 @@ public static class StartupExtensions
             .AddHealthChecks().AddNpgSql(_ => options.Ticketing);
 
         builder.Services.AddAWSService<IAmazonSimpleNotificationService>();
-        builder.Services.AddSingleton<INotificationService>(provider =>
-        {
-            var snsService = provider.GetRequiredService<IAmazonSimpleNotificationService>();
-            var topicArn = string.IsNullOrWhiteSpace(builder.Configuration["TopicArn"])
-                ? throw new ArgumentException("Configuration has no TopicArn.")
-                : builder.Configuration["TopicArn"];
-            return new NotificationService(snsService, topicArn);
-        });
+         builder.Services.AddSingleton<INotificationService>(provider =>
+         {
+             var snsService = provider.GetRequiredService<IAmazonSimpleNotificationService>();
+             var topicArn = string.IsNullOrWhiteSpace(builder.Configuration["TopicArn"])
+                 ? throw new ArgumentException("Configuration has no TopicArn.")
+                 : builder.Configuration["TopicArn"];
+             return new NotificationService(snsService, topicArn);
+         });
 
         builder.Services.AddSingleton<TicketsNotifier>();
 
