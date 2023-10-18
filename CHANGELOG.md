@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.0...v1.17.1) (2023-10-18)
+
+
+### Bug Fixes
+
+* stale ticket notification range logic ([5b6e453](https://github.com/informatievlaanderen/ticketing-system/commit/5b6e453c6530b09abe0952677018cbf6c7c74cd9))
+
 # [1.17.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.16.2...v1.17.0) (2023-10-18)
 
 
