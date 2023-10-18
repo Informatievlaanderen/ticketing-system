@@ -10,6 +10,7 @@ var app = WebApplication
     .AddOptions<ConnectionStrings>()
     .AddOptions<NotificationsOptions>()
     .AddServices()
+    .AddLogging()
     .Build();
 
 app

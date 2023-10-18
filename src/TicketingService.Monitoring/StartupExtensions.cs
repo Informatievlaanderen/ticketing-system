@@ -6,9 +6,13 @@ using System.Linq;
 using System.Reflection;
 using Amazon.SimpleNotificationService;
 using Be.Vlaanderen.Basisregisters.GrAr.Notifications;
+using Destructurama;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Debugging;
 using Storage.PgSqlMarten;
 
 public static class StartupExtensions
@@ -48,6 +52,25 @@ public static class StartupExtensions
         builder.Services.AddSingleton<TicketsNotifier>();
 
         builder.Services.AddHostedService<NotificationBackgroundService>();
+
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddLogging(this WebApplicationBuilder builder)
+    {
+        SelfLog.Enable(Console.WriteLine);
+
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .Enrich.FromLogContext()
+            .Enrich.WithMachineName()
+            .Enrich.WithThreadId()
+            .Enrich.WithEnvironmentUserName()
+            .Destructure.JsonNetTypes()
+            .CreateLogger();
+
+        builder.Logging.ClearProviders();
+        builder.Logging.AddSerilog(Log.Logger);
 
         return builder;
     }

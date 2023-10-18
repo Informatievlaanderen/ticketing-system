@@ -7,5 +7,15 @@ SwashBuckle.AspNetCore.SwaggerUI
 Datadog.Trace
 Datadog.Trace.Bundle
 
+Serilog
+Serilog.Settings.Configuration
+Serilog.Extensions.Logging
+Serilog.Sinks.Console
+Serilog.Sinks.File
+Serilog.Enrichers.Thread
+Serilog.Enrichers.Environment
+Serilog.Formatting.Compact
+Destructurama.JsonNet
+
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles

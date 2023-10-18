@@ -4,6 +4,7 @@ using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
+using Destructurama;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -12,6 +13,9 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Debugging;
 using TicketingService.Abstractions;
 using TicketingService.Endpoints;
 using TicketingService.Extensions;
@@ -35,6 +39,19 @@ builder.Configuration.Bind("Health", healthOptions);
 builder.Services
     .AddMartenTicketing(connectionString)
     .AddHealthChecksFromConfiguration(healthOptions, connectionString);
+
+// add logging
+SelfLog.Enable(Console.WriteLine);
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()
+    .Enrich.WithThreadId()
+    .Enrich.WithEnvironmentUserName()
+    .Destructure.JsonNetTypes()
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(Log.Logger);
 
 // add security
 builder.Services

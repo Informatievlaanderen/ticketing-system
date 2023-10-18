@@ -7,3 +7,13 @@ Be.Vlaanderen.Basisregisters.GrAr.Notifications
 
 AWSSDK.SimpleNotificationService
 AWSSDK.Extensions.NETCore.Setup
+
+Serilog
+Serilog.Settings.Configuration
+Serilog.Extensions.Logging
+Serilog.Sinks.Console
+Serilog.Sinks.File
+Serilog.Enrichers.Thread
+Serilog.Enrichers.Environment
+Serilog.Formatting.Compact
+Destructurama.JsonNet
