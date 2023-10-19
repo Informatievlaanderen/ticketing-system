@@ -44,7 +44,7 @@
 
             var numberOfTickets = new TicketQueryBuilder(_store)
                 .FromTo(Operators.WHERE, from, _until.Value)
-                .ByStatuses(Operators.AND, TicketStatus.Created, TicketStatus.Pending, TicketStatus.Complete)
+                .ByStatuses(Operators.AND, TicketStatus.Created, TicketStatus.Pending)
                 .WhitelistedRegistries(Operators.AND, _options.WhitelistedRegistries)
                 .BlacklistedActions(Operators.AND, _options.BlacklistedActions)
                 .Execute().GetAwaiter().GetResult()
