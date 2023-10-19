@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.1...v1.17.2) (2023-10-19)
+
+
+### Bug Fixes
+
+* monitoring query ([1f5bee7](https://github.com/informatievlaanderen/ticketing-system/commit/1f5bee7cd0b1d67a63a5cdd351f6c79c1b1947b2))
+
 ## [1.17.1](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.0...v1.17.1) (2023-10-18)
 
 
