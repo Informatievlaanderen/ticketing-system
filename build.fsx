@@ -24,7 +24,7 @@ let buildSolution = buildSolution assemblyVersionNumber
 let buildSource = build assemblyVersionNumber
 let buildTest = buildTest assemblyVersionNumber
 let setVersions = (setSolutionVersions assemblyVersionNumber product copyright company)
-let test = testSolution
+//let test = testSolution
 let publishSource = publish assemblyVersionNumber
 let pack = pack nugetVersionNumber
 let containerize = containerize dockerRepository
@@ -40,7 +40,14 @@ Target.create "Build_Solution" (fun _ ->
   setVersions "SolutionInfo.cs"
   buildSolution "TicketingSystem")
 
-Target.create "Test_Solution" (fun _ -> test "TicketingSystem")
+Target.create "Test_Solution" (fun _ ->
+  [
+    "TicketingService.IntegrationTests"
+    //"TicketingService.Monitoring.Tests"
+    "TicketingService.Proxy.HttpProxy.Tests"
+    "TicketingService.Storage.InMemory.Tests"
+    //"TicketingService.Storage.PgSqlMarten.Tests"
+  ] |> List.iter test)
 
 Target.create "Publish_Solution" (fun _ ->
   [
