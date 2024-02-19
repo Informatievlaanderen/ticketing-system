@@ -1,3 +1,10 @@
+## [1.17.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.2...v1.17.3) (2024-02-19)
+
+
+### Bug Fixes
+
+* **bump:** add new ECR + change test + prd pipeline ([2cdd647](https://github.com/informatievlaanderen/ticketing-system/commit/2cdd6475ff5862935bc5aac2c9701c7bc0f3eba3))
+
 ## [1.17.2](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.1...v1.17.2) (2023-10-19)
 
 
