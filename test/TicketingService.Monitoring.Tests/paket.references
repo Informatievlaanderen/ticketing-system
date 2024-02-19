@@ -6,4 +6,5 @@ Moq
 xunit
 xunit.runner.visualstudio
 xunit.categories
+Xunit.Extensions.Ordering
 FluentAssertions

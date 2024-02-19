@@ -30,6 +30,7 @@ nuget Newtonsoft.Json 13.0.1
 nuget xunit 2.4.2
 nuget xunit.runner.visualstudio 2.4.5
 nuget xunit.categories 2.0.6
+nuget Xunit.Extensions.Ordering 1.4.5
 nuget FluentAssertions 6.5.1
 nuget SwashBuckle.AspNetCore.Swagger 6.4.0
 nuget SwashBuckle.AspNetCore.SwaggerGen 6.3.1
