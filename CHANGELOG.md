@@ -1,3 +1,10 @@
+## [1.17.4](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.3...v1.17.4) (2024-02-19)
+
+
+### Bug Fixes
+
+* **bump:** cd pipeline ([614d73a](https://github.com/informatievlaanderen/ticketing-system/commit/614d73a839038ed138487adf7037193cde1751b6))
+
 ## [1.17.3](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.2...v1.17.3) (2024-02-19)
 
 
