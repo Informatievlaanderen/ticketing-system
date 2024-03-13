@@ -1,12 +1,13 @@
 namespace TicketingService.Storage.PgSqlMarten.Tests;
 
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Abstractions;
 using Be.Vlaanderen.Basisregisters.DockerUtilities;
 using Marten;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using Xunit;
 
 public class MartenTicketingTests
@@ -16,10 +17,11 @@ public class MartenTicketingTests
     {
         using var _ = DockerComposer.Compose("postgres_test.yml", "ticketing-system-marten-integration-tests");
 
+        await CreateDatabase("Host=localhost;Port=5434;Username=postgres;Password=postgres", "tickets");
+
         // add Marten
-        const string connectionString = "Host=localhost;Port=5434;Database=tickets;Username=postgres;Password=postgres";
         var services = new ServiceCollection();
-        services.AddMartenTicketing(connectionString);
+        services.AddMartenTicketing("Host=localhost;Port=5434;Database=tickets;Username=postgres;Password=postgres");
         var serviceProvider = services.BuildServiceProvider();
 
         var ticketing = new MartenTicketing(serviceProvider.GetRequiredService<IDocumentStore>()) as ITicketing;
@@ -85,5 +87,29 @@ public class MartenTicketingTests
             var ticket = await ticketing.Get(ticketId);
             Assert.Null(ticket);
         }
+    }
+
+    private async Task CreateDatabase(string connectionString, string database)
+    {
+        var createDbQuery = $"CREATE DATABASE {database}";
+
+        await using var connection = new NpgsqlConnection(connectionString);
+        await using var command = new NpgsqlCommand(createDbQuery, connection);
+
+        var attempt = 1;
+        while (attempt <= 5)
+        {
+            try
+            {
+                await connection.OpenAsync();
+            }
+            catch (Exception)
+            {
+                attempt++;
+                await Task.Delay(TimeSpan.FromMilliseconds(200));
+            }
+        }
+
+        await command.ExecuteNonQueryAsync();
     }
 }

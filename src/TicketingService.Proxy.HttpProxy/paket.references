@@ -1,4 +1,6 @@
 Microsoft.Extensions.DependencyInjection
 Microsoft.Extensions.Http
+System.Net.Http.Json
+
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles

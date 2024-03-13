@@ -20,7 +20,7 @@
 
         public void Dispose()
         {
-            var session =_fixture.DocumentStore.OpenSession();
+            var session =_fixture.DocumentStore.DirtyTrackedSession();
             session.DeleteWhere<Ticket>(_ => true);
             session.SaveChanges();
         }
@@ -55,7 +55,7 @@
                 .ByStatuses(Operators.AND, new [] {TicketStatus.Created, TicketStatus.Pending})
                 .Paged(0, 2);
 
-            var result = query.Execute().GetAwaiter().GetResult();
+            var result = await query.Execute();
 
             // Assert
             result.Count.Should().Be(2);
@@ -69,9 +69,9 @@
                 {MetaDataConstants.Registry, "test"}
             });
 
-            var result = new TicketQueryBuilder(_fixture.DocumentStore)
+            var result = await new TicketQueryBuilder(_fixture.DocumentStore)
                 .WhitelistedRegistries(Operators.WHERE, "test")
-                .Execute().GetAwaiter().GetResult();
+                .Execute();
 
             // Assert
             result.Count.Should().Be(1);
@@ -88,7 +88,7 @@
             var query = new TicketQueryBuilder(_fixture.DocumentStore)
                 .FromTo(Operators.WHERE, from.ToString(), to.ToString());
 
-            var result = query.Execute().GetAwaiter().GetResult();
+            var result = await query.Execute();
 
             // Assert
             result.Count.Should().Be(1);
@@ -101,9 +101,9 @@
             await _fixture.MartenTicketing.CreateTicket(new Dictionary<string, string>());
             await _fixture.MartenTicketing.CreateTicket(new Dictionary<string, string>());
 
-            var result = new TicketQueryBuilder(_fixture.DocumentStore)
+            var result = await new TicketQueryBuilder(_fixture.DocumentStore)
                 .Paged(0, 2)
-                .Execute().GetAwaiter().GetResult();
+                .Execute();
 
             // Assert
             result.Count.Should().Be(2);
@@ -123,7 +123,7 @@
             var query = new TicketQueryBuilder(_fixture.DocumentStore)
                 .ByStatuses(Operators.WHERE, new[] { TicketStatus.Pending, TicketStatus.Error});
 
-            var result = query.Execute().GetAwaiter().GetResult();
+            var result = await query.Execute();
 
             // Assert
             result.Count.Should().Be(2);

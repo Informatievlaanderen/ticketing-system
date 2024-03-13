@@ -12,11 +12,14 @@ projectUrl https://vlaanderen.be/digitaal-vlaanderen
 iconUrl https://raw.githubusercontent.com/Informatievlaanderen/build-pipeline/master/logo.png
 licenseUrl https://opensource.org/licenses/EUPL-1.2
 
-description TicketingService in-memory storage.
+description TicketingService HTTP proxy.
 
 dependencies
-  framework: net6.0
+  framework: netstandard2.1
+    Microsoft.Extensions.DependencyInjection >= LOCKEDVERSION
+    Microsoft.Extensions.Http >= LOCKEDVERSION
+    System.Net.Http.Json >= LOCKEDVERSION
 
 files
-  TicketingService.Proxy.HttpProxy.dll => lib\net6.0
-  TicketingService.Proxy.HttpProxy.pdb => lib\net6.0
+  TicketingService.Proxy.HttpProxy.dll => lib\netstandard2.1
+  TicketingService.Proxy.HttpProxy.pdb => lib\netstandard2.1

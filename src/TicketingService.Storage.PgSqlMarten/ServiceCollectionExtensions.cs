@@ -22,11 +22,6 @@ public static class ServiceCollectionExtensions
                 .IdStrategy(new CombGuidIdGeneration())
                 .Identity(x => x.TicketId);
 
-            options.CreateDatabasesForTenants(configure => configure.ForTenant()
-                .CheckAgainstPgDatabase()
-                .WithEncoding("UTF-8")
-                .ConnectionLimit(-1));
-
             options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
 
             // Optionally configure the serializer directly
