@@ -13,6 +13,7 @@ using Be.Vlaanderen.Basisregisters.DockerUtilities;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Npgsql;
 using Proxy.HttpProxy;
 using Storage.PgSqlMarten;
 using Xunit;
@@ -27,6 +28,8 @@ public class TicketingServiceTests
     {
         // start postgres
         using var _ = DockerComposer.Compose("postgres_test.yml", "ticketing-system-integration-tests");
+
+        await CreateDatabase("Host=localhost;Port=5433;Username=postgres;Password=postgres", "tickets");
 
         // construct claims identity
         var claimsIdentity = new ClaimsIdentity(new[] { new Claim("internal", "true") });
@@ -135,5 +138,29 @@ public class TicketingServiceTests
             var r = await client.GetAsync($"/tickets/{ticketId:D}");
             Assert.Equal(HttpStatusCode.NotFound, r.StatusCode);
         }
+    }
+
+    private async Task CreateDatabase(string connectionString, string database)
+    {
+        var createDbQuery = $"CREATE DATABASE {database}";
+
+        await using var connection = new NpgsqlConnection(connectionString);
+        await using var command = new NpgsqlCommand(createDbQuery, connection);
+
+        var attempt = 1;
+        while (attempt <= 5)
+        {
+            try
+            {
+                await connection.OpenAsync();
+            }
+            catch (Exception)
+            {
+                attempt++;
+                await Task.Delay(TimeSpan.FromMilliseconds(200));
+            }
+        }
+
+        await command.ExecuteNonQueryAsync();
     }
 }

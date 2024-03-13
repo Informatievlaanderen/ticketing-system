@@ -1,50 +1,52 @@
-framework: net6.0, net472
+framework: net8.0, netstandard2.1
 
 source https://api.nuget.org/v3/index.json
 
 // AWS STUFF
-nuget AWSSDK.Extensions.NETCore.Setup 3.7.5
-nuget AWSSDK.SimpleNotificationService 3.7.101.86
+nuget AWSSDK.Extensions.NETCore.Setup 3.7.300
+nuget AWSSDK.SimpleNotificationService 3.7.301.4
 
 // VBR STUFF
-nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
-nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
-nuget Be.Vlaanderen.Basisregisters.GrAr.Notifications 20.3.1
+nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 7.1.0
+nuget Be.Vlaanderen.Basisregisters.DockerUtilities 2.0.0
+nuget Be.Vlaanderen.Basisregisters.GrAr.Notifications 21.0.0
 
 // Datadog
-nuget Datadog.Trace 2.32.0
-nuget Datadog.Trace.Bundle 2.32.0
+nuget Datadog.Trace 2.48.0
+nuget Datadog.Trace.Bundle 2.48.0
 
 // PRODUCTION STUFF
-nuget AspNetCore.HealthChecks.NpgSql 6.0.2
-nuget Marten.AspNetCore 5.10.1
-nuget Microsoft.Extensions.DependencyInjection 6.0.1
-nuget Microsoft.Extensions.Http 6.0.0
+nuget AspNetCore.HealthChecks.NpgSql 8.0.0
+nuget Marten.AspNetCore 7.2.0
+nuget Microsoft.Extensions.DependencyInjection 8.0.0
+nuget Microsoft.Extensions.Http 8.0.0
+nuget System.Text.Json 8.0.3
+nuget System.Net.Http.Json 8.0.0
 
 // TEST STUFF
-nuget Microsoft.AspNetCore.Authentication.JwtBearer 6.0.10
-nuget Microsoft.AspNetCore.Mvc.Testing 6.0.6
-nuget Microsoft.NET.Test.Sdk 17.1.0
-nuget Moq 4.18.2
-nuget Newtonsoft.Json 13.0.1
-nuget xunit 2.4.2
-nuget xunit.runner.visualstudio 2.4.5
-nuget xunit.categories 2.0.6
-nuget FluentAssertions 6.5.1
-nuget SwashBuckle.AspNetCore.Swagger 6.4.0
-nuget SwashBuckle.AspNetCore.SwaggerGen 6.3.1
-nuget SwashBuckle.AspNetCore.SwaggerUI 6.4.0
+nuget Microsoft.AspNetCore.Authentication.JwtBearer 8.0.3
+nuget Microsoft.AspNetCore.Mvc.Testing 8.0.3
+nuget Microsoft.NET.Test.Sdk 17.9.0
+nuget Moq 4.20.70
+nuget Newtonsoft.Json 13.0.3
+nuget xunit 2.7.0
+nuget xunit.runner.visualstudio 2.5.7
+nuget xunit.categories 2.0.8
+nuget FluentAssertions 6.12.0
+nuget SwashBuckle.AspNetCore.Swagger 6.5.0
+nuget SwashBuckle.AspNetCore.SwaggerGen 6.5.0
+nuget SwashBuckle.AspNetCore.SwaggerUI 6.5.0
 
-nuget Serilog 2.10.0
-nuget Serilog.Settings.Configuration 3.3.0
-nuget Serilog.Extensions.Logging 3.1.0
-nuget Serilog.Sinks.Console 4.0.1
+nuget Serilog 3.1.1
+nuget Serilog.Settings.Configuration 8.0.0
+nuget Serilog.Extensions.Logging 8.0.0
+nuget Serilog.Sinks.Console 5.0.1
 nuget Serilog.Sinks.File 5.0.0
 nuget Serilog.Enrichers.Thread 3.1.0
-nuget Serilog.Enrichers.Environment 2.2.0
-nuget Serilog.Formatting.Compact 1.1.0
+nuget Serilog.Enrichers.Environment 2.3.0
+nuget Serilog.Formatting.Compact 2.0.0
 
-nuget Destructurama.JsonNet 2.0.0
+nuget Destructurama.JsonNet 3.0.0
 
 // BUILD STUFF
 nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true

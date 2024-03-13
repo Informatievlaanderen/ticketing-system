@@ -32,7 +32,7 @@ public class HttpProxyTicketing : ITicketing
 
         response.EnsureSuccessStatusCode();
 
-        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(cancellationToken),
+        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(),
             cancellationToken: cancellationToken);
     }
 

@@ -15,8 +15,9 @@ licenseUrl https://opensource.org/licenses/EUPL-1.2
 description TicketingService in-memory storage.
 
 dependencies
-  framework: net6.0
+  framework: netstandard2.1
+    Microsoft.Extensions.DependencyInjection  >= LOCKEDVERSION
 
 files
-  TicketingService.Storage.InMemory.dll => lib\net6.0
-  TicketingService.Storage.InMemory.pdb => lib\net6.0
+  TicketingService.Storage.InMemory.dll => lib\netstandard2.1
+  TicketingService.Storage.InMemory.pdb => lib\netstandard2.1

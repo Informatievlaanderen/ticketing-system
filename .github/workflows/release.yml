@@ -3,20 +3,152 @@ name: Release
 on:
   workflow_dispatch:
 
+concurrency: Release
+
 jobs:
-  build:
+  set-release-version:
     if: github.repository_owner == 'Informatievlaanderen'
-    name: Build
+    name: Decide next version
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.set-version.outputs.version }}
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+      with:
+          persist-credentials: false
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Node version
+      shell: bash
+      run: node --version
+
+    - name: Install NPM dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Run Semantic Release Dry-Run
+      shell: bash
+      run: npx semantic-release --dry-run
+      env:
+        GITHUB_TOKEN: ${{ secrets.VBR_GIT_RELEASE_TOKEN }}
+        GIT_COMMIT: ${{ github.sha }}
+        GIT_USERNAME: ${{ secrets.VBR_GIT_USER }}
+        GIT_AUTHOR_NAME: ${{ secrets.VBR_GIT_USER }}
+        GIT_COMMITTER_NAME: ${{ secrets.VBR_GIT_USER }}
+        GIT_EMAIL: ${{ secrets.VBR_GIT_EMAIL }}
+        GIT_AUTHOR_EMAIL: ${{ secrets.VBR_GIT_EMAIL }}
+        GIT_COMMITTER_EMAIL: ${{ secrets.VBR_GIT_EMAIL }}
+
+    - name: Set Release Version
+      id: set-version
+      run: |
+        [ ! -f semver ] && echo none > semver
+        echo $(cat semver)
+        echo version=$(cat semver) >> $GITHUB_OUTPUT
+      shell: bash
+
+  build-ticketing-service:
+    name: Build Ticketing Service
+    uses: Informatievlaanderen/build-pipeline/.github/workflows/build-image.yml@main
+    needs: [ set-release-version ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
+    with:
+      registry: '${{ vars.VBR_DEVOPS_DOCKER_REGISTRY }}/ticketing-service'
+      image-file: ticketing-image.tar
+      image-name: ticketing
+      build-project: TicketingService
+      semver: ${{ needs.set-release-version.outputs.version }}
+      dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
+    secrets: inherit
+
+  build-ticketing-monitor:
+    name: Build Ticketing Service Monitoring
+    uses: Informatievlaanderen/build-pipeline/.github/workflows/build-image.yml@main    
+    needs: [ set-release-version ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
+    with:
+      registry: '${{ vars.VBR_DEVOPS_DOCKER_REGISTRY }}/ticketing-service'
+      image-file: ticketing-monitoring-image.tar
+      image-name: ticketing-monitoring
+      build-project: TicketingService.Monitoring
+      semver: ${{ needs.set-release-version.outputs.version }}
+      dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
+    secrets: inherit
+
+  pack-abstractions:
+    name: Pack TicketingService.Abstractions
+    uses: Informatievlaanderen/build-pipeline/.github/workflows/pack.yml@main
+    needs: [ set-release-version ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
+    with:
+      pack-file: Be.Vlaanderen.Basisregisters.TicketingService.Abstractions
+      build-project: TicketingService.Abstractions
+      semver: ${{ needs.set-release-version.outputs.version }}
+      dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
+    secrets: inherit
+
+  pack-http-proxy:
+    name: Pack TicketingService.Proxy.HttpProxy
+    uses: Informatievlaanderen/build-pipeline/.github/workflows/pack.yml@main
+    needs: [ set-release-version ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
+    with:
+      pack-file: Be.Vlaanderen.Basisregisters.TicketingService.Proxy.HttpProxy
+      test-project: TicketingService.Proxy.HttpProxy.Tests
+      build-project: TicketingService.Proxy.HttpProxy
+      semver: ${{ needs.set-release-version.outputs.version }}
+      dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
+    secrets: inherit
+
+  pack-storage-inmemory:
+    name: Pack TicketingService.Storage.InMemory
+    uses: Informatievlaanderen/build-pipeline/.github/workflows/pack.yml@main
+    needs: [ set-release-version ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
+    with:
+      pack-file: Be.Vlaanderen.Basisregisters.TicketingService.Storage.InMemory
+      test-project: TicketingService.Storage.InMemory.Tests
+      build-project: TicketingService.Storage.InMemory
+      semver: ${{ needs.set-release-version.outputs.version }}
+      dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
+    secrets: inherit
+
+  pack-storage-pgsql:
+    name: Pack TicketingService.Storage.PgSqlMarten
+    uses: Informatievlaanderen/build-pipeline/.github/workflows/pack.yml@main
+    needs: [ set-release-version ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
+    with:
+      pack-file: Be.Vlaanderen.Basisregisters.TicketingService.Storage.PgSqlMarten
+      test-project: TicketingService.Storage.PgSqlMarten.Tests
+      build-project: TicketingService.Storage.PgSqlMarten
+      semver: ${{ needs.set-release-version.outputs.version }}
+      dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
+    secrets: inherit
+
+  release:
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    needs: [ set-release-version, 
+      build-ticketing-service, build-ticketing-monitor, 
+      pack-abstractions, pack-http-proxy, pack-storage-inmemory, pack-storage-pgsql ]
+    outputs:
+      version: ${{ steps.set-version.outputs.version }}
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
       with:
           persist-credentials: false
 
     - name: Cache NPM
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       env:
         cache-name: cache-npm
       with:
@@ -25,38 +157,17 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
 
-    - name: Cache Paket
-      uses: actions/cache@v3
-      env:
-        cache-name: cache-paket
-      with:
-        path: packages
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('paket.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-
-    - name: Cache Python
-      uses: actions/cache@v3
-      env:
-        cache-name: cache-pip
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-build-${{ env.cache-name }}
-
     - name: Parse repository name
       run: echo REPOSITORY_NAME=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//") >> $GITHUB_ENV
       shell: bash
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
-
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-node@v4
       with:
-        dotnet-version: ${{ secrets.VBR_DOTNET_VERSION }}
+        node-version: '20.x'
 
-    - name: Set up Python
-      uses: actions/setup-python@v3
+    - name: Setup Python
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
 
@@ -74,7 +185,7 @@ jobs:
 
     - name: Install NPM dependencies
       shell: bash
-      run: npm ci 
+      run: npm ci
 
     - name: Install Python dependencies
       shell: bash
@@ -82,17 +193,38 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests markdown argparse
 
-    - name: Restore packages
-      shell: bash
-      run: |
-        dotnet tool restore
-        dotnet restore
+    - name: Download NuGet TicketingService.Abstractions
+      uses: actions/download-artifact@v4
+      continue-on-error: false
+      with:
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Abstractions-${{ needs.set-release-version.outputs.version }}
+        path: dist/nuget/
+
+    - name: Download NuGet TicketingService.Proxy.HttpProxy
+      uses: actions/download-artifact@v4
+      continue-on-error: false
+      with:
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Proxy.HttpProxy-${{ needs.set-release-version.outputs.version }}
+        path: dist/nuget/
+
+    - name: Download NuGet TicketingService.Storage.InMemory
+      uses: actions/download-artifact@v4
+      continue-on-error: false
+      with:
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Storage.InMemory-${{ needs.set-release-version.outputs.version }}
+        path: dist/nuget/
+
+    - name: Download NuGet TicketingService.Storage.PgSqlMarten
+      uses: actions/download-artifact@v4
+      continue-on-error: false
+      with:
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Storage.PgSqlMarten-${{ needs.set-release-version.outputs.version }}
+        path: dist/nuget/
 
     - name: Run Semantic Release
       shell: bash
       run: npx semantic-release
       env:
-        BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
         GITHUB_TOKEN: ${{ secrets.VBR_GIT_RELEASE_TOKEN }}
         GIT_COMMIT: ${{ github.sha }}
         GIT_USERNAME: ${{ secrets.VBR_GIT_USER }}
@@ -103,120 +235,257 @@ jobs:
         GIT_COMMITTER_EMAIL: ${{ secrets.VBR_GIT_EMAIL }}
 
     - name: Set Release Version
+      id: set-version
       run: |
         [ ! -f semver ] && echo none > semver
+        echo $(cat semver)
+        echo ::set-output name=version::$(cat semver)
         echo RELEASE_VERSION=$(cat semver) >> $GITHUB_ENV
       shell: bash
 
-    - name: Configure AWS credentials
-      if: env.RELEASE_VERSION != 'none'
-      uses: aws-actions/configure-aws-credentials@v1
+  publish_to_nuget:
+    needs: [ release ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.release.outputs.version != 'none') }}
+    name: Publish to NuGet
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
       with:
-        aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID_DEVOPS }}
-        aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY_DEVOPS }}
-        aws-region: ${{ secrets.VBR_AWS_REGION_PRD }}
+        dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
 
-    - name: Login to Amazon ECR
-      if: env.RELEASE_VERSION != 'none'
-      uses: aws-actions/amazon-ecr-login@v1.5.2
-
-    - name: Push
-      if: env.RELEASE_VERSION != 'none'
+    - name: .NET version
       shell: bash
-      run: |
-        docker tag $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
-        docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
-        docker tag $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
-        docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
-      env:
-        BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
-        BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
-        SEMVER: ${{ env.RELEASE_VERSION }}
-        WORKSPACE: ${{ github.workspace }}
-        
-    - name: Configure AWS credentials (Staging)
-      if: env.RELEASE_VERSION != 'none'
-      uses: aws-actions/configure-aws-credentials@v1
+      run: dotnet --info
+
+    - name: Download NuGet TicketingService.Abstractions package
+      uses: actions/download-artifact@v4
       with:
-        aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.VBR_AWS_REGION }}
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Abstractions-${{ needs.release.outputs.version }}
+        path: ~/
 
-    - name: Login to Amazon ECR (Staging)
-      if: env.RELEASE_VERSION != 'none'
-      uses: aws-actions/amazon-ecr-login@v1.5.2
-
-    - name: Push to Staging
-      if: env.RELEASE_VERSION != 'none'
-      shell: bash
-      run: |
-        docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
-        docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER 
-        docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
-        docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER 
-      env:
-        BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
-        BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY }}
-        SEMVER: ${{ env.RELEASE_VERSION }}
-        WORKSPACE: ${{ github.workspace }}
-
-    - name: Configure AWS credentials (New Production)
-      if: env.RELEASE_VERSION != 'none'
-      uses: aws-actions/configure-aws-credentials@v1
+    - name: Download NuGet TicketingService.Proxy.HttpProxy package
+      uses: actions/download-artifact@v4
       with:
-        aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID_NEWPRD }}
-        aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY_NEWPRD }}
-        aws-region: ${{ secrets.VBR_AWS_REGION_PRD }}
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Proxy.HttpProxy-${{ needs.release.outputs.version }}
+        path: ~/
 
-    - name: Login to Amazon ECR (New Production)
-      if: env.RELEASE_VERSION != 'none'
-      uses: aws-actions/amazon-ecr-login@v1.5.2
+    - name: Download NuGet TicketingService.Storage.InMemory package
+      uses: actions/download-artifact@v4
+      with:
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Storage.InMemory-${{ needs.release.outputs.version }}
+        path: ~/
 
-    - name: Push to New Production
-      if: env.RELEASE_VERSION != 'none'
+    - name: Download NuGet TicketingService.Storage.PgSqlMarten package
+      uses: actions/download-artifact@v4
+      with:
+        name: nuget-Be.Vlaanderen.Basisregisters.TicketingService.Storage.PgSqlMarten-${{ needs.release.outputs.version }}
+        path: ~/
+
+    - name: Publish packages to NuGet
       shell: bash
       run: |
-        docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
-        docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
-        docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
-        docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
-
+        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.TicketingService.Abstractions.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.TicketingService.Proxy.HttpProxy.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.TicketingService.Storage.InMemory.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.TicketingService.Storage.PgSqlMarten.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
       env:
-        BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
-        BUILD_DOCKER_REGISTRY_NEWPRD: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_NEWPRD }}
-        SEMVER: ${{ env.RELEASE_VERSION }}
+        SEMVER: ${{  needs.release.outputs.version }}
         WORKSPACE: ${{ github.workspace }}
-
-    - name: Publish to NuGet
-      if: env.RELEASE_VERSION != 'none'
-      shell: bash
-      run: |
-        node packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-nuget.js dist/nuget/Be.Vlaanderen.Basisregisters.TicketingService.Abstractions.$SEMVER.nupkg
-        node packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-nuget.js dist/nuget/Be.Vlaanderen.Basisregisters.TicketingService.Proxy.HttpProxy.$SEMVER.nupkg
-        node packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-nuget.js dist/nuget/Be.Vlaanderen.Basisregisters.TicketingService.Storage.InMemory.$SEMVER.nupkg
-        node packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-nuget.js dist/nuget/Be.Vlaanderen.Basisregisters.TicketingService.Storage.PgSqlMarten.$SEMVER.nupkg
-      env:
-        SEMVER: ${{ env.RELEASE_VERSION }}
-        NUGET_HOST: ${{ secrets.NUGET_HOST }}
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
-    - name: Publish to Confluence
-      if: env.RELEASE_VERSION != 'none'
-      shell: bash
-      run: ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-confluence.sh
-      env:
-        CONFLUENCE_TITLE: ${{ env.REPOSITORY_NAME }}
-        CONFLUENCE_USERNAME: ${{ secrets.VBR_CONFLUENCE_USER }}
-        CONFLUENCE_PASSWORD: ${{ secrets.VBR_CONFLUENCE_PASSWORD }}
+  push_images:
+    if: needs.release.outputs.version != 'none'
+    needs: [ release ]
+    name: Push images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download TicketingService artifact
+        uses: actions/download-artifact@v4
+        continue-on-error: false
+        with:
+          name: ticketing-${{ needs.release.outputs.version }}
+          path: ~/
 
-   # - name: Create Jira Release
-   #   if: env.RELEASE_VERSION != 'none'
-   #   shell: bash
-   #   run: ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-jira.sh
-   #   env:
-   #     CONFLUENCE_TITLE: ${{ env.REPOSITORY_NAME }}
-   #     CONFLUENCE_USERNAME: ${{ secrets.VBR_CONFLUENCE_USER }}
-   #     CONFLUENCE_PASSWORD: ${{ secrets.VBR_CONFLUENCE_PASSWORD }}
-   #     JIRA_PREFIX: Ticketing
-   #     JIRA_PROJECT: GAWR
-   #     JIRA_VERSION: ${{ env.RELEASE_VERSION }}
+      - name: Load TicketingService artifact
+        shell: bash
+        run: |
+          echo $IMAGE-image.tar
+          docker image load -i ~/$IMAGE-image.tar
+        env:
+          IMAGE: ticketing
+
+      - name: Download TicketingService.Monitoring artifact
+        uses: actions/download-artifact@v4
+        continue-on-error: false
+        with:
+          name: ticketing-monitoring-${{ needs.release.outputs.version }}
+          path: ~/
+
+      - name: Load TicketingService.Monitoring artifact
+        shell: bash
+        run: |
+          echo $IMAGE-image.tar
+          docker image load -i ~/$IMAGE-image.tar
+        env:
+          IMAGE: ticketing-monitoring
+
+      - name: Configure AWS credentials
+        if: needs.release.outputs.version != 'none'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID_DEVOPS }}
+          aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY_DEVOPS }}
+          aws-region: ${{ secrets.VBR_AWS_REGION_PRD }}
+
+      - name: Login to Amazon ECR
+        if: needs.release.outputs.version != 'none'
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Push TicketingService to ECR
+        if: needs.release.outputs.version != 'none'
+        shell: bash
+        run: |
+          docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
+        env:
+          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          SEMVER: ${{ needs.release.outputs.version }}
+          WORKSPACE: ${{ github.workspace }}
+
+      - name: Push TicketingService.Monitoring to ECR
+        if: needs.release.outputs.version != 'none'
+        shell: bash
+        run: |
+          docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
+        env:
+          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          SEMVER: ${{ needs.release.outputs.version }}
+          WORKSPACE: ${{ github.workspace }}
+
+      - name: Configure AWS credentials (Staging)
+        if: needs.release.outputs.version != 'none'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.VBR_AWS_REGION }}
+
+      - name: Login to Amazon ECR (Staging)
+        if: needs.release.outputs.version != 'none'
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Push TicketingService to Staging
+        if: needs.release.outputs.version != 'none'
+        shell: bash
+        run: |
+          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
+        env:
+          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY }}
+          SEMVER: ${{ needs.release.outputs.version }}
+          WORKSPACE: ${{ github.workspace }}
+
+      - name: Push TicketingService.Monitoring to Staging
+        if: needs.release.outputs.version != 'none'
+        shell: bash
+        run: |
+          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
+        env:
+          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY }}
+          SEMVER: ${{ needs.release.outputs.version }}
+          WORKSPACE: ${{ github.workspace }}
+
+      - name: Configure AWS credentials (New Production)
+        if: needs.release.outputs.version != 'none'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID_NEWPRD }}
+          aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY_NEWPRD }}
+          aws-region: ${{ secrets.VBR_AWS_REGION_PRD }}
+
+      - name: Login to Amazon ECR (New Production)
+        if: needs.release.outputs.version != 'none'
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Push TicketingService to New Production
+        if: needs.release.outputs.version != 'none'
+        shell: bash
+        run: |
+          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
+        env:
+          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          BUILD_DOCKER_REGISTRY_NEWPRD: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_NEWPRD }}
+          SEMVER: ${{ needs.release.outputs.version }}
+          WORKSPACE: ${{ github.workspace }}
+
+      - name: Push TicketingServiceMonitoring to New Production
+        if: needs.release.outputs.version != 'none'
+        shell: bash
+        run: |
+          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
+        env:
+          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
+          BUILD_DOCKER_REGISTRY_NEWPRD: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_NEWPRD }}
+          SEMVER: ${{ needs.release.outputs.version }}
+          WORKSPACE: ${{ github.workspace }}
+
+  publish_to_atlassian:
+    needs: [ release ]
+    if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.release.outputs.version != 'none') }}
+    name: Publish to Atlassian
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Parse repository name
+        run: echo REPOSITORY_NAME=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//") >> $GITHUB_ENV
+        shell: bash
+
+      - name: Cache Paket
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-paket
+        with:
+          path: packages
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('paket.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: Cache Python
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-pip
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests markdown argparse
+
+      - name: Publish to Confluence
+        shell: bash
+        run: ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-confluence.sh
+        env:
+          CONFLUENCE_TITLE: ${{ env.REPOSITORY_NAME }}
+          CONFLUENCE_USERNAME: ${{ secrets.VBR_CONFLUENCE_USER }}
+          CONFLUENCE_PASSWORD: ${{ secrets.VBR_CONFLUENCE_PASSWORD }}

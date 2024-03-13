@@ -15,11 +15,12 @@ licenseUrl https://opensource.org/licenses/EUPL-1.2
 description TicketingService Abstractions.
 
 dependencies
-  framework: net6.0
+  framework: netstandard2.1
+    System.Text.Json >= LOCKEDVERSION
 
 files
-  TicketingService.Abstractions.xml => lib\net6.0
+  TicketingService.Abstractions.xml => lib\netstandard2.1
   TicketingService.Abstractions.xml => content
 
-  TicketingService.Abstractions.dll => lib\net6.0
-  TicketingService.Abstractions.pdb => lib\net6.0
+  TicketingService.Abstractions.dll => lib\netstandard2.1
+  TicketingService.Abstractions.pdb => lib\netstandard2.1
