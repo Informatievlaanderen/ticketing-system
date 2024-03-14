@@ -62,6 +62,7 @@ jobs:
       registry: '${{ vars.VBR_DEVOPS_DOCKER_REGISTRY }}/ticketing-service'
       image-file: ticketing-image.tar
       image-name: ticketing
+      test-project: TicketingService.IntegrationTests
       build-project: TicketingService
       semver: ${{ needs.set-release-version.outputs.version }}
       dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
@@ -76,6 +77,7 @@ jobs:
       registry: '${{ vars.VBR_DEVOPS_DOCKER_REGISTRY }}/ticketing-service'
       image-file: ticketing-monitoring-image.tar
       image-name: ticketing-monitoring
+      test-project: TicketingService.Monitoring.Tests
       build-project: TicketingService.Monitoring
       semver: ${{ needs.set-release-version.outputs.version }}
       dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
