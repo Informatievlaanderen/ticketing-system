@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.4...v2.0.0) (2024-03-14)
+
+
+### Features
+
+* move to dotnet 8.0.2 ([3a29754](https://github.com/informatievlaanderen/ticketing-system/commit/3a29754e34561c3d0306254b60d730dee838bb22))
+
+
+### BREAKING CHANGES
+
+* move to dotnet 8.0.2
+
 ## [1.17.4](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.3...v1.17.4) (2024-02-19)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "ticketing-system",
-  "version": "1.17.4",
+  "version": "2.0.0",
   "description": "A system with service to get tickets for async operations.",
   "author": "Basisregisters Vlaanderen",
   "license": "EUPL-1.2",
