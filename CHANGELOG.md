@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/informatievlaanderen/ticketing-system/compare/v2.0.0...v2.0.1) (2024-03-15)
+
+
+### Bug Fixes
+
+* register addhttplogging ([133ea17](https://github.com/informatievlaanderen/ticketing-system/commit/133ea17d6742ebaf6bc1a3360f7206e7e695744c))
+
 # [2.0.0](https://github.com/informatievlaanderen/ticketing-system/compare/v1.17.4...v2.0.0) (2024-03-14)
 
 
