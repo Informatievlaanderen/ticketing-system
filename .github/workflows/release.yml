@@ -348,7 +348,7 @@ jobs:
         if: needs.release.outputs.version != 'none'
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Push TicketingService to ECR
+      - name: Push TicketingService to ECR Devops
         if: needs.release.outputs.version != 'none'
         shell: bash
         run: |
@@ -359,7 +359,7 @@ jobs:
           SEMVER: ${{ needs.release.outputs.version }}
           WORKSPACE: ${{ github.workspace }}
 
-      - name: Push TicketingService.Monitoring to ECR
+      - name: Push TicketingService.Monitoring to ECR Devops
         if: needs.release.outputs.version != 'none'
         shell: bash
         run: |
@@ -367,78 +367,6 @@ jobs:
         env:
           BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
           BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
-          SEMVER: ${{ needs.release.outputs.version }}
-          WORKSPACE: ${{ github.workspace }}
-
-      - name: Configure AWS credentials (Staging)
-        if: needs.release.outputs.version != 'none'
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.VBR_AWS_REGION }}
-
-      - name: Login to Amazon ECR (Staging)
-        if: needs.release.outputs.version != 'none'
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Push TicketingService to Staging
-        if: needs.release.outputs.version != 'none'
-        shell: bash
-        run: |
-          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing:$SEMVER
-        env:
-          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
-          BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY }}
-          SEMVER: ${{ needs.release.outputs.version }}
-          WORKSPACE: ${{ github.workspace }}
-
-      - name: Push TicketingService.Monitoring to Staging
-        if: needs.release.outputs.version != 'none'
-        shell: bash
-        run: |
-          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/ticketing-service/ticketing-monitoring:$SEMVER
-        env:
-          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
-          BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY }}
-          SEMVER: ${{ needs.release.outputs.version }}
-          WORKSPACE: ${{ github.workspace }}
-
-      - name: Configure AWS credentials (New Production)
-        if: needs.release.outputs.version != 'none'
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.VBR_AWS_ACCESS_KEY_ID_NEWPRD }}
-          aws-secret-access-key: ${{ secrets.VBR_AWS_SECRET_ACCESS_KEY_NEWPRD }}
-          aws-region: ${{ secrets.VBR_AWS_REGION_PRD }}
-
-      - name: Login to Amazon ECR (New Production)
-        if: needs.release.outputs.version != 'none'
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Push TicketingService to New Production
-        if: needs.release.outputs.version != 'none'
-        shell: bash
-        run: |
-          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing:$SEMVER
-        env:
-          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
-          BUILD_DOCKER_REGISTRY_NEWPRD: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_NEWPRD }}
-          SEMVER: ${{ needs.release.outputs.version }}
-          WORKSPACE: ${{ github.workspace }}
-
-      - name: Push TicketingServiceMonitoring to New Production
-        if: needs.release.outputs.version != 'none'
-        shell: bash
-        run: |
-          docker tag  $BUILD_DOCKER_REGISTRY_TST/ticketing-service/ticketing-monitoring:$SEMVER $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY_NEWPRD/ticketing-service/ticketing-monitoring:$SEMVER
-        env:
-          BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_DEVOPS_DOCKER_REGISTRY }}
-          BUILD_DOCKER_REGISTRY_NEWPRD: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_NEWPRD }}
           SEMVER: ${{ needs.release.outputs.version }}
           WORKSPACE: ${{ github.workspace }}
 
