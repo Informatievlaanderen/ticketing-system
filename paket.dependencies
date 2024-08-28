@@ -8,7 +8,7 @@ nuget AWSSDK.SimpleNotificationService 3.7.301.4
 
 // VBR STUFF
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 7.1.0
-nuget Be.Vlaanderen.Basisregisters.DockerUtilities 2.0.0
+nuget Be.Vlaanderen.Basisregisters.DockerUtilities 3.0.0
 nuget Be.Vlaanderen.Basisregisters.GrAr.Notifications 21.0.0
 
 // Datadog

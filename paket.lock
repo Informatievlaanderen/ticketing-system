@@ -14,7 +14,7 @@ NUGET
     AWSSDK.SimpleNotificationService (3.7.301.4)
       AWSSDK.Core (>= 3.7.302.17 < 4.0)
     Be.Vlaanderen.Basisregisters.Build.Pipeline (7.1)
-    Be.Vlaanderen.Basisregisters.DockerUtilities (2.0)
+    Be.Vlaanderen.Basisregisters.DockerUtilities (3.0)
       Ductus.FluentDocker (>= 2.10.59)
     Be.Vlaanderen.Basisregisters.GrAr.Notifications (21.0)
       AWSSDK.SimpleNotificationService (>= 3.7.301.3)
