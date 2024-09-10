@@ -73,6 +73,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 app
+    .UseMiddleware<AddVersionHeaderMiddleware>()
     .UseHealthChecks(new PathString("/tickets/health"), new HealthCheckOptions
     {
         ResultStatusCodes =
@@ -85,8 +86,6 @@ app
     .UseCors()
     .UseAuthentication()
     .UseAuthorization();
-
-app.UseMiddleware<AddVersionHeaderMiddleware>();
 
 // map endpoints
 app.MapPost("/tickets/create", Handlers.Create)
