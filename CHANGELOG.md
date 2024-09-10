@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/informatievlaanderen/ticketing-system/compare/v2.1.0...v2.1.1) (2024-09-10)
+
+
+### Bug Fixes
+
+* pipeline middleware order ([56bbbd6](https://github.com/informatievlaanderen/ticketing-system/commit/56bbbd66918a2adc3f438d82fa71f64667d8ebca))
+
 # [2.1.0](https://github.com/informatievlaanderen/ticketing-system/compare/v2.0.1...v2.1.0) (2024-09-10)
 
 
