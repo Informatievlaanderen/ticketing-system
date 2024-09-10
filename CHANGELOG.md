@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/informatievlaanderen/ticketing-system/compare/v2.0.1...v2.1.0) (2024-09-10)
+
+
+### Features
+
+* add version header ([9e4b5ac](https://github.com/informatievlaanderen/ticketing-system/commit/9e4b5ac81275fc7ca196a34cca34f57312566503))
+
 ## [2.0.1](https://github.com/informatievlaanderen/ticketing-system/compare/v2.0.0...v2.0.1) (2024-03-15)
 
 
