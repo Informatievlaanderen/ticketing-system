@@ -4,6 +4,8 @@ SwashBuckle.AspNetCore.Swagger
 SwashBuckle.AspNetCore.SwaggerGen
 SwashBuckle.AspNetCore.SwaggerUI
 
+Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.AddVersionHeader
+
 Datadog.Trace
 Datadog.Trace.Bundle
 

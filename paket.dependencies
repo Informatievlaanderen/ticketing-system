@@ -11,6 +11,8 @@ nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 7.1.0
 nuget Be.Vlaanderen.Basisregisters.DockerUtilities 3.0.0
 nuget Be.Vlaanderen.Basisregisters.GrAr.Notifications 21.0.0
 
+nuget Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.AddVersionHeader 4.0.0
+
 // Datadog
 nuget Datadog.Trace 2.48.0
 nuget Datadog.Trace.Bundle 2.48.0
