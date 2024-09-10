@@ -1,10 +1,12 @@
 name: CD Staging
+run-name: 'CD Staging: ${{ github.event.inputs.version }}'
+concurrency: CD Staging
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version'     
+        description: 'Version'
         required: true
 
 jobs:

@@ -1,10 +1,12 @@
 name: CD New Production
+run-name: 'Manual Production Deploy: ${{ github.event.inputs.version }}'
+concurrency: Manual Production Deploy
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version'     
+        description: 'Version'
         required: true
 
 jobs:
