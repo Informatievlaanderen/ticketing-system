@@ -4,6 +4,7 @@ using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
+using Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware;
 using Destructurama;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using Polly;
 using Serilog;
 using Serilog.Debugging;
 using TicketingService.Abstractions;
@@ -83,6 +85,8 @@ app
     .UseCors()
     .UseAuthentication()
     .UseAuthorization();
+
+app.UseMiddleware<AddVersionHeaderMiddleware>();
 
 // map endpoints
 app.MapPost("/tickets/create", Handlers.Create)
