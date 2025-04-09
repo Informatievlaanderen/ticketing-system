@@ -105,7 +105,7 @@
         public async Task<IReadOnlyList<Ticket>> Execute()
         {
             await using var session = _documentStore.QuerySession();
-            return session.Query<Ticket>(query.ToString());
+            return await session.QueryAsync<Ticket>(query.ToString());
         }
 
         private static (DateTimeOffset from, DateTimeOffset to) CreateDateRange(string? fromDate, string? toDate)

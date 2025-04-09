@@ -22,7 +22,7 @@
         {
             var session =_fixture.DocumentStore.DirtyTrackedSession();
             session.DeleteWhere<Ticket>(_ => true);
-            session.SaveChanges();
+            session.SaveChangesAsync().GetAwaiter().GetResult();
         }
 
         [Fact]

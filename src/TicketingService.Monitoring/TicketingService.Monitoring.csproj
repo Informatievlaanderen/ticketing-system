@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.App.props" />
+  <Import Project="..\..\.build\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.App.props" />
 
   <PropertyGroup>
     <!-- Error NETSDK1152: https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/duplicate-files-in-output -->
@@ -26,6 +26,22 @@
     <Content Include="init.sh" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
-
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
+    <PackageReference Include="AWSSDK.SimpleNotificationService" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" />
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.GrAr.Notifications" />
+    <PackageReference Include="SwashBuckle.AspNetCore.Swagger" />
+    <PackageReference Include="SwashBuckle.AspNetCore.SwaggerGen" />
+    <PackageReference Include="SwashBuckle.AspNetCore.SwaggerUI" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Settings.Configuration" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="Serilog.Enrichers.Thread" />
+    <PackageReference Include="Serilog.Enrichers.Environment" />
+    <PackageReference Include="Serilog.Formatting.Compact" />
+    <PackageReference Include="Destructurama.JsonNet" />
+  </ItemGroup>
 </Project>

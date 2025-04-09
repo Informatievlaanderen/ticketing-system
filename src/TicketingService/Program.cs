@@ -15,7 +15,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
-using Polly;
 using Serilog;
 using Serilog.Debugging;
 using TicketingService.Abstractions;
@@ -33,7 +32,7 @@ builder.Configuration
     .AddEnvironmentVariables()
     .AddCommandLine(args);
 
-var connectionString = builder.Configuration.GetConnectionString("Marten");
+var connectionString = builder.Configuration.GetConnectionString("Marten")!;
 
 // add dependencies
 var healthOptions = new HealthOptions();
