@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/informatievlaanderen/ticketing-system/compare/v2.1.1...v3.0.0) (2025-04-09)
+
+
+### Code Refactoring
+
+* use renovate and nuget + update pipeline ([d9fed24](https://github.com/informatievlaanderen/ticketing-system/commit/d9fed248a7af8ca8f153b28c8777ff11c2c367ca))
+
+
+### BREAKING CHANGES
+
+* update to dotnet 9
+
 ## [2.1.1](https://github.com/informatievlaanderen/ticketing-system/compare/v2.1.0...v2.1.1) (2024-09-10)
 
 
