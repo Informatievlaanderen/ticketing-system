@@ -8,8 +8,8 @@
 
     public class NotificationsOptions
     {
-        public string[] WhitelistedRegistries { get; set; }
-        public string[] BlacklistedActions { get; set; }
+        public required string[] WhitelistedRegistries { get; set; }
+        public required string[] BlacklistedActions { get; set; }
     }
 
     public class NotificationBackgroundService :  IHostedService, IDisposable

@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
                 .IdStrategy(new CombGuidIdGeneration())
                 .Identity(x => x.TicketId);
 
-            options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
+            options.UseSystemTextJsonForSerialization();
 
             // Optionally configure the serializer directly
             var systemTextJsonSerializer = new SystemTextJsonSerializer
@@ -34,7 +34,7 @@ public static class ServiceCollectionExtensions
                 Casing = Casing.CamelCase,
             };
 
-            systemTextJsonSerializer.Customize(serializerOptions =>
+            systemTextJsonSerializer.Configure(serializerOptions =>
             {
                 serializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
                 serializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));

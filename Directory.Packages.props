@@ -1,0 +1,51 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.400" />
+        <PackageVersion Include="AWSSDK.SimpleNotificationService" Version="3.7.400.130" />
+
+        <PackageVersion Include="Be.Vlaanderen.Basisregisters.DockerUtilities" Version="4.0.0" />
+        <PackageVersion Include="Be.Vlaanderen.Basisregisters.GrAr.Notifications" Version="22.0.0" />
+        <PackageVersion Include="Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.AddVersionHeader" Version="5.0.0" />
+
+        <PackageVersion Include="Datadog.Trace.Bundle" Version="3.14.2" />
+
+        <PackageVersion Include="Marten.AspNetCore" Version="7.39.6" />
+        <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+
+        <PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.3" />
+        <PackageVersion Include="System.Text.Json" Version="9.0.3" />
+        <PackageVersion Include="System.Net.Http.Json" Version="9.0.3" />
+
+        <PackageVersion Include="SwashBuckle.AspNetCore.Swagger" Version="8.1.0" />
+        <PackageVersion Include="SwashBuckle.AspNetCore.SwaggerGen" Version="8.1.0" />
+        <PackageVersion Include="SwashBuckle.AspNetCore.SwaggerUI" Version="8.1.0" />
+
+        <PackageVersion Include="Serilog" Version="4.2.0" />
+        <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
+        <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.1" />
+        <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageVersion Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageVersion Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+        <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+        <PackageVersion Include="Serilog.Formatting.Compact" Version="3.0.0" />
+        <PackageVersion Include="Destructurama.JsonNet" Version="4.0.2" />
+
+        <PackageVersion Include="Moq" Version="4.20.72" />
+        <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.3" />
+        <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3" />
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+        <PackageVersion Include="xunit" Version="2.9.3" />
+        <PackageVersion Include="xunit.categories" Version="3.0.1" />
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+        <PackageVersion Include="FluentAssertions" Version="[7.1.0,8.0.0)" />
+        <PackageVersion Include="SourceLink.Embed.AllSourceFiles" Version="2.8.3" />
+        <PackageVersion Include="SourceLink.Copy.PdbFiles" Version="2.8.3" />
+    </ItemGroup>
+</Project>

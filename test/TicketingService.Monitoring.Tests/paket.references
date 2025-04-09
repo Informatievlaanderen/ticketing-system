@@ -1,9 +1,0 @@
-
-Be.Vlaanderen.Basisregisters.DockerUtilities
-
-Microsoft.NET.Test.Sdk
-Moq
-xunit
-xunit.runner.visualstudio
-xunit.categories
-FluentAssertions

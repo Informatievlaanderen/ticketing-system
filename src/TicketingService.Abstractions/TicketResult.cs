@@ -81,11 +81,16 @@ public record TicketError : IEquatable<TicketError>
         if (ReferenceEquals(this, null)) return false;
         if (ReferenceEquals(this, other)) return true;
 
-        if (_errors is not null && other._errors is null) return false;
-        if (_errors is null && other._errors is not null) return false;
-        if (_errors is null || other._errors is null) return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode);
+        if (_errors is not null && other?._errors is null) return false;
+        if (_errors is null && other?._errors is not null) return false;
+        if (_errors is null || other?._errors is null) return ErrorMessage.Equals(other?.ErrorMessage) && ErrorCode.Equals(other.ErrorCode);
 
         var sequenceEqual = _errors.SequenceEqual(other._errors);
         return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && sequenceEqual;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Errors, ErrorMessage, ErrorCode);
     }
 }

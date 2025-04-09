@@ -66,9 +66,9 @@ public class MartenTicketingTests
             // get
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
             Assert.Equivalent(new TicketResult(ticketErrors), ticket.Result);
-            Assert.False(ticket.Result.ResultAsJson.Contains("null"));
+            Assert.DoesNotContain("null", ticket.Result?.ResultAsJson);
 
             // complete
             const string complete = "Complete";

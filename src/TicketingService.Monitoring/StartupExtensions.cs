@@ -46,7 +46,7 @@ public static class StartupExtensions
              var topicArn = string.IsNullOrWhiteSpace(builder.Configuration["TopicArn"])
                  ? throw new ArgumentException("Configuration has no TopicArn.")
                  : builder.Configuration["TopicArn"];
-             return new NotificationService(snsService, topicArn);
+             return new NotificationService(snsService, topicArn!);
          });
 
         builder.Services.AddSingleton<TicketsNotifier>();
