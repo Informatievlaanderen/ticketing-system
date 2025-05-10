@@ -12,7 +12,7 @@
         <PackageVersion Include="Be.Vlaanderen.Basisregisters.GrAr.Notifications" Version="22.0.0" />
         <PackageVersion Include="Be.Vlaanderen.Basisregisters.AspNetCore.Mvc.Middleware.AddVersionHeader" Version="5.0.0" />
 
-        <PackageVersion Include="Datadog.Trace.Bundle" Version="3.14.2" />
+        <PackageVersion Include="Datadog.Trace.Bundle" Version="3.16.0" />
 
         <PackageVersion Include="Marten.AspNetCore" Version="7.39.6" />
         <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
