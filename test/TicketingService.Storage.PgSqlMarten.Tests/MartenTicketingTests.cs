@@ -35,14 +35,14 @@ public class MartenTicketingTests
             // get
             var ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Created, ticket!.Status);
+            Assert.Equal(TicketStatus.Created, ticket.Status);
             Assert.Equal(originator, ticket.Metadata[originator]);
 
             // pending
             await ticketing.Pending(ticketId);
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Pending, ticket!.Status);
+            Assert.Equal(TicketStatus.Pending, ticket.Status);
 
             // error
             var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
@@ -51,16 +51,25 @@ public class MartenTicketingTests
             // get
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
             Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
+            // error with context
+            var ticketErrorWithContext = new TicketError("mockErrorMessage", "mockErrorCode", new Dictionary<string, object>{{"key", new {value = 1}}});
+            await ticketing.Error(ticketId, ticketErrorWithContext);
+
+            // get
+            ticket = await ticketing.Get(ticketId);
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
+            Assert.Equal(new TicketResult(ticketErrorWithContext), ticket.Result);
+
             // errors
-            var ticketErrors = new TicketError(new[]
-            {
+            var ticketErrors = new TicketError([
                 new TicketError("mockErrorMessage1", "mockErrorCode1"),
                 new TicketError("mockErrorMessage2", "mockErrorCode2"),
                 new TicketError("mockErrorMessage3", "mockErrorCode3")
-            });
+            ]);
             await ticketing.Error(ticketId, ticketErrors);
 
             // get
@@ -77,7 +86,7 @@ public class MartenTicketingTests
             // get
             ticket = await ticketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Complete, ticket!.Status);
+            Assert.Equal(TicketStatus.Complete, ticket.Status);
             Assert.Equal(new TicketResult(complete), ticket.Result);
         }
         finally

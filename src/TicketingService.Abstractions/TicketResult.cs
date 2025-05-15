@@ -46,11 +46,22 @@ public record TicketError : IEquatable<TicketError>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public int? ErrorCount => _errors?.Count;
 
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public Dictionary<string, object>? Context { get; init; } = null;
+
     public TicketError(string errorMessage, string errorCode)
         : this()
     {
         ErrorMessage = errorMessage;
         ErrorCode = errorCode;
+    }
+
+    public TicketError(string errorMessage, string errorCode, Dictionary<string, object>? context = null)
+        : this()
+    {
+        ErrorMessage = errorMessage;
+        ErrorCode = errorCode;
+        Context = context;
     }
 
     public TicketError(IList<TicketError> errors)
@@ -74,6 +85,7 @@ public record TicketError : IEquatable<TicketError>
         _errors = null;
         ErrorMessage = string.Empty;
         ErrorCode = string.Empty;
+        Context = null;
     }
 
     public virtual bool Equals(TicketError? other)
@@ -83,14 +95,14 @@ public record TicketError : IEquatable<TicketError>
 
         if (_errors is not null && other?._errors is null) return false;
         if (_errors is null && other?._errors is not null) return false;
-        if (_errors is null || other?._errors is null) return ErrorMessage.Equals(other?.ErrorMessage) && ErrorCode.Equals(other.ErrorCode);
+        if (_errors is null || other?._errors is null) return ErrorMessage.Equals(other?.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && Context == other.Context;
 
         var sequenceEqual = _errors.SequenceEqual(other._errors);
-        return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && sequenceEqual;
+        return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && Context == other.Context && sequenceEqual;
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Errors, ErrorMessage, ErrorCode);
+        return HashCode.Combine(Errors, ErrorMessage, ErrorCode, Context);
     }
 }
