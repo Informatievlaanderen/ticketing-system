@@ -63,7 +63,7 @@ public class TicketingServiceTests
             var httpProxyTicketing = new HttpProxyTicketing(client);
             var ticket = await httpProxyTicketing.Get(ticketId);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Created, ticket!.Status);
+            Assert.Equal(TicketStatus.Created, ticket.Status);
             Assert.NotEqual(default, ticket.Created);
             Assert.NotEqual(default, ticket.LastModified);
 
@@ -77,7 +77,7 @@ public class TicketingServiceTests
             var s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Pending, ticket!.Status);
+            Assert.Equal(TicketStatus.Pending, ticket.Status);
             Assert.Equal(ticketCreatedOn, ticket.Created);
             Assert.True(ticket.Created < ticket.LastModified);
 
@@ -94,16 +94,29 @@ public class TicketingServiceTests
             s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
             Assert.Equal(new TicketResult(ticketError), ticket.Result);
 
+            // error with context
+            var ticketErrorWithContext = new TicketError("mockErrorMessage", "mockErrorCode", new Dictionary<string, object>{{"key", new {value = 1}}});
+            request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/error");
+            request.Headers.Authorization = new AuthenticationHeaderValue(jwtToken);
+            request.Content = JsonContent.Create(ticketErrorWithContext);
+            await client.SendAsync(request);
+
+            // get
+            s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            ticket = JsonConvert.DeserializeObject<Ticket>(s);
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
+            Assert.Equal(new TicketResult(ticketErrorWithContext), ticket.Result);
+
             // errors
-            var ticketErrors = new TicketError(new[]
-            {
+            var ticketErrors = new TicketError([
                 new TicketError("mockErrorMessage1", "mockErrorCode1"),
                 new TicketError("mockErrorMessage2", "mockErrorCode2"),
                 new TicketError("mockErrorMessage3", "mockErrorCode3")
-            });
+            ]);
             request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/error");
             request.Headers.Authorization = new AuthenticationHeaderValue(jwtToken);
             request.Content = JsonContent.Create(ticketErrors);
@@ -113,7 +126,7 @@ public class TicketingServiceTests
             s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Error, ticket!.Status);
+            Assert.Equal(TicketStatus.Error, ticket.Status);
             Assert.Equivalent(new TicketResult(ticketErrors), ticket.Result);
 
             // complete
@@ -126,7 +139,7 @@ public class TicketingServiceTests
             s = await client.GetStringAsync($"/tickets/{ticketId:D}");
             ticket = JsonConvert.DeserializeObject<Ticket>(s);
             Assert.NotNull(ticket);
-            Assert.Equal(TicketStatus.Complete, ticket!.Status);
+            Assert.Equal(TicketStatus.Complete, ticket.Status);
             Assert.Equal(new TicketResult(complete), ticket.Result);
             Assert.True(ticketLastModified < ticket.LastModified);
         }
