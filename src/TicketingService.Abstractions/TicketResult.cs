@@ -95,10 +95,12 @@ public record TicketError : IEquatable<TicketError>
 
         if (_errors is not null && other?._errors is null) return false;
         if (_errors is null && other?._errors is not null) return false;
-        if (_errors is null || other?._errors is null) return ErrorMessage.Equals(other?.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && Context == other.Context;
+        if (_errors is null || other?._errors is null) return ErrorMessage.Equals(other?.ErrorMessage) && ErrorCode.Equals(other.ErrorCode)
+            && ((Context is null && other.Context is null) || (Context is not null && Context.Equals(other.Context)));
 
         var sequenceEqual = _errors.SequenceEqual(other._errors);
-        return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && Context == other.Context && sequenceEqual;
+        return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && sequenceEqual
+            && ((Context is null && other.Context is null) || (Context is not null && Context.Equals(other.Context)));
     }
 
     public override int GetHashCode()
