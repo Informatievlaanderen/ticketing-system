@@ -52,9 +52,9 @@
       },
       "xunit.runner.visualstudio": {
         "type": "Direct",
-        "requested": "[3.0.2, )",
-        "resolved": "3.0.2",
-        "contentHash": "oXbusR6iPq0xlqoikjdLvzh+wQDkMv9If58myz9MEzldS4nIcp442Btgs2sWbYWV+caEluMe2pQCZ0hUZgPiow=="
+        "requested": "[3.1.0, )",
+        "resolved": "3.1.0",
+        "contentHash": "K9O9TOzugqOo4LJ87uuq1VG8RAqGp20Ng85Wx932oT5LNBkIgeeGYubVW5UMnOOTanFNbGavmbuYrJr4INzSwg=="
       },
       "Ductus.FluentDocker": {
         "type": "Transitive",
@@ -111,8 +111,8 @@
       },
       "Marten": {
         "type": "Transitive",
-        "resolved": "7.39.6",
-        "contentHash": "gYcSsbA2Avk30s+vBha33sBLS0fz6aF/fT6PZBsJEEfQceCP/7OQxI5mAUIcQvzc3Yq7xijQx0NlNnoGptRcaA==",
+        "resolved": "7.40.3",
+        "contentHash": "MDsmHjP8h5sZoUb8xmXud8qRV7DhdZ3U2pnE7vdYuTaLgJP1ce5lUJ7w5Rm4pvqc7aZaEVrEddBECzDpeDC6Sg==",
         "dependencies": {
           "FSharp.Core": "9.0.100",
           "JasperFx.CodeGeneration": "3.7.2",
@@ -127,7 +127,7 @@
           "Polly.Core": "8.5.0",
           "System.Text.Json": "8.0.5",
           "System.Threading.Tasks.Dataflow": "8.0.0",
-          "Weasel.Postgresql": "7.14.1"
+          "Weasel.Postgresql": "7.14.2"
         }
       },
       "Microsoft.Bcl.AsyncInterfaces": {
@@ -307,8 +307,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "9.0.3",
-        "contentHash": "TfaHPSe39NyL2wxkisRxXK7xvHGZYBZ+dy3r+mqGvnxKgAPdHkMu3QMQZI4pquP6W5FIQBqs8FJpWV8ffCgDqQ=="
+        "resolved": "9.0.5",
+        "contentHash": "cjnRtsEAzU73aN6W7vkWy8Phj5t3Xm78HSqgrbh/O4Q9SK/yN73wZVa21QQY6amSLQRQ/M8N+koGnY6PuvKQsw=="
       },
       "Microsoft.Extensions.Diagnostics.Abstractions": {
         "type": "Transitive",
@@ -601,20 +601,20 @@
       },
       "Weasel.Core": {
         "type": "Transitive",
-        "resolved": "7.14.1",
-        "contentHash": "smMnhNu44jVjV07O3KN50AWWjj4z2PSrS+ABN0Gkc4/F9WvN3cb0oioJE+/lK36b7x5zqp3ET7RBTjDGtutQqA==",
+        "resolved": "7.14.2",
+        "contentHash": "ovtNxWJcHy9n3zHyJPcUVSfCS4qToBgWjzQPNWbvuoYWlFF5E8NPjHbBMtvxes2D0jtuP3JOjx2sa5HprElJtw==",
         "dependencies": {
           "JasperFx.Core": "1.9.0"
         }
       },
       "Weasel.Postgresql": {
         "type": "Transitive",
-        "resolved": "7.14.1",
-        "contentHash": "GTlul1fofJ4TpOzRpfFUYz3GsFhlpBLyqTnhoS+17T+7fWXTWX7R6j5UFvfITEjCfOnbyM6I1ghsMntKKjsiKw==",
+        "resolved": "7.14.2",
+        "contentHash": "aaoeOjz85UCVf4T4nUthzFcQw0npaZBY7+ej9QhxTLrFWU/5WTqY3FOBdc1TrTTBqXaRMpm+zg1FVgXD7AVnjw==",
         "dependencies": {
           "Npgsql": "8.0.6",
           "Npgsql.NetTopologySuite": "8.0.6",
-          "Weasel.Core": "7.14.1"
+          "Weasel.Core": "7.14.2"
         }
       },
       "xunit.abstractions": {
@@ -660,33 +660,33 @@
       "Be.Vlaanderen.Basisregisters.TicketingService.Abstractions": {
         "type": "Project",
         "dependencies": {
-          "System.Text.Json": "[9.0.3, )"
+          "System.Text.Json": "[9.0.5, )"
         }
       },
       "Be.Vlaanderen.Basisregisters.TicketingService.Storage.PgSqlMarten": {
         "type": "Project",
         "dependencies": {
           "Be.Vlaanderen.Basisregisters.TicketingService.Abstractions": "[1.0.0, )",
-          "Marten.AspNetCore": "[7.39.6, )",
-          "Microsoft.Extensions.DependencyInjection": "[9.0.3, )"
+          "Marten.AspNetCore": "[7.40.3, )",
+          "Microsoft.Extensions.DependencyInjection": "[9.0.5, )"
         }
       },
       "Marten.AspNetCore": {
         "type": "CentralTransitive",
-        "requested": "[7.39.6, )",
-        "resolved": "7.39.6",
-        "contentHash": "n987RdBZOOXfSj+HoEAR56Fk5ScC5UKk1o7zBxvbUK6PiCE+zXd7cR2LYgj0Ka/IqUfNHJ1PeXIC6nVO1Phq5w==",
+        "requested": "[7.40.3, )",
+        "resolved": "7.40.3",
+        "contentHash": "mLjrqktRbPQS/xqWNtn6Yr9nWoOUQ4Vl1dbRA9fpqWgp/5cabrZos5iy7715ZIHU50eoY/yCts1puzg5MrG49w==",
         "dependencies": {
-          "Marten": "7.39.6"
+          "Marten": "7.40.3"
         }
       },
       "Microsoft.Extensions.DependencyInjection": {
         "type": "CentralTransitive",
-        "requested": "[9.0.3, )",
-        "resolved": "9.0.3",
-        "contentHash": "lDbxJpkl6X8KZGpkAxgrrthQ42YeiR0xjPp7KPx+sCPc3ZbpaIbjzd0QQ+9kDdK2RU2DOl3pc6tQyAgEZY3V0A==",
+        "requested": "[9.0.5, )",
+        "resolved": "9.0.5",
+        "contentHash": "N1Mn0T/tUBPoLL+Fzsp+VCEtneUhhxc1//Dx3BeuQ8AX+XrMlYCfnp2zgpEXnTCB7053CLdiqVWPZ7mEX6MPjg==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.3"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.5"
         }
       },
       "Newtonsoft.Json": {
@@ -697,9 +697,9 @@
       },
       "System.Text.Json": {
         "type": "CentralTransitive",
-        "requested": "[9.0.3, )",
-        "resolved": "9.0.3",
-        "contentHash": "r2JRkLjsYrq5Dpo7+y3Wa73OfirZPdVhxiTJWwZ+oJM7FOAe0LkM3GlH+pgkNRdd1G1kwUbmRCdmh4uoaWwu1g=="
+        "requested": "[9.0.5, )",
+        "resolved": "9.0.5",
+        "contentHash": "rnP61ZfloTgPQPe7ecr36loNiGX3g1PocxlKHdY/FUpDSsExKkTxpMAlB4X35wNEPr1X7mkYZuQvW3Lhxmu7KA=="
       }
     },
     "net9.0/linux-x64": {

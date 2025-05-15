@@ -7,6 +7,10 @@
     {
       "matchDatasources": ["dotnet-version"],
       "enabled": false
+    },
+    {
+      "matchPackageNames": ["FluentAssertions"],
+      "allowedVersions": "<8.0.0"
     }
   ]
 }
