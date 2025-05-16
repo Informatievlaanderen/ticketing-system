@@ -7,9 +7,11 @@ using System.Reflection;
 using Amazon.SimpleNotificationService;
 using Be.Vlaanderen.Basisregisters.GrAr.Notifications;
 using Destructurama;
+using HealthChecks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Debugging;
@@ -37,7 +39,8 @@ public static class StartupExtensions
             .AddEndpointsApiExplorer()
             .AddSwaggerGen()
             .AddMartenTicketing(options.Ticketing)
-            .AddHealthChecks().AddNpgSql(_ => options.Ticketing);
+            .AddHealthChecks()
+            .AddNpgSql(_ => options.Ticketing);
 
         builder.Services.AddAWSService<IAmazonSimpleNotificationService>();
          builder.Services.AddSingleton<INotificationService>(provider =>
@@ -52,6 +55,18 @@ public static class StartupExtensions
         builder.Services.AddSingleton<TicketsNotifier>();
 
         builder.Services.AddHostedService<NotificationBackgroundService>();
+        builder.Services.AddHostedService<ExpiredTicketsRemover>();
+
+        builder.Services.AddHealthChecks().AddTypeActivatedCheck<ServiceHealthCheck>(
+            name: "NotificationService",
+            failureStatus: HealthStatus.Unhealthy,
+            tags: ["service", "notificationservice"],
+            args: [typeof(NotificationBackgroundService), "NotificationService"])
+        .AddTypeActivatedCheck<ServiceHealthCheck>(
+            name: "ExpiredTicketsRemover",
+            failureStatus: HealthStatus.Unhealthy,
+            tags: ["service", "expiredticketsremover"],
+            args: [typeof(ExpiredTicketsRemover), "ExpiredTicketsRemover"]);
 
         return builder;
     }

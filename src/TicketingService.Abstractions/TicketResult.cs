@@ -47,7 +47,7 @@ public record TicketError : IEquatable<TicketError>
     public int? ErrorCount => _errors?.Count;
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    public Dictionary<string, object>? Context { get; init; } = null;
+    public Dictionary<string, object>? ErrorContext { get; init; } = null;
 
     public TicketError(string errorMessage, string errorCode)
         : this()
@@ -56,12 +56,12 @@ public record TicketError : IEquatable<TicketError>
         ErrorCode = errorCode;
     }
 
-    public TicketError(string errorMessage, string errorCode, Dictionary<string, object>? context = null)
+    public TicketError(string errorMessage, string errorCode, Dictionary<string, object> errorContext)
         : this()
     {
         ErrorMessage = errorMessage;
         ErrorCode = errorCode;
-        Context = context;
+        ErrorContext = errorContext;
     }
 
     public TicketError(IList<TicketError> errors)
@@ -85,7 +85,7 @@ public record TicketError : IEquatable<TicketError>
         _errors = null;
         ErrorMessage = string.Empty;
         ErrorCode = string.Empty;
-        Context = null;
+        ErrorContext = null;
     }
 
     public virtual bool Equals(TicketError? other)
@@ -96,15 +96,15 @@ public record TicketError : IEquatable<TicketError>
         if (_errors is not null && other?._errors is null) return false;
         if (_errors is null && other?._errors is not null) return false;
         if (_errors is null || other?._errors is null) return ErrorMessage.Equals(other?.ErrorMessage) && ErrorCode.Equals(other.ErrorCode)
-            && ((Context is null && other.Context is null) || (Context is not null && Context.Equals(other.Context)));
+            && ((ErrorContext is null && other.ErrorContext is null) || (ErrorContext is not null && ErrorContext.Equals(other.ErrorContext)));
 
         var sequenceEqual = _errors.SequenceEqual(other._errors);
         return ErrorMessage.Equals(other.ErrorMessage) && ErrorCode.Equals(other.ErrorCode) && sequenceEqual
-            && ((Context is null && other.Context is null) || (Context is not null && Context.Equals(other.Context)));
+            && ((ErrorContext is null && other.ErrorContext is null) || (ErrorContext is not null && ErrorContext.Equals(other.ErrorContext)));
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Errors, ErrorMessage, ErrorCode, Context);
+        return HashCode.Combine(Errors, ErrorMessage, ErrorCode, ErrorContext);
     }
 }

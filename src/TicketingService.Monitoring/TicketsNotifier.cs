@@ -8,7 +8,7 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
 
-    public class TicketsNotifier
+    public sealed class TicketsNotifier
     {
         private readonly IDocumentStore _store;
         private readonly INotificationService _notificationService;
@@ -55,7 +55,7 @@
             if (numberOfTickets > 0)
             {
                 _logger.LogWarning($"{numberOfTickets} stale tickets between {from} - {_until.Value}");
-                
+
                 await _notificationService
                     .PublishToTopicAsync(new NotificationMessage(
                         "OpenTickets",
