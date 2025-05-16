@@ -3,6 +3,7 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using HealthChecks;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
 
@@ -12,7 +13,7 @@
         public required string[] BlacklistedActions { get; set; }
     }
 
-    public class NotificationBackgroundService :  IHostedService, IDisposable
+    public class NotificationBackgroundService :  IHostedService, IDisposable, IHealthCheckable
     {
         private static readonly TimeSpan Interval = TimeSpan.FromMinutes(5);
 
@@ -20,6 +21,8 @@
         private readonly ILogger _logger;
 
         private Timer? _timer;
+
+        public bool IsHealthy { get; private set; } = true;
 
         public NotificationBackgroundService(
             ILoggerFactory loggerFactory,
@@ -41,15 +44,24 @@
         private bool _working;
         private void DoWork(object? state)
         {
-            if (_working)
+            try
             {
-                _logger.LogWarning($"{nameof(NotificationBackgroundService)} run time exceeded interval of {Interval}...");
-                return;
-            }
+                if (_working)
+                {
+                    _logger.LogWarning(
+                        $"{nameof(NotificationBackgroundService)} run time exceeded interval of {Interval}...");
+                    return;
+                }
 
-            _working = true;
-            _ticketsNotifier.OnTicketsOpenLongerThan(Interval).Wait();
-            _working = false;
+                _working = true;
+                _ticketsNotifier.OnTicketsOpenLongerThan(Interval).Wait();
+                _working = false;
+            }
+            catch (Exception)
+            {
+                IsHealthy = false;
+                throw;
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
