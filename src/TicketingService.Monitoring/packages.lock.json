@@ -26,11 +26,11 @@
       },
       "AWSSDK.SimpleNotificationService": {
         "type": "Direct",
-        "requested": "[3.7.400.130, )",
-        "resolved": "3.7.400.130",
-        "contentHash": "l+/f0F3m9upfH7yJdb4Uk5J4XAzBZI7FVmmQV8m1drQEXjnzH7WGP0RQV8+xpxu4BJkYN0OODFOoswelW/Q1Gg==",
+        "requested": "[3.7.400.155, )",
+        "resolved": "3.7.400.155",
+        "contentHash": "IYCb5IbqqwLsMKgny7Ea8VkYXPRQHmMcJPA1DVjaZ+aKOeluNpAdnYvBqd3T6y8FmiMjsVa0BPObvn5/PaPbVw==",
         "dependencies": {
-          "AWSSDK.Core": "[3.7.402.36, 4.0.0)"
+          "AWSSDK.Core": "[3.7.402.61, 4.0.0)"
         }
       },
       "Be.Vlaanderen.Basisregisters.GrAr.Notifications": {
@@ -151,8 +151,8 @@
       },
       "AWSSDK.Core": {
         "type": "Transitive",
-        "resolved": "3.7.402.36",
-        "contentHash": "Xrsw7P8z8ZxClciRXY4Rdb31FLhuXq57IGAisb0C15cClM/gThyy2Us0dnS0gXPdSOYuC21fk/pmLX+GDRopFw=="
+        "resolved": "3.7.402.61",
+        "contentHash": "pwC8rOfg8hFDaL/lBgZAFTmuzWVfRxka7e/UQ+at+r/n99JoSLIbu/n5wloCdjYp/UTb4qmKuA8O4jyZxiSR/A=="
       },
       "FastExpressionCompiler": {
         "type": "Transitive",
@@ -200,8 +200,8 @@
       },
       "Marten": {
         "type": "Transitive",
-        "resolved": "7.40.3",
-        "contentHash": "MDsmHjP8h5sZoUb8xmXud8qRV7DhdZ3U2pnE7vdYuTaLgJP1ce5lUJ7w5Rm4pvqc7aZaEVrEddBECzDpeDC6Sg==",
+        "resolved": "7.40.4",
+        "contentHash": "OahGGEA1WLnIiwH3qeS9IDTDTjTcgWVd5y1ItQMqAizqE4JoVKK6T4LHOcDxjg0TMel48SiJ8LrGSGWKQb1LJw==",
         "dependencies": {
           "FSharp.Core": "9.0.100",
           "JasperFx.CodeGeneration": "3.7.2",
@@ -684,17 +684,17 @@
         "type": "Project",
         "dependencies": {
           "Be.Vlaanderen.Basisregisters.TicketingService.Abstractions": "[1.0.0, )",
-          "Marten.AspNetCore": "[7.40.3, )",
+          "Marten.AspNetCore": "[7.40.4, )",
           "Microsoft.Extensions.DependencyInjection": "[9.0.5, )"
         }
       },
       "Marten.AspNetCore": {
         "type": "CentralTransitive",
-        "requested": "[7.40.3, )",
-        "resolved": "7.40.3",
-        "contentHash": "mLjrqktRbPQS/xqWNtn6Yr9nWoOUQ4Vl1dbRA9fpqWgp/5cabrZos5iy7715ZIHU50eoY/yCts1puzg5MrG49w==",
+        "requested": "[7.40.4, )",
+        "resolved": "7.40.4",
+        "contentHash": "JGERJu4oz2TYhlxldHEcK1smjY6AZE4HIqV3NLGJ2BmboTRGwaMKs6+fgz7dGXEiLXy0YLQER+vdW9b4cpuypg==",
         "dependencies": {
-          "Marten": "7.40.3"
+          "Marten": "7.40.4"
         }
       },
       "Microsoft.Extensions.DependencyInjection": {
