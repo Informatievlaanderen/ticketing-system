@@ -1,3 +1,15 @@
+# [3.1.0](https://github.com/informatievlaanderen/ticketing-system/compare/v3.0.0...v3.1.0) (2025-05-23)
+
+
+### Bug Fixes
+
+* equality compare ([230cb40](https://github.com/informatievlaanderen/ticketing-system/commit/230cb40f9648f12164bd40bc4e3c69cfb5474301))
+
+
+### Features
+
+* add error context GAWR-6910 ([6902e07](https://github.com/informatievlaanderen/ticketing-system/commit/6902e07e4989410ad494b2cd88e507af579bb58e))
+
 # [3.0.0](https://github.com/informatievlaanderen/ticketing-system/compare/v2.1.1...v3.0.0) (2025-04-09)
 
 
