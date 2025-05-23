@@ -14,7 +14,7 @@
 
         <PackageVersion Include="Datadog.Trace.Bundle" Version="3.16.0" />
 
-        <PackageVersion Include="Marten.AspNetCore" Version="7.40.3" />
+        <PackageVersion Include="Marten.AspNetCore" Version="7.40.4" />
         <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
 
         <PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
