@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/informatievlaanderen/ticketing-system/compare/v3.1.0...v3.2.0) (2025-05-23)
+
+
+### Features
+
+* add ticketremover service + healthchecks ([05c6e4c](https://github.com/informatievlaanderen/ticketing-system/commit/05c6e4cd52ab994f698b5d2a9ca4e059a84a8682))
+
 # [3.1.0](https://github.com/informatievlaanderen/ticketing-system/compare/v3.0.0...v3.1.0) (2025-05-23)
 
 
