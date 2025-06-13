@@ -53,6 +53,8 @@ public static class StartupExtensions
          });
 
         builder.Services.AddSingleton<TicketsNotifier>();
+        builder.Services.AddSingleton<NotificationBackgroundService>();
+        builder.Services.AddSingleton<ExpiredTicketsRemover>();
 
         builder.Services.AddHostedService<NotificationBackgroundService>();
         builder.Services.AddHostedService<ExpiredTicketsRemover>();
