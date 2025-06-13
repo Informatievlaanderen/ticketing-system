@@ -1,3 +1,10 @@
+## [3.2.2](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.1...v3.2.2) (2025-06-13)
+
+
+### Bug Fixes
+
+* **monitoring:** add registrations ([7c2aec0](https://github.com/informatievlaanderen/ticketing-system/commit/7c2aec0dd914011bf351e6d44dc2529cb86e66d2))
+
 ## [3.2.1](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.0...v3.2.1) (2025-06-13)
 
 
