@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.0...v3.2.1) (2025-06-13)
+
+
+### Bug Fixes
+
+* **monitor:** service healthcheck ([c0179da](https://github.com/informatievlaanderen/ticketing-system/commit/c0179daea19ec73b7d949d316e64a8bdceee9121))
+
 # [3.2.0](https://github.com/informatievlaanderen/ticketing-system/compare/v3.1.0...v3.2.0) (2025-05-23)
 
 
