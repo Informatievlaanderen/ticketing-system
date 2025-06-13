@@ -57,16 +57,9 @@ public static class StartupExtensions
         builder.Services.AddHostedService<NotificationBackgroundService>();
         builder.Services.AddHostedService<ExpiredTicketsRemover>();
 
-        builder.Services.AddHealthChecks().AddTypeActivatedCheck<ServiceHealthCheck>(
-            name: "NotificationService",
-            failureStatus: HealthStatus.Unhealthy,
-            tags: ["service", "notificationservice"],
-            args: [typeof(NotificationBackgroundService), "NotificationService"])
-        .AddTypeActivatedCheck<ServiceHealthCheck>(
-            name: "ExpiredTicketsRemover",
-            failureStatus: HealthStatus.Unhealthy,
-            tags: ["service", "expiredticketsremover"],
-            args: [typeof(ExpiredTicketsRemover), "ExpiredTicketsRemover"]);
+        builder.Services.AddHealthChecks()
+            .AddCheck<ServiceHealthCheck<NotificationBackgroundService>>("NotificationService")
+            .AddCheck<ServiceHealthCheck<ExpiredTicketsRemover>>("ExpiredTicketsRemover");
 
         return builder;
     }
