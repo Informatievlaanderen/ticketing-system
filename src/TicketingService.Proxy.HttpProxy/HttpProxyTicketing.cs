@@ -49,7 +49,14 @@ public class HttpProxyTicketing : ITicketing
         => await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/complete", result, cancellationToken: cancellationToken);
 
     public async Task Error(Guid ticketId, TicketError error, CancellationToken cancellationToken = default)
-        => await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/error", error, cancellationToken: cancellationToken);
+    {
+        if (error.ErrorCount is not null && error.ErrorCount > 100)
+        {
+            error.Errors = error.Errors!.Take(100).ToList();
+        }
+
+        await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/error", error, cancellationToken: cancellationToken);
+    }
 
     public async Task Delete(Guid ticketId, CancellationToken cancellationToken = default)
         => await _httpClient.DeleteAsync($"/tickets/{ticketId}", cancellationToken);
