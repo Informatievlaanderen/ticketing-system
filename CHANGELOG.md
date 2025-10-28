@@ -1,3 +1,10 @@
+## [3.2.4](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.3...v3.2.4) (2025-10-28)
+
+
+### Bug Fixes
+
+* **proxy:** cut off errors at 100 ([e540a7d](https://github.com/informatievlaanderen/ticketing-system/commit/e540a7d9d3ac10c61e41214f4778f18ea12675b4))
+
 ## [3.2.3](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.2...v3.2.3) (2025-06-13)
 
 
