@@ -57,7 +57,7 @@ public record Ticket(
         Status = newStatus;
         LastModified = DateTimeOffset.UtcNow;
 
-        if (Status is TicketStatus.Complete or TicketStatus.Error && result is not null)
+        if (Status is TicketStatus.Pending or TicketStatus.Complete or TicketStatus.Error && result is not null)
         {
             Result = result;
         }

@@ -53,8 +53,8 @@ public class MartenTicketing : ITicketing
         }
     }
 
-    public Task Pending(Guid ticketId, CancellationToken cancellationToken = default)
-        => ChangeStatus(ticketId, TicketStatus.Pending, cancellationToken: cancellationToken);
+    public Task Pending(Guid ticketId, TicketResult? result = null, CancellationToken cancellationToken = default)
+        => ChangeStatus(ticketId, TicketStatus.Pending, result, cancellationToken);
 
     public Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default)
         => ChangeStatus(ticketId, TicketStatus.Complete, result, cancellationToken);
