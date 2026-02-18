@@ -42,13 +42,11 @@ public class HttpProxyTicketing : ITicketing
     public async Task<Ticket?> Get(Guid ticketId, CancellationToken cancellationToken = default) =>
         await _httpClient.GetFromJsonAsync<Ticket>($"/tickets/{ticketId:D}", _jsonSerializerOptions, cancellationToken: cancellationToken);
 
-    public async Task Pending(Guid ticketId, TicketResult? result = null, CancellationToken cancellationToken = default)
-    {
-        if (result is not null)
-            await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/pending", result, cancellationToken: cancellationToken);
-        else
-            await _httpClient.PutAsync($"/tickets/{ticketId}/pending", new ReadOnlyMemoryContent(null), cancellationToken);
-    }
+    public async Task Pending(Guid ticketId, CancellationToken cancellationToken = default) =>
+        await _httpClient.PutAsync($"/tickets/{ticketId}/pending", new ReadOnlyMemoryContent(null), cancellationToken);
+
+    public async Task Pending(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default) =>
+        await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/pending", result, cancellationToken: cancellationToken);
 
     public async Task Complete(Guid ticketId, TicketResult result, CancellationToken cancellationToken = default)
         => await _httpClient.PutAsJsonAsync($"/tickets/{ticketId}/complete", result, cancellationToken: cancellationToken);
