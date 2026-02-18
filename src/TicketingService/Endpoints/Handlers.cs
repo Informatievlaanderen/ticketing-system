@@ -35,10 +35,10 @@ public static class Handlers
         CancellationToken cancellationToken = default)
         => await ticketing.Get(ticketId, cancellationToken);
 
-    public static async Task Pending(Guid ticketId, ITicketing ticketing, CancellationToken cancellationToken = default)
+    public static async Task Pending(Guid ticketId, TicketResult? result, ITicketing ticketing, CancellationToken cancellationToken = default)
     {
         using var scope = Tracer.Instance.StartActive("SetTicketPending");
-        await ticketing.Pending(ticketId, cancellationToken);
+        await ticketing.Pending(ticketId, result, cancellationToken);
 
         scope.Span.SetTag("ticketId", ticketId.ToString("D"));
         scope.Span.SetTag("status", "Pending");

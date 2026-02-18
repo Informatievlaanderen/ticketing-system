@@ -40,7 +40,7 @@
             {
                 {MetaDataConstants.Registry, "registry_2"}
             });
-            await _fixture.MartenTicketing.Pending(id, CancellationToken.None);
+            await _fixture.MartenTicketing.Pending(id, cancellationToken: CancellationToken.None);
             await _fixture.MartenTicketing.CreateTicket(new Dictionary<string, string>
             {
                 {MetaDataConstants.Registry, "registry_3"}

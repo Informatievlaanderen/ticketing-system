@@ -83,6 +83,19 @@ public class TicketingServiceTests
 
             var ticketLastModified = ticket.LastModified;
 
+            // pending with body
+            const string pendingBody = "PendingBody";
+            request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/pending");
+            request.Content = JsonContent.Create(new TicketResult(pendingBody));
+            await client.SendAsync(request);
+
+            // get
+            s = await client.GetStringAsync($"/tickets/{ticketId:D}");
+            ticket = JsonConvert.DeserializeObject<Ticket>(s);
+            Assert.NotNull(ticket);
+            Assert.Equal(TicketStatus.Pending, ticket.Status);
+            Assert.Equal(new TicketResult(pendingBody), ticket.Result);
+
             // error
             var ticketError = new TicketError("mockErrorMessage", "mockErrorCode");
             request = new HttpRequestMessage(HttpMethod.Put, $"/tickets/{ticketId}/error");

@@ -100,6 +100,7 @@ app.MapGet("/tickets/{ticketId:guid}", async (Guid ticketId, ITicketing ticketin
     .AllowAnonymous()
     .Produces<Ticket?>(contentType: MediaTypeNames.Application.Json);
 app.MapPut("/tickets/{ticketId:guid}/pending", Handlers.Pending)
+    .Accepts<TicketResult>(contentType: MediaTypeNames.Application.Json)
     .Produces((int)HttpStatusCode.OK, contentType: MediaTypeNames.Application.Json)
     .ExcludeFromDescription();
 app.MapPut("/tickets/{ticketId:guid}/complete", Handlers.Complete)
