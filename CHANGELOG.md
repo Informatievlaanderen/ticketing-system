@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/informatievlaanderen/ticketing-system/compare/v3.3.0...v3.3.1) (2026-02-18)
+
+
+### Bug Fixes
+
+* add overload for pending instead of nullable ([4d44db3](https://github.com/informatievlaanderen/ticketing-system/commit/4d44db380bbd3d813f2fceeda31a3ecd6c45a14d))
+
 # [3.3.0](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.4...v3.3.0) (2026-02-18)
 
 
