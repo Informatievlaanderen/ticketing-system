@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.4...v3.3.0) (2026-02-18)
+
+
+### Features
+
+* add optional TicketResult to Pending method ([0f3ab98](https://github.com/informatievlaanderen/ticketing-system/commit/0f3ab98b698f7dd532d4691e842a2c0b74de9604))
+
 ## [3.2.4](https://github.com/informatievlaanderen/ticketing-system/compare/v3.2.3...v3.2.4) (2025-10-28)
 
 
