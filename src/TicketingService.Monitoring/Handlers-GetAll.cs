@@ -30,7 +30,7 @@ public static partial class Handlers
             .Paged(offset is null or < 0 ? 0 : offset.Value, limit is null or > maxLimit ? maxLimit : limit.Value)
             .Execute().GetAwaiter().GetResult()
             .AsQueryable()
-            .OrderBy(nameof(Ticket.Created));
+            .OrderByDescending(nameof(Ticket.Created));
 
         return Results.Json(tickets);
     }

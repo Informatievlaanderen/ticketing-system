@@ -98,6 +98,7 @@
 
         public TicketQueryBuilder Paged(int offset, int limit)
         {
+            query.Append($"ORDER BY data ->> 'created' DESC ");
             query.Append($"OFFSET {offset} LIMIT {limit}");
             return this;
         }
