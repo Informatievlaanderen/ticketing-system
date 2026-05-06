@@ -27,7 +27,7 @@
         <PackageVersion Include="SwashBuckle.AspNetCore.SwaggerGen" Version="8.1.1" />
         <PackageVersion Include="SwashBuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
 
-        <PackageVersion Include="Serilog" Version="4.2.0" />
+        <PackageVersion Include="Serilog" Version="4.3.1" />
         <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
         <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.1" />
         <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
