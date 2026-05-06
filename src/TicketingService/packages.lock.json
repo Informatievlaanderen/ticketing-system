@@ -157,8 +157,8 @@
       },
       "FSharp.Core": {
         "type": "Transitive",
-        "resolved": "9.0.100",
-        "contentHash": "ye8yagHGsH08H2Twno5GRWkSbrMtxK/SWiHuPcF+3nODpW65/VJ8RO0aWxp8n9+KQbmahg90wAEL3TEXjF0r6A=="
+        "resolved": "8.0.100",
+        "contentHash": "ZOVZ/o+jI3ormTZOa28Wh0tSRoyle1f7lKFcUN61sPiXI7eDZu8eSveFybgTeyIEyW0ujjp31cp7GOglDgsNEg=="
       },
       "Humanizer.Core": {
         "type": "Transitive",
@@ -196,10 +196,10 @@
       },
       "Marten": {
         "type": "Transitive",
-        "resolved": "7.40.4",
-        "contentHash": "OahGGEA1WLnIiwH3qeS9IDTDTjTcgWVd5y1ItQMqAizqE4JoVKK6T4LHOcDxjg0TMel48SiJ8LrGSGWKQb1LJw==",
+        "resolved": "7.40.5",
+        "contentHash": "yVF65aRKRg6FijV6mLsZjpvZdTp00lUffeXqpdmWsFw/Z+9QN3gsL4bZg+9j54KJKtzOda3DJruE+kuPBTEYSA==",
         "dependencies": {
-          "FSharp.Core": "9.0.100",
+          "FSharp.Core": "8.0.100",
           "JasperFx.CodeGeneration": "3.7.2",
           "JasperFx.Core": "1.12.0",
           "JasperFx.RuntimeCompiler": "3.7.2",
@@ -735,17 +735,17 @@
         "type": "Project",
         "dependencies": {
           "Be.Vlaanderen.Basisregisters.TicketingService.Abstractions": "[1.0.0, )",
-          "Marten.AspNetCore": "[7.40.4, )",
+          "Marten.AspNetCore": "[7.40.5, )",
           "Microsoft.Extensions.DependencyInjection": "[9.0.5, )"
         }
       },
       "Marten.AspNetCore": {
         "type": "CentralTransitive",
-        "requested": "[7.40.4, )",
-        "resolved": "7.40.4",
-        "contentHash": "JGERJu4oz2TYhlxldHEcK1smjY6AZE4HIqV3NLGJ2BmboTRGwaMKs6+fgz7dGXEiLXy0YLQER+vdW9b4cpuypg==",
+        "requested": "[7.40.5, )",
+        "resolved": "7.40.5",
+        "contentHash": "I9XM15uQ09B1n/ZzPe0RmzZHkMd0BQOSt2pA/cOV7HaOsaT9iAqG5qsFmSO6nidFLusTxGq6xsi2cvr7m/TjwA==",
         "dependencies": {
-          "Marten": "7.40.4"
+          "Marten": "7.40.5"
         }
       },
       "Microsoft.Extensions.DependencyInjection": {
