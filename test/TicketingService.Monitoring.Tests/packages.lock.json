@@ -67,8 +67,8 @@
       },
       "AWSSDK.Core": {
         "type": "Transitive",
-        "resolved": "3.7.402.61",
-        "contentHash": "pwC8rOfg8hFDaL/lBgZAFTmuzWVfRxka7e/UQ+at+r/n99JoSLIbu/n5wloCdjYp/UTb4qmKuA8O4jyZxiSR/A=="
+        "resolved": "3.7.501",
+        "contentHash": "Yky0lnLmPl/EMmtFviI+NYU/EyG+CvXFGYvZh6kczI882R2NLLc6K/lPFaM6WbgSZDsIm0hk4UfLPLK0gPGrdg=="
       },
       "Castle.Core": {
         "type": "Transitive",
@@ -745,8 +745,8 @@
       "ticketingservice.monitoring": {
         "type": "Project",
         "dependencies": {
-          "AWSSDK.Extensions.NETCore.Setup": "[3.7.400, )",
-          "AWSSDK.SimpleNotificationService": "[3.7.400.155, )",
+          "AWSSDK.Extensions.NETCore.Setup": "[3.7.400.1, )",
+          "AWSSDK.SimpleNotificationService": "[3.7.502.60, )",
           "AspNetCore.HealthChecks.NpgSql": "[9.0.0, )",
           "Be.Vlaanderen.Basisregisters.GrAr.Notifications": "[22.0.0, )",
           "Be.Vlaanderen.Basisregisters.TicketingService.Abstractions": "[1.0.0, )",
@@ -777,9 +777,9 @@
       },
       "AWSSDK.Extensions.NETCore.Setup": {
         "type": "CentralTransitive",
-        "requested": "[3.7.400, )",
-        "resolved": "3.7.400",
-        "contentHash": "i4ta6n+QuGKt1RBCIbRU2wohz5DYJ+wRPR9EI7YkzC8eaWSbmMXTNL+s4HpYUsoxM7uyUrYoW0gC52/9KnK7xw==",
+        "requested": "[3.7.400.1, )",
+        "resolved": "3.7.400.1",
+        "contentHash": "GsIvwaoSnRnQ+nBDv5jWLXilHlZUXcrGYf8EarVD/9fS1bH6bXobEYFZta27WNghYcEBkuZA5HsFAoXtfarbfA==",
         "dependencies": {
           "AWSSDK.Core": "3.7.402",
           "Microsoft.Extensions.Configuration.Abstractions": "2.0.0",
@@ -789,11 +789,11 @@
       },
       "AWSSDK.SimpleNotificationService": {
         "type": "CentralTransitive",
-        "requested": "[3.7.400.155, )",
-        "resolved": "3.7.400.155",
-        "contentHash": "IYCb5IbqqwLsMKgny7Ea8VkYXPRQHmMcJPA1DVjaZ+aKOeluNpAdnYvBqd3T6y8FmiMjsVa0BPObvn5/PaPbVw==",
+        "requested": "[3.7.502.60, )",
+        "resolved": "3.7.502.60",
+        "contentHash": "4r4p3WoUq4Yqzd/Lzbjgo+da702XNhZG1TsTeqExNfuJXNR1E68UE5zAe8sc/nbZAg+igKVW0jIzNeu7DyYEyg==",
         "dependencies": {
-          "AWSSDK.Core": "[3.7.402.61, 4.0.0)"
+          "AWSSDK.Core": "[3.7.501, 4.0.0)"
         }
       },
       "Be.Vlaanderen.Basisregisters.GrAr.Notifications": {
