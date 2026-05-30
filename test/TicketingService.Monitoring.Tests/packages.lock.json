@@ -67,8 +67,8 @@
       },
       "AWSSDK.Core": {
         "type": "Transitive",
-        "resolved": "3.7.402.61",
-        "contentHash": "pwC8rOfg8hFDaL/lBgZAFTmuzWVfRxka7e/UQ+at+r/n99JoSLIbu/n5wloCdjYp/UTb4qmKuA8O4jyZxiSR/A=="
+        "resolved": "4.0.7.4",
+        "contentHash": "qNlzH2ygJ6JG8uefpvws782PnJlkVEwqRD5vz4fR8wFfwWU3ttyAjiwEOPEYcxl84mhQdYGI9gR+kroGFI2+wA=="
       },
       "Castle.Core": {
         "type": "Transitive",
@@ -745,8 +745,8 @@
       "ticketingservice.monitoring": {
         "type": "Project",
         "dependencies": {
-          "AWSSDK.Extensions.NETCore.Setup": "[3.7.400, )",
-          "AWSSDK.SimpleNotificationService": "[3.7.400.155, )",
+          "AWSSDK.Extensions.NETCore.Setup": "[4.0.4.2, )",
+          "AWSSDK.SimpleNotificationService": "[4.0.2.35, )",
           "AspNetCore.HealthChecks.NpgSql": "[9.0.0, )",
           "Be.Vlaanderen.Basisregisters.GrAr.Notifications": "[22.0.0, )",
           "Be.Vlaanderen.Basisregisters.TicketingService.Abstractions": "[1.0.0, )",
@@ -777,23 +777,23 @@
       },
       "AWSSDK.Extensions.NETCore.Setup": {
         "type": "CentralTransitive",
-        "requested": "[3.7.400, )",
-        "resolved": "3.7.400",
-        "contentHash": "i4ta6n+QuGKt1RBCIbRU2wohz5DYJ+wRPR9EI7YkzC8eaWSbmMXTNL+s4HpYUsoxM7uyUrYoW0gC52/9KnK7xw==",
+        "requested": "[4.0.4.2, )",
+        "resolved": "4.0.4.2",
+        "contentHash": "4uHKkkLHmv9/Qv4AyR8FdZgIHzqDdvmfEL1t3+VHSBF4Ph5CguE2ubfkm3w8aiilCVZraNZM4VShigH4z+RCFw==",
         "dependencies": {
-          "AWSSDK.Core": "3.7.402",
+          "AWSSDK.Core": "4.0.7.4",
           "Microsoft.Extensions.Configuration.Abstractions": "2.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0"
         }
       },
       "AWSSDK.SimpleNotificationService": {
         "type": "CentralTransitive",
-        "requested": "[3.7.400.155, )",
-        "resolved": "3.7.400.155",
-        "contentHash": "IYCb5IbqqwLsMKgny7Ea8VkYXPRQHmMcJPA1DVjaZ+aKOeluNpAdnYvBqd3T6y8FmiMjsVa0BPObvn5/PaPbVw==",
+        "requested": "[4.0.2.35, )",
+        "resolved": "4.0.2.35",
+        "contentHash": "cXaetDK4uc3Uo6+nEDilNvnHizM+vCQPaCYLcI5of0jC4+QdZJXmfTCspvue9usVponX1E6nTypc30t+fFa+Iw==",
         "dependencies": {
-          "AWSSDK.Core": "[3.7.402.61, 4.0.0)"
+          "AWSSDK.Core": "[4.0.7.4, 5.0.0)"
         }
       },
       "Be.Vlaanderen.Basisregisters.GrAr.Notifications": {
