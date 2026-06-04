@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/informatievlaanderen/ticketing-system/compare/v3.3.2...v4.0.0) (2026-06-04)
+
+
+### Features
+
+* update packages + upgrade to dotnet 10 ([fdafaa2](https://github.com/informatievlaanderen/ticketing-system/commit/fdafaa228bea7abb7bdde61142988964386af64b))
+
+
+### BREAKING CHANGES
+
+* update to dotnet 10
+
 ## [3.3.2](https://github.com/informatievlaanderen/ticketing-system/compare/v3.3.1...v3.3.2) (2026-05-06)
 
 ## [3.3.1](https://github.com/informatievlaanderen/ticketing-system/compare/v3.3.0...v3.3.1) (2026-02-18)
