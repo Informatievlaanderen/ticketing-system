@@ -628,7 +628,7 @@
           "AWSSDK.Extensions.NETCore.Setup": "[4.0.4.3, )",
           "AWSSDK.SimpleNotificationService": "[4.0.2.36, )",
           "AspNetCore.HealthChecks.NpgSql": "[9.0.0, )",
-          "Be.Vlaanderen.Basisregisters.GrAr.Notifications": "[23.0.0, )",
+          "Be.Vlaanderen.Basisregisters.GrAr.Notifications": "[24.4.1, )",
           "Be.Vlaanderen.Basisregisters.TicketingService.Abstractions": "[1.0.0, )",
           "Be.Vlaanderen.Basisregisters.TicketingService.Storage.PgSqlMarten": "[1.0.0, )",
           "Destructurama.JsonNet": "[4.0.2, )",
@@ -678,9 +678,9 @@
       },
       "Be.Vlaanderen.Basisregisters.GrAr.Notifications": {
         "type": "CentralTransitive",
-        "requested": "[23.0.0, )",
-        "resolved": "23.0.0",
-        "contentHash": "PwhR8fca3+c3y6Oasz485Xoq8bM7nDocg14nDIspsTq8UceDApdRlumLi3J2uGUUDwkDUG5vbG4BeUVhz6vp9w==",
+        "requested": "[24.4.1, )",
+        "resolved": "24.4.1",
+        "contentHash": "Fvjz05TA26kP/Ie2+18xMtuHN5j4Y8XDfwEzeAbVI9iFHqJJTBJFcGtJKBOxo5JkK6cmMBPPS0A/sTD6PhEKDg==",
         "dependencies": {
           "AWSSDK.SimpleNotificationService": "4.0.2.36"
         }
