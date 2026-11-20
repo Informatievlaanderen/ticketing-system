@@ -13,20 +13,20 @@
       },
       "AWSSDK.Extensions.NETCore.Setup": {
         "type": "Direct",
-        "requested": "[4.0.4.3, )",
-        "resolved": "4.0.4.3",
-        "contentHash": "LCM0isx2/Ldkl/gEJFI/HH5KXD8Txa3JZLl9PNCINnXWa+UWGdcaxQe6dOIlYfPfOexoP/iuTfY1tfjjgAjodA==",
+        "requested": "[4.1.0.3, )",
+        "resolved": "4.1.0.3",
+        "contentHash": "SVJfEZPUE6/KodsEE/JwGsc2BbS0lfsPA7USW9e/Mv6Uf0p39XrUurpagYDJKUKjIGd/8Gn0hNA7VCL+nKCdOQ==",
         "dependencies": {
-          "AWSSDK.Core": "4.0.7.5"
+          "AWSSDK.Core": "4.1.1.1"
         }
       },
       "AWSSDK.SimpleNotificationService": {
         "type": "Direct",
-        "requested": "[4.0.2.36, )",
-        "resolved": "4.0.2.36",
-        "contentHash": "a2djLbLVxSiQAqs/lQRbQCTpYDO/F22reQpWnYPcx1uNjw21rjcht6NusWcFCW3wzo4Un6GfPGUqhTsGM+ybJA==",
+        "requested": "[4.1.0.2, )",
+        "resolved": "4.1.0.2",
+        "contentHash": "CxbWafXjYyOy2LrfbDIkWcBaucrXBnfDhHRAEzGPXhvCQdps7Pwa/XO03yNJxvv2QUlP+CqHG5sMfDeCDyJ/2Q==",
         "dependencies": {
-          "AWSSDK.Core": "[4.0.7.5, 5.0.0)"
+          "AWSSDK.Core": "[4.1.1.1, 5.0.0)"
         }
       },
       "Be.Vlaanderen.Basisregisters.GrAr.Notifications": {
@@ -144,8 +144,17 @@
       },
       "AWSSDK.Core": {
         "type": "Transitive",
-        "resolved": "4.0.7.5",
-        "contentHash": "kOx1nlnJic0Ao+tpCia/DxmttQCPuKLWbfuJuXSJnG03yur0TRfPDCvkrroZ/4yuy0fLomPf46vDYnpkk01J9w=="
+        "resolved": "4.1.1.1",
+        "contentHash": "paZNy+g/hXMCsEpWvmOFr14x9gVzIY2JRSzSk+nXpKcnaASxEFBMWE4CNBuI/WwGN1ygTwojRTsPRn3yXuhSYQ==",
+        "dependencies": {
+          "AWSSDK.Extensions.Numerics": "[4.1.0, 5.0.0)",
+          "System.IO.Hashing": "11.0.0"
+        }
+      },
+      "AWSSDK.Extensions.Numerics": {
+        "type": "Transitive",
+        "resolved": "4.1.0",
+        "contentHash": "hhoiXT1aUyVgIiQbQoqG3L1EEneqXDh2GKyH5izUlO6Rzi9GAAi8S6mlLiVwow23+EGg77zHjdmUi+ia3RSUTg=="
       },
       "FastExpressionCompiler": {
         "type": "Transitive",
@@ -428,6 +437,11 @@
           "System.Composition.Hosting": "8.0.0",
           "System.Composition.Runtime": "8.0.0"
         }
+      },
+      "System.IO.Hashing": {
+        "type": "Transitive",
+        "resolved": "11.0.0",
+        "contentHash": "U+Bv2qCYt6eONi+arSP0QIp4uTO6os6uceBsqiAwruZ+Wo2HrRhO/0tj38M9URJtS+4DhAtT3ka2TGNFYsnhyQ=="
       },
       "Weasel.Core": {
         "type": "Transitive",
